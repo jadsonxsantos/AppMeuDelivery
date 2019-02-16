@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+             x:Class="DeLivre.Views.Detalhes">
+
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+              PositionIn="Bottom"
+              PositionOut="Center"
+              ScaleIn="1"
+              ScaleOut="0.7"
+              DurationIn="700"
+              EasingIn="BounceOut"/>
+    </pages:PopupPage.Animation>
+
+    <StackLayout WidthRequest="300" BackgroundColor="White" IsClippedToBounds="True" HorizontalOptions="Center" VerticalOptions="Center" Padding="10, 5" Spacing="3">
+
+        <Label x:Name="sss" Text="Detalhe do Pedido!" FontSize="20" HorizontalTextAlignment="Center" TextColor="{StaticResource asphaltPrimary}"></Label>
+        <BoxView Margin="3" HeightRequest="1" WidthRequest="50" Color="#EF5350" />
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,15">
+            <Label x:Name="Qt_Pedido" 
+                   Text="{Binding Value, Mode=TwoWay, StringFormat=' {0}'}"                                                     
+                   FontSize="15"
+                   FontAttributes="Bold"
+                   BindingContext="{x:Reference stepper}"
+                   HorizontalTextAlignment="Center"
+                   TextColor="{StaticResource asphaltPrimary}" />
+            <Label x:Name="lbl_Tipo_lanche" FontSize="15" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="{StaticResource asphaltPrimary}"></Label>
+            <Label x:Name="lbl_Nome_lanche" FontSize="15" HorizontalTextAlignment="Center" TextColor="{StaticResource asphaltPrimary}"></Label>
+           
+        </StackLayout>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,0">
+            <Label x:Name="lbl_Descricao" HorizontalTextAlignment="Center" FontSize="15" TextColor="{StaticResource asphaltPrimary}"></Label>
+            <Label x:Name="lbl_Valor" HorizontalTextAlignment="Center" FontSize="15" TextColor="{StaticResource asphaltPrimary}"></Label>
+        </StackLayout>
+        <StackLayout>
+            <Label x:Name="Descr" FontSize="15" TextColor="{StaticResource asphaltPrimary}" Text="Informações Complementares:"/>
+            <Entry x:Name="Obs" Placeholder="Trocar a salado por Queijo" Margin="0,0" HeightRequest="50" WidthRequest="200"/>
+        </StackLayout>
+        <StackLayout x:Name="Container">
+            <Label Text="Quantidade:" 
+                   FontSize="Small"        
+                   HorizontalTextAlignment="Center"
+                   TextColor="{StaticResource asphaltPrimary}" />
+
+            <Stepper x:Name="stepper" Minimum="1" Maximum="10" HeightRequest="150" WidthRequest="200" 
+                     Value="{Binding Quantidade}" HorizontalOptions="CenterAndExpand"
+                     ValueChanged="Stepper_ValueChanged"
+                     VerticalOptions="CenterAndExpand" Increment="1" />
+
+        </StackLayout>
+
+        <Button x:Name="btn_selecionar" Text="Proximo!" BackgroundColor="#EF5350" TextColor="White" Clicked="Btn_selecionar_Clicked" ></Button>
+    </StackLayout>
+
+</pages:PopupPage>

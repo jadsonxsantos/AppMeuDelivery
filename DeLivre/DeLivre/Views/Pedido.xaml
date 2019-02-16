@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"         
+            x:Class="DeLivre.Views.Pedido">
+
+    <ContentPage Title="Pedidos">
+        <StackLayout Margin="5,0,5,0">
+            <ListView x:Name="ListaCardapio"                      
+                      BackgroundColor="White" 
+                      SeparatorColor="{StaticResource grayPrimary}"
+                      VerticalOptions="FillAndExpand"
+                      HasUnevenRows="true" 
+                      ItemSelected="ListaCardapio_ItemSelected"
+                      CachingStrategy="RecycleElement">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <StackLayout Grid.Column="0" >
+                                        <Label x:Name="Tipo" Text="{Binding Tipo}" 
+                                               FontSize="Small"
+                                               LineBreakMode="TailTruncation"                                      
+                                               TextColor="{StaticResource asphaltPrimary}" />
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label x:Name="QtPedido" 
+                                                   Text="{Binding Quantidade, Mode=TwoWay, StringFormat='  {0}x'}"                                                     
+                                                   FontSize="Small" 
+                                                   TextColor="{StaticResource asphaltPrimary}" />
+                                            <Label x:Name="NomeLanche" 
+                                                   Text="{Binding Nome}" 
+                                                   FontSize="Small" 
+                                                   TextColor="{StaticResource asphaltPrimary}" />
+                                        </StackLayout>
+                                        <!--Mode=TwoWay, StringFormat='Valor Unit.: R$ {0:C}-->
+                                        <Label x:Name="lbl_valor_Unit"
+                                               Grid.Column="2" 
+                                               Text="{Binding Valor}"
+                                               FontSize="12"
+                                               FontAttributes="Bold"
+                                               TextColor="{StaticResource grayPrimary}"
+                                               LineBreakMode="TailTruncation" />
+
+                                        <Label Grid.Column="2" 
+                                               Text="{Binding ValorTotal, Mode=TwoWay, StringFormat='Valor Total: R$ {0:C}'}"
+                                               FontSize="11" FontAttributes="Bold"
+                                               TextColor="{StaticResource grayPrimary}"
+                                               LineBreakMode="TailTruncation" />
+
+                                    </StackLayout>
+                                </Grid>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout Margin="5,0,5,0"  HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                <StackLayout.Resources>
+                    <Style TargetType="StackLayout">
+                        <Setter Property="VisualStateManager.VisualStateGroups">
+                            <VisualStateGroupList>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale" Value="1"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale" Value="0.8"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateGroupList>
+                        </Setter>
+                    </Style>
+                </StackLayout.Resources>
+                <ImageButton Source="delete"              
+                                 Aspect="AspectFit"                                                      
+                                 BackgroundColor="Transparent"
+                                 HeightRequest="30"
+                                 WidthRequest="30" >
+                   
+                </ImageButton>
+                <Label Margin="0,3" Text="Excluir Todos os Pedidos!" TextColor="DarkCyan"></Label>
+            </StackLayout>
+            <StackLayout BackgroundColor="#E53935">
+                <Grid HeightRequest="200">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="100" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label x:Name="lbl_Entrega" Margin="0,30" Grid.Column="0" TextColor="White"/>
+                    <Label x:Name="lbl_Total_Pedido" Grid.Column="0" Margin="0,10" Text="Total do Pedido: " FontAttributes="Bold" TextColor="White"/>
+                    <Label Text="Total: " FontSize="16" Grid.Column="1" TextColor="White"/>
+                    <Label x:Name="lbl_Valor_Total" Margin="-20,15" HorizontalTextAlignment="Start" Grid.Column="1" FontSize="20" FontAttributes="Bold" TextColor="White"/>
+                </Grid>
+                <Button x:Name="Finalizar_Pedido"  BackgroundColor="White" Clicked="Finalizar_Pedido_Clicked" TextColor="#E53935" Text="Finalizar Pedido"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage>
+
+    <ContentPage x:Name="DadosPessoais" Title="Confirmar Identidade" >
+        <StackLayout Margin="5,0,0,5" >
+
+            <StackLayout Orientation="Vertical" >
+                <Label Text="Nome:" TextColor="Black"/>
+                <Entry x:Name="EntNome" Placeholder="Primeiro Nome" Margin="0,0,0,10" >
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState x:Name="Focused">
+                                <VisualState.Setters>
+                                    <Setter Property="FontSize" Value="36" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Red" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                </Entry>
+
+                <Label Text="Sobrenome:" TextColor="Black" />
+                <Entry x:Name="EntSobrenome" Placeholder="Segundo Nome" Margin="0,0,0,10"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical">
+                <StackLayout VerticalOptions="EndAndExpand">
+                    <Label Text="Endereço:" TextColor="Black" />
+                    <Entry x:Name="EntEndereco" Placeholder="Rua Gov. Jose Augusto" />
+                </StackLayout>
+            </StackLayout>
+            <StackLayout Orientation="Vertical" >
+                <StackLayout Orientation="Horizontal">
+                    <StackLayout WidthRequest="50">
+                        <Label Text="Numero:" TextColor="Black" />
+                        <Entry x:Name="EntNumero" Placeholder="100" />
+                    </StackLayout>
+                    <StackLayout WidthRequest="150">
+                        <Label Text="Cidade:" TextColor="Black" />
+                        <Entry x:Name="EntCidade" IsEnabled="False" Placeholder="" />
+                    </StackLayout>
+                    <StackLayout WidthRequest="150">
+                        <Label Text="Bairro:" TextColor="Black" />
+                        <Entry x:Name="EntBairro" Placeholder="Centro" />
+                    </StackLayout>
+
+                </StackLayout>
+            </StackLayout>
+            <Button x:Name="SalvareEnviar" 
+                    Clicked="SalvareEnviar_Clicked" 
+                    Text="Salvar e Enviar Pedido!" 
+                    BackgroundColor="#E53935"
+                    Margin="5,0,5,0" BorderRadius="5" 
+                    TextColor="White" />
+        </StackLayout>
+     
+         
+      
+    </ContentPage>
+       
+</TabbedPage>

@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeLivre.iOS", "DeLivre\DeLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeLivre.UWP", "DeLivre\DeLivre.UWP\DeLivre.UWP.csproj", "{9500074C-C4C5-44E0-8E00-3357ED0A5A98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeLivre", "DeLivre\DeLivre\DeLivre.csproj", "{FC89638F-6878-4042-BC64-A177123934F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeLivre", "DeLivre\DeLivre\DeLivre.csproj", "{FC89638F-6878-4042-BC64-A177123934F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
