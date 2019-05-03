@@ -3,90 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:cardView="clr-namespace:DeLivre"          
              xmlns:local1="clr-namespace:DeLivre.Controls"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              x:Class="DeLivre.Views.Cardapios" 
              BackgroundColor="#EF5350">
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem Name="MenuItem1" Order="Primary" Icon="ic_Carrinho" Clicked="MenuItem1_Clicked" Text="Carrinho" Priority="0" />
+        <ToolbarItem Name="OnInformacoes" Order="Primary" Icon="ic_Info" Clicked="OnInformacoes_Clicked" Text="Carrinho" Priority="0" />
+        <ToolbarItem Name="OnCarrinho" Order="Primary" Icon="ic_Carrinho" Clicked="OnCarrinho_Clicked" Text="Carrinho" Priority="1" />
     </ContentPage.ToolbarItems>
 
     <StackLayout Padding="5,5,5,0" BackgroundColor="White" Orientation="Vertical">
+        <!--<input:AutoCompleteEntry x:Name="Pesquisar" HeightRequest="60" Annotation="None" ValidationMessage="Teste"  TextColor="#EF5350"
+                          ItemsSource="{Binding Tipo}" />-->
+
         <SearchBar x:Name="CardapioPesquisa" Placeholder="Pesquise por um lanche!" HeightRequest="40" BackgroundColor="White" TextChanged="CardapioPesquisa_TextChanged" />
-        <cardView:CardView x:Name="CardEstabelecimento" BackgroundColor="White" CardViewHasShadow="True">
-            <cardView:CardView.CardViewContent>
-                <StackLayout x:Name="Stack" 
-                             HorizontalOptions="Center"                                         
-                             VerticalOptions="Center">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="120"/>
-                        </Grid.ColumnDefinitions>
-                        <controls:CircleImage x:Name="ImagemEstab" Grid.Column="1" BorderColor="#EF5350" 
-                                              BorderThickness="2" 
-                                              Margin="1,0,1,0" 
-                                              WidthRequest="300" 
-                                              HeightRequest="300"                                                 
-                                              Aspect="AspectFit"/>
 
-                        <Label x:Name="lbl_Entrega"                                              
-                               Grid.Column="0"
-                               Text="ENTREGA"
-                               HorizontalTextAlignment="Center"
-                               TextColor="{StaticResource asphaltPrimary}"                              
-                               FontSize="14" FontAttributes="Bold"/>
-
-                        <Label x:Name="lbl_Tempo"                              
-                               Grid.Column="0"
-                               HorizontalTextAlignment="Center"
-                               TextColor="{StaticResource asphaltPrimary}"
-                               Margin="0,20,0,0"
-                               FontSize="13"/>
-
-                        <Label x:Name="lbl_Frete"                                            
-                               Grid.Column="0"
-                               HorizontalTextAlignment="Center"
-                               TextColor="{StaticResource asphaltPrimary}"
-                               Margin="0,35,0,0"
-                               FontSize="13" />
-
-
-                        <Label x:Name="Entrega"                                             
-                               Grid.Column="2"
-                               HorizontalTextAlignment="Center"
-                               Text="FUNCIONAMENTO"
-                               TextColor="{StaticResource asphaltPrimary}"                              
-                               FontSize="14" FontAttributes="Bold"/>
-
-                        <Label x:Name="lbl_Horario_Funcionamento"                                             
-                               TextColor="{StaticResource asphaltPrimary}"
-                               Grid.Column="2" 
-                               HorizontalTextAlignment="Center"
-                               Margin="0,20,0,0"
-                               FontSize="13"/>
-
-                        <Label x:Name="lbl_Local"                                              
-                               Grid.Column="2"
-                               Margin="0,35"
-                               HorizontalTextAlignment="Center"
-                               TextColor="{StaticResource asphaltPrimary}"                              
-                               FontSize="13"/>
-                    </Grid>
-
-                    <Label x:Name="lbl_Descricao"                                         
-                                   HorizontalTextAlignment="Center"
-                                   TextColor="{StaticResource asphaltPrimary}"
-                                   Margin="0,15,0,0"
-                                   FontSize="13" />
-
-                    <ListView x:Name="ListaCardapio" 
-                  
+        <ListView x:Name="ListaCardapio"                   
                       BackgroundColor="White"                    
                       SeparatorColor="{StaticResource grayPrimary}"
-                      VerticalOptions="FillAndExpand"                      
-                      HasUnevenRows="true"                                      
+                      VerticalOptions="FillAndExpand"                  
+                      HasUnevenRows="true"                                   
                       ItemSelected="ListaCardapio_ItemSelected"
                       ItemsSource="{Binding Cardapios}"
                       CachingStrategy="RecycleElement">
@@ -100,7 +37,7 @@
                                                        FontSize="15"
                                                        FontAttributes="Bold"                                      
                                                        Margin="5"
-                                                       TextColor="{StaticResource asphaltPrimary}" />
+                                                       TextColor="#EF5350" />
 
                                                 <Label x:Name="NomeLanche" Text="{Binding Nome}" 
                                                        FontSize="13"                                         
@@ -125,12 +62,8 @@
                                                 <RowDefinition Height="*"/>
                                             </Grid.RowDefinitions>
                                             <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="0" Margin="5,0,5,0" HorizontalOptions="FillAndExpand">
-                                                <Label Text="{Binding Valor, StringFormat=' R$: {0:C}'}" TextColor="#E53935" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="13" />
-                                                <Label HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" IsVisible="False" TextColor="#E53935" VerticalTextAlignment="Center" FontSize="13" Text="{Binding Valor_P, StringFormat=' P R$: {0:C}'}"/>
-                                                <Label HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" IsVisible="False" TextColor="#E53935" VerticalTextAlignment="Center" FontSize="13" Text="{Binding Valor_M, StringFormat=' M R$: {0:C}'}"/>
-                                                <Label HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" IsVisible="False" TextColor="#E53935" VerticalTextAlignment="Center" FontSize="13" Text="{Binding Valor_G, StringFormat=' G R$: {0:C}'}"/>
-                                                <Label HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" IsVisible="False" TextColor="#E53935" VerticalTextAlignment="Center" FontSize="13" Text="{Binding Valor_B, StringFormat=' B R$: {0:C}'}"/>
-                                            </StackLayout>
+                                    <Label Text="{Binding ValorExibicao}" Grid.Row="0" TextColor="#E53935" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="13" />
+                                </StackLayout>
                                         </Grid>
                                     </StackLayout>
                                 </ViewCell>
@@ -138,7 +71,7 @@
                         </ListView.ItemTemplate>
                     </ListView>
                 </StackLayout>
-            </cardView:CardView.CardViewContent>
-        </cardView:CardView>
-    </StackLayout>
+            <!--</cardView:CardView.CardViewContent>
+        </cardView:CardView>-->
+    <!--</StackLayout>-->
 </ContentPage>

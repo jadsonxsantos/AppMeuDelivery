@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+                xmlns:cardView="clr-namespace:DeLivre"                        
+                xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+                x:Class="DeLivre.Views.Info">
+
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+              PositionIn="Bottom"
+              PositionOut="Center"
+              ScaleIn="1"
+              ScaleOut="0.7"
+              DurationIn="500"
+              EasingIn="SpringIn"/>
+    </pages:PopupPage.Animation>
+    
+    <StackLayout WidthRequest="350" HeightRequest="350" BackgroundColor="White" Padding="5,10" IsClippedToBounds="True" HorizontalOptions="Center" VerticalOptions="Center">
+        <cardView:CardView x:Name="CardEstabelecimento" BackgroundColor="White" CardViewHasShadow="True">
+            <cardView:CardView.CardViewContent>
+                <StackLayout x:Name="Stack" 
+                             HorizontalOptions="Center"                                         
+                             VerticalOptions="Center">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="120"/>
+                        </Grid.ColumnDefinitions>
+                        <controls:CircleImage x:Name="ImagemEstab" Grid.Column="1" BorderColor="#EF5350" 
+                                              BorderThickness="2" 
+                                              Margin="0,-80,0,0" 
+                                              WidthRequest="300" 
+                                              HeightRequest="300"                                                 
+                                              Aspect="AspectFit"/>
+
+                        <Label x:Name="lbl_Entrega"                                              
+                               Grid.Column="0"
+                               Text="ENTREGA"
+                               HorizontalTextAlignment="Center"
+                               TextColor="{StaticResource asphaltPrimary}"                              
+                               FontSize="14" FontAttributes="Bold"/>
+
+                        <Label x:Name="lbl_Tempo"                              
+                               Grid.Column="0"
+                               HorizontalTextAlignment="Center"
+                               TextColor="{StaticResource asphaltPrimary}"
+                               Margin="0,30,0,0"
+                               FontSize="13"/>
+
+                        <Label x:Name="lbl_Frete"                                            
+                               Grid.Column="0"
+                               HorizontalTextAlignment="Center"
+                               TextColor="{StaticResource asphaltPrimary}"
+                               Margin="0,60,0,0"
+                               FontSize="13" />
+
+
+                        <Label x:Name="Entrega"                                             
+                               Grid.Column="2"
+                               HorizontalTextAlignment="Center"
+                               Text="FUNCIONAMENTO"
+                               TextColor="{StaticResource asphaltPrimary}"                              
+                               FontSize="14" FontAttributes="Bold"/>
+
+                        <Label x:Name="lbl_Horario_Funcionamento"                                             
+                               TextColor="{StaticResource asphaltPrimary}"
+                               Grid.Column="2" 
+                               HorizontalTextAlignment="Center"
+                               Margin="0,30,0,0"
+                               FontSize="13"/>
+
+                        <Label x:Name="lbl_Local"                                              
+                               Grid.Column="2"
+                               Margin="0,60,0,0"
+                               HorizontalTextAlignment="Center"
+                               TextColor="{StaticResource asphaltPrimary}"                              
+                               FontSize="13"/>
+                    </Grid>
+                </StackLayout>
+            </cardView:CardView.CardViewContent>
+        </cardView:CardView>
+        <Label x:Name="lbl_Endereco" Margin="0,-80"                                        
+                           HorizontalTextAlignment="Center"
+                           TextColor="{StaticResource asphaltPrimary}"                         
+                           FontAttributes="Italic"
+                           FontSize="13" />
+
+        <Label x:Name="lbl_Descricao" Margin="0,80"                                         
+                           HorizontalTextAlignment="Center"
+                           TextColor="{StaticResource asphaltPrimary}"                           
+                           FontSize="13" />
+
+        <StackLayout>
+            <Label x:Name="Instagram" FontAttributes="Italic" FontSize="15"></Label>
+            <Label x:Name="Facebook" FontAttributes="Italic" FontSize="15"></Label>
+        </StackLayout>
+        
+    </StackLayout>
+
+ 
+</pages:PopupPage>

@@ -1,23 +1,21 @@
 ﻿using DeLivre.Models;
+using DeLivre.Views.Detalhe;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace DeLivre.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Cardapios : ContentPage
     {
         ObservableCollection<Cardapio> ListaPedido = new ObservableCollection<Cardapio>();
         Estabelecimento MeuEstabelecimento;
-        List<Cardapio> MeusCadapios;
-        string Testes;
+        List<Cardapio> MeusCadapios;           
 
         public Cardapios(Estabelecimento MeusEstabelecimentos)
         {
@@ -25,52 +23,88 @@ namespace DeLivre.Views
             MeuEstabelecimento = new Estabelecimento();
             MeuEstabelecimento = MeusEstabelecimentos;
             MeusCadapios = new List<Cardapio>();
-            MeusCadapios = MeusEstabelecimentos.Cardapios;           
+            MeusCadapios = MeusEstabelecimentos.Cardapios;
+            Title = MeuEstabelecimento.Nome;
             DadosEstabelecimentos();
-            ListaCardapio.ItemsSource = MeuEstabelecimento.Cardapios;   
+            ListaCardapio.ItemsSource = MeuEstabelecimento.Cardapios;                  
         }
 
         private void  DadosEstabelecimentos()
-        {           
-            Title = MeuEstabelecimento.Nome;
-            Testes = MeuEstabelecimento.Cardapios.ToString();         
-            ImagemEstab.Source = MeuEstabelecimento.Logo;
-            lbl_Horario_Funcionamento.Text = MeuEstabelecimento.Horario_Funcionamento;
-            lbl_Local.Text = MeuEstabelecimento.Local;
-            lbl_Frete.Text = MeuEstabelecimento.Frete;
-            lbl_Tempo.Text = MeuEstabelecimento.Entrega_;
-            lbl_Descricao.Text = MeuEstabelecimento.Descricao;        
-        }
-
-        protected override void OnAppearing()
         {
-            base.OnAppearing();
+            //Armaenando o valor do Frete!    
+            string ValorFrete = MeuEstabelecimento.Frete;
+            Application.Current.Properties["_Frete"] = ValorFrete;
+            //Armaenando o Numero do Whatsapp!
+            Application.Current.Properties["_Whatsapp"] = MeuEstabelecimento.Whatsapp;
+            //Armaenando o Numero do Whatsapp!
+            Application.Current.Properties["_Estabelecimento_"] = MeuEstabelecimento.Nome;
+            Application.Current.Properties["_JurosCartao"] = MeuEstabelecimento.Juros_Cartao;
         }
-
-        protected override void OnDisappearing()
-        {
-            base.OnAppearing();
-        }                     
-
+        
         private async void ListaCardapio_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             #region DisabledSelectionHighlighting
             ((ListView)sender).SelectedItem = null;
             #endregion
-            if (e.SelectedItem != null)
+            try
             {
-                Cardapio item = (Cardapio)e.SelectedItem;
-                var selection = e.SelectedItem as ObservableCollection<Cardapio>;
-              
-                if(item != null)
+                if (e.SelectedItem != null)
                 {
-                    ListaPedido.Add(item);
-                    //await Navigation.PushAsync(new Pedido(ListaPedido));            
-                    var page = new Detalhes(ListaPedido);
+                    Cardapio item = (Cardapio)e.SelectedItem;
+                    var selection = e.SelectedItem as ObservableCollection<Cardapio>;
+                    Estabelecimento estab = new Estabelecimento();
 
-                    await PopupNavigation.Instance.PushAsync(page);
-                }                                                                                                                                                    
+                    if (item != null)
+                    {
+                        if (item.Tipo == "Pizza" || item.Tipo == "Pizza Doce")
+                        {
+                            var page = new Detalhe.Pizza(item);
+                            await PopupNavigation.Instance.PushAsync(page);
+                        }
+                        else
+                        {
+                            if (item.Tipo == "Refrigerante")
+                            {
+                                var page = new Detalhe.Refrigerante(item);
+                                await PopupNavigation.Instance.PushAsync(page);
+                            }
+                            else
+                            {
+                                if (item.Tipo == "Sorvete" || item.Tipo == "Picolé")
+                                {
+                                    var page = new Detalhe.Frios(item, MeuEstabelecimento);
+                                    await PopupNavigation.Instance.PushAsync(page);
+                                }
+                                else
+                                {
+                                    if (item.Tipo == "Açaí" || item.Tipo == "Açaí Copo" || item.Tipo == "Barca")
+                                    {
+                                        var page = new Detalhe.AcaiNormal(item, MeuEstabelecimento);
+                                        await PopupNavigation.Instance.PushAsync(page);
+                                    }
+                                    else
+                                    {
+                                        if (item.Tipo == "Doces")
+                                        {
+                                            var pageDoces = new Detalhe.Doces(item);
+                                            await PopupNavigation.Instance.PushAsync(pageDoces);
+                                        }
+                                        else
+                                        {
+                                            var page = new Detalhes(item);
+                                            await PopupNavigation.Instance.PushAsync(page);
+                                        }                                       
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
+            catch (Exception)
+            {
+                await DisplayAlert("Ops!", "Este item esta em atualização! em breve estará disponível!", "OK");
+            }           
         }
 
         private void CardapioPesquisa_TextChanged(object sender, TextChangedEventArgs e)
@@ -84,13 +118,29 @@ namespace DeLivre.Views
                 ListaCardapio.ItemsSource = MeuEstabelecimento.Cardapios.Where(x => x.Tipo.ToLower().Contains(texto.ToLower()));
 
             ListaCardapio.EndRefresh();
-
         }
 
-        private async void MenuItem1_Clicked(object sender, EventArgs e)
+        protected override bool OnBackButtonPressed()
         {
-            await Navigation.PushAsync(new Pedido(/*ListaPedido*/));
+            App.Meus_Pedidos.Clear();
+            return base.OnBackButtonPressed();           
         }
-       
+
+        private async void OnInformacoes_Clicked(object sender, EventArgs e)
+        {
+            await PopupNavigation.Instance.PushAsync(new Info(MeuEstabelecimento));       
+        }
+
+        private async void OnCarrinho_Clicked(object sender, EventArgs e)
+        {
+            if(App.Meus_Pedidos.Count > 0)
+            {
+                await Navigation.PushAsync(new Pedido(App.Meus_Pedidos));               
+            }
+            else
+            {
+                await DisplayAlert("Carrinho vazio!", "Você não tem nenhum pedido no carrinho!", "OK");
+            }                     
+        }
     }
 }

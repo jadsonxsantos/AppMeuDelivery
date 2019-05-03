@@ -4,14 +4,9 @@ using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -24,15 +19,14 @@ namespace DeLivre.Views
        
         // Request do JSON 
         private HttpClient _client = new HttpClient();
-        ObservableCollection<Estabelecimento> Estabelecimento;
+        ObservableCollection<Estabelecimento> Estabelecimento_;
         string Url_Api;
         public Estabelecimentos(string Estab_)
         {
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
             Local_Name = Estab_;
-            GetListEstab();
-            VerificarUsuario();
+            GetListEstab();         
         }      
 
         protected async void GetListEstab()
@@ -52,45 +46,40 @@ namespace DeLivre.Views
                         // deserialize o Json para o Modelo de Dados Estabelecimento
                         var ItensJson = JsonConvert.DeserializeObject<List<Estabelecimento>>(await response.Content.ReadAsStringAsync());
                         // Adiciona os dados em uma Lista!
-                        Estabelecimento = new ObservableCollection<Estabelecimento>(ItensJson);
+                        Estabelecimento_ = new ObservableCollection<Estabelecimento>(ItensJson);
+                        //bool StatusEstab = Estabelecimento_.Where(x => x.Aberto);
+                        //if (StatusEstab == true)
+                        //{
 
+                        //}
                         //Atribui os dados para a ListaView 
-                        ListaVagas.ItemsSource = Estabelecimento;
+                        ListaEstabelecimento.ItemsSource = Estabelecimento_.Where(x => x.Ativo == true);                                     
                         //Verificação da lista
-                        int i = Estabelecimento.Count;
+                        int i = Estabelecimento_.Count;
                         if (i > 0)
-                        {
-                            //                                          
+                        {                                                                     
                             activity_indicator.IsRunning = false;
-                            activity_indicator.IsVisible = false;
-
-                            //foreach (var item in Estabelecimento)
-                            //{
-                            //    if(item.Ativo == false)
-                            //    {
-                                    
-                            //    }
-
-                            //}
-                        }
-                       
+                            activity_indicator.IsVisible = false;                            
+                        }                       
                     }
                     else
                     {
-                      await DisplayAlert("Servidor em Manutenção", "Olá, Estamos faendo manutenção nos nossos servidores, aguarde e tente mais tarde.", "OK");
+                      await DisplayAlert("Servidor em Manutenção", "Olá, Estamos fazendo manutenção em nossos servidores, aguarde e tente mais tarde.", "OK");
                     }
                 }
                 catch (Exception)
                 {
                     activity_indicator.IsVisible = false;
-                    var resp = await DisplayAlert("Servidor em Manutenção", "Olá, Estamos faendo manutenção nos nossos servidores, aguarde e tente mais tarde.", "OK", "Atualiar");
+                    var resp = await DisplayAlert("Servidor em Manutenção", "Olá, Estamos fazendo manutenção nos nossos servidores, aguarde e tente mais tarde.", "OK", "Atualizar");
                     if (resp)
                     {
 
                     }
                     else
                     {
+                        activity_indicator.IsRunning = true;
                         GetListEstab();
+                        
                     }
                 }
             }
@@ -107,41 +96,28 @@ namespace DeLivre.Views
                     GetListEstab();
                 }
             }
-        }      
-
-        private async void VerificarUsuario()
-        {
-            if (!Application.Current.Properties.ContainsKey("Nome1"))
-            {
-                //await Navigation.PushAsync(new ClienteF());
-                //var Nome = Application.Current.Properties["Nome"] as string;
-                //// do something with id
-            }
-        }
+        }          
 
         private async void NavegarToCardapio(string Nome_estabelecimento)
         {            
             try
             {             
-                //Activity indicator visibility on
+                //Visibilidade do indicador
                 activity_indicator.IsRunning = true;
-                //Getting JSON data from the Web
+                //Pegando os dados JSON da Servidor
                 var content = await _client.GetStringAsync(Url_Api);
-                ObservableCollection<Estabelecimento> categoriasFrases = JsonConvert.DeserializeObject<ObservableCollection<Estabelecimento>>(content);
-
+                ObservableCollection<Estabelecimento> _Estabelecimentos = JsonConvert.DeserializeObject<ObservableCollection<Estabelecimento>>(content);
                 // Selecionar o objeto no Json.
-                Estabelecimento categoriaFrasee = categoriasFrases.FirstOrDefault(cf => cf.Nome.Equals(Nome_estabelecimento));
-
+                Estabelecimento _Estabelecimento = _Estabelecimentos.FirstOrDefault(cf => cf.Nome.Equals(Nome_estabelecimento));                      
                 // Abre tela e envia os parâmetros.    
-                if (categoriaFrasee != null)
+                if (_Estabelecimento != null)
                 {
-                    await Navigation.PushAsync(new Cardapios(categoriaFrasee));
+                    await Navigation.PushAsync(new Cardapios(_Estabelecimento));
                 }
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Tapped", ex.ToString() + " ", "OK");
-
+                await DisplayAlert("Entre em contato com o Desenvolvedor!", ex.ToString() + " ", "OK");
             }
         }        
         
@@ -153,19 +129,10 @@ namespace DeLivre.Views
             {
                 return; //ItemSelected is called on deselection which results in SelectedItem being set to null
             }
-
-            //var item = e.SelectedItem as MenuItem; //This is what I DON'T want to use because it references my Model directly.
+         
             var item = (Estabelecimento)e.Item;
-            switch (item.Nome.ToString()) //This is what I need. I can't get this unless I reference my Model "TableMainMenuItems" directly.
-            {
-                case "Robertinho Lanches":
-                    NavegarToCardapio("Robertinho Lanches");
-                    break;
+            NavegarToCardapio(item.Nome.ToString());
 
-                case "Coxinhas da Lia":
-                    NavegarToCardapio("Coxinhas da Lia");
-                    break;
-            }
             lv.SelectedItem = null;
         }             
     }

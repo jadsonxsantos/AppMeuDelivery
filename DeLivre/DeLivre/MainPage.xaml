@@ -2,20 +2,20 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"       
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
-             x:Class="DeLivre.MainPage" BackgroundImage="Fundob">
+             x:Class="DeLivre.MainPage" BackgroundImage="fundoapp">
 
     <StackLayout>
         <StackLayout>
-            <controls:CircleImage Source="logotipo_color.png" Margin="0,5,0,5" 
-                                  HeightRequest="100" 
-                                  HorizontalOptions="CenterAndExpand" 
-                                  BorderColor="White" BorderThickness="1" 
-                                   Aspect="AspectFit"/>
-
+            <controls:CircleImage 
+                      Source="logotipo_color.png" Margin="0,5,0,0" 
+                      HeightRequest="100" Aspect="AspectFit"
+                      HorizontalOptions="CenterAndExpand" 
+                      BorderColor="White" BorderThickness="1" />
+                                
             <Label x:Name="lbCidade"
                    Text="Qual sua cidade?" 
-                   Margin="5,10,5,0"
-                   FontSize="29"
+                   Margin="5,-5,5,0"
+                   FontSize="29" FontAttributes="Bold"
                    TextColor="#E53935"
                    HorizontalOptions="Center"
                    VerticalOptions="CenterAndExpand" />
@@ -32,20 +32,19 @@
                 BackgroundColor="#E53935"
                 HorizontalOptions="Center" 
                 VerticalOptions="Center"/>-->
-            
 
             <Button x:Name="btnPinhao"
-                Text="PINHÃO/SE"
-                TextColor="White"
-                BorderRadius="30" 
-                WidthRequest="250"
-                HeightRequest="75"
-                Margin="5,60,5,0" 
-                FontSize="30"
-                Clicked="BtnPinhao_Clicked"
-                BackgroundColor="#E53935"
-                HorizontalOptions="Center" 
-                VerticalOptions="Center">
+                    Text="PINHÃO/SE"
+                    TextColor="White"
+                    BorderRadius="30" 
+                    WidthRequest="250"
+                    HeightRequest="75"
+                    Margin="5,60,5,0" 
+                    FontSize="30"
+                    Clicked="BtnPinhao_Clicked"
+                    BackgroundColor="#E53935"
+                    HorizontalOptions="Center" 
+                    VerticalOptions="Center">
                 <VisualStateManager.VisualStateGroups>
                     <VisualStateGroup x:Name="CommonStates">
                         <VisualState x:Name="Normal">
@@ -64,6 +63,17 @@
                 </VisualStateManager.VisualStateGroups>
             </Button>
         </StackLayout>
+        <Button x:Name="btn_Parceria"  FontSize="15"
+                Text="MEU ESTABELECIMENTO NO APP?"
+                TextColor="White"
+                BorderRadius="10" 
+                WidthRequest="300"
+                HeightRequest="40"
+                Margin="5,200,5,0"                
+                Clicked="Btn_Parceria_Clicked"
+                BackgroundColor="#E53935"
+                HorizontalOptions="Center" 
+                VerticalOptions="Center"></Button>
     </StackLayout>
 
 </ContentPage>

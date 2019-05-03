@@ -5,13 +5,13 @@
              x:Class="DeLivre.Views.Estabelecimentos">
 
     <StackLayout BackgroundColor="White" >
-        <StackLayout HorizontalOptions="CenterAndExpand" HeightRequest="70" WidthRequest="650" BackgroundColor="#EF5350">
-            <controls:CircleImage Source="logotipo_transparente" WidthRequest="200" HeightRequest="60" 
-                                  HorizontalOptions="CenterAndExpand" BorderThickness="1"
-                                  BorderColor="White" Margin="0,3"
-                                  Aspect="AspectFit"/>
-        </StackLayout>
-        
+
+            <controls:CircleImage Source="logotipo_color.png" WidthRequest="200" HeightRequest="70" 
+                                  HorizontalOptions="CenterAndExpand" BorderThickness="1" 
+                                  BorderColor="White" Margin="0,5" Aspect="AspectFit"/>
+
+           <BoxView Margin="3"  HeightRequest="1"  WidthRequest="10" Color="Black" />
+                                                                     
         <ActivityIndicator 
                 IsRunning="true" x:Name="activity_indicator"
                 AbsoluteLayout.LayoutBounds="0.5,0,100,100" 
@@ -19,61 +19,81 @@
                 Color="#EF5350" />
         
         <StackLayout>
-        <ListView x:Name="ListaVagas"
-                  CachingStrategy="RecycleElement"
-                  BackgroundColor="White"                    
-                  VerticalOptions="FillAndExpand"
-                  HasUnevenRows="true"
-                  SeparatorColor="Black"
-                  Margin="0,-5,0,5"             
-                  ItemTapped="ListaVagas_ItemTapped" >
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal" Spacing="10" BackgroundColor="White" Margin="0,3,0,1">
-                            <BoxView Margin="3"
+            <ListView x:Name="ListaEstabelecimento"
+                      CachingStrategy="RecycleElement"
+                      BackgroundColor="White"                    
+                      VerticalOptions="FillAndExpand"
+                      HasUnevenRows="true"
+                      SeparatorColor="Black"
+                      Margin="0,-5,0,5"             
+                      ItemTapped="ListaVagas_ItemTapped" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Spacing="10" BackgroundColor="White" Margin="0,3,0,1">
+                                <BoxView Margin="3"
                                      HeightRequest="1"
                                      WidthRequest="1.5"
                                      Color="#EF5350" />
-                            <controls:CircleImage Source="{Binding Logo}" BorderColor="#EF5350" BorderThickness="2" Margin="1,0,1,0" WidthRequest="60" HeightRequest="60" Aspect="AspectFit"/>
-                            <Grid VerticalOptions="FillAndExpand" Padding="5" Margin="5,0,5,0" HorizontalOptions="FillAndExpand" BackgroundColor="White">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid Grid.Row="0" VerticalOptions="FillAndExpand" Padding="0" Margin="0" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+                                
+                                <controls:CircleImage Source="{Binding Logo}" BorderColor="#EF5350" BorderThickness="2" Margin="1,0,1,0" WidthRequest="60" HeightRequest="60" Aspect="AspectFit"/>
+                                <Grid VerticalOptions="FillAndExpand" Padding="5" Margin="5,0,5,0" HorizontalOptions="FillAndExpand" BackgroundColor="White">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
-                                    <Label FontAttributes="Bold" Text="{Binding Nome}" Grid.Row="0" TextColor="{StaticResource asphaltPrimary}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Default"  Margin="0" />
-                                    <Label Grid.Row="1" Text="{Binding Descricao}" VerticalTextAlignment="Start" FontSize="Small" TextColor="DarkGray" Margin="0" />
-                                    <StackLayout Grid.Row="2" Orientation="Horizontal">
+
+                                    <Grid Grid.Row="0" VerticalOptions="FillAndExpand" Padding="0" Margin="0" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="230"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <ContentView x:Name="FundoOpenOrClose" 
+                                                     Grid.Row="0"
+                                                     IsVisible="False"
+                                                     Grid.Column="1"
+                                                     BackgroundColor="#EF5350"
+                                                     HorizontalOptions="FillAndExpand"
+                                                     VerticalOptions="FillAndExpand"
+                                                     HeightRequest="24"
+                                                     WidthRequest="40">
+
+                                            <Label x:Name="OpenOrClose"
+                                                   IsVisible="false"
+                                                   Text="{Binding Aberto}"
+                                                   FontAttributes="Bold"
+                                                   FontSize="12"
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="Center"/>
+
+                                        </ContentView>
+                                        <Label FontAttributes="Bold" Grid.Column="0" Text="{Binding Nome}" Grid.Row="0" TextColor="{StaticResource asphaltPrimary}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Default"  Margin="0" />
+                                        <Label Grid.Row="1" Grid.Column="0" Text="{Binding Descricao}" VerticalTextAlignment="Start" FontSize="Small" TextColor="DarkGray" Margin="0" />
+                                        <StackLayout Grid.Row="2" Orientation="Horizontal">
+                                        </StackLayout>
+                                    </Grid>
+                                    <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="5"  Margin="-6,0,-10,0" HorizontalOptions="FillAndExpand" BackgroundColor="#EF5350">
+                                        <Image WidthRequest="25" HeightRequest="25" Source="ic_Tempo"  />
+                                        <Label HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro" Text="{Binding Entrega_}"/>
+                                        <Image WidthRequest="25" HeightRequest="25" Source="ic_Entrega" />
+                                        <Label HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro" Text="{Binding Frete, Mode=TwoWay, StringFormat='R$ {0:C}'}"/>
+                                        <Image WidthRequest="25" HeightRequest="25" Source="ic_Funcionamento" />
+                                        <Label HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro" Text="{Binding Horario_Funcionamento}"/>
                                     </StackLayout>
                                 </Grid>
-                                <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="5"  Margin="-6,0,-10,0" HorizontalOptions="FillAndExpand" BackgroundColor="#EF5350">
-                                    <Image WidthRequest="25" HeightRequest="25" Source="ic_Tempo"  />
-                                    <Label HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro" Text="{Binding Entrega_}"/>
-                                    <Image WidthRequest="25" HeightRequest="25" Source="ic_Entrega" />
-                                    <Label HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro" Text="{Binding Frete}"/>
-                                    <Image WidthRequest="25" HeightRequest="25" Source="ic_Funcionamento" />
-                                    <Label HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro" Text="{Binding Horario_Funcionamento}"/>
-                                </StackLayout>
-                            </Grid>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
         </StackLayout>
-        <!--<StackLayout>
-
-            --><!--<Image Source="logomarca1" Margin="0,5,0,5" WidthRequest="450" HeightRequest="100" HorizontalOptions="CenterAndExpand"></Image>--><!--
-
-         
-
-        </StackLayout>-->
-   
     </StackLayout>
-    </ContentPage>
+</ContentPage>
