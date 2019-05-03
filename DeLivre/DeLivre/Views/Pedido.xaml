@@ -1,18 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"         
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+            xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
             x:Class="DeLivre.Views.Pedido">
+    
+    <!--Pedidos -->
+    <ContentPage Title="PEDIDOS" Icon="ic_Pedidos">
+        <StackLayout Margin="0,0,0,0">
+            <StackLayout x:Name="stck_Listalimpa" BackgroundColor="Transparent" IsVisible="False" VerticalOptions="CenterAndExpand" Orientation="Vertical">
 
-    <ContentPage Title="Pedidos">
-        <StackLayout Margin="5,0,5,0">
-            <ListView x:Name="ListaCardapio"                      
-                      BackgroundColor="White" 
+                <Label x:Name="lbl_Listalimpa" FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Center" TextColor="Black" Text="Seu carrinho está vazio!"/>
+                <Image Source="semitens.png" BackgroundColor="Transparent" HeightRequest="100" WidthRequest="100" ></Image>
+
+            </StackLayout>
+            <ListView x:Name="ListaCardapio" BackgroundColor="White" HasUnevenRows="true"                                          
                       SeparatorColor="{StaticResource grayPrimary}"
-                      VerticalOptions="FillAndExpand"
-                      HasUnevenRows="true" 
-                      ItemSelected="ListaCardapio_ItemSelected"
-                      CachingStrategy="RecycleElement">
-
+                      VerticalOptions="FillAndExpand" CachingStrategy="RecycleElement"                      
+                      ItemSelected="ListaCardapio_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -26,36 +30,38 @@
                                     </Grid.RowDefinitions>
 
                                     <StackLayout Grid.Column="0" >
+                                        <!--Tipo do Lanche-->
                                         <Label x:Name="Tipo" Text="{Binding Tipo}" 
-                                               FontSize="Small"
+                                               FontSize="Small" FontAttributes="Bold"
                                                LineBreakMode="TailTruncation"                                      
                                                TextColor="{StaticResource asphaltPrimary}" />
 
                                         <StackLayout Orientation="Horizontal">
+                                            <!--Quantidade-->
                                             <Label x:Name="QtPedido" 
                                                    Text="{Binding Quantidade, Mode=TwoWay, StringFormat='  {0}x'}"                                                     
                                                    FontSize="Small" 
                                                    TextColor="{StaticResource asphaltPrimary}" />
+                                            <!--Nome Do Lanche-->
                                             <Label x:Name="NomeLanche" 
                                                    Text="{Binding Nome}" 
                                                    FontSize="Small" 
                                                    TextColor="{StaticResource asphaltPrimary}" />
                                         </StackLayout>
-                                        <!--Mode=TwoWay, StringFormat='Valor Unit.: R$ {0:C}-->
+                                        <!--Valor Unitario-->
                                         <Label x:Name="lbl_valor_Unit"
-                                               Grid.Column="2" 
-                                               Text="{Binding Valor}"
+                                               Grid.Column="2"                                               
+                                               Text="{Binding ValorUnit, Mode=TwoWay, StringFormat='Valor Unit.: {0:C}'}"
                                                FontSize="12"
-                                               FontAttributes="Bold"
+                                               FontAttributes="Italic"
                                                TextColor="{StaticResource grayPrimary}"
                                                LineBreakMode="TailTruncation" />
-
+                                        <!--Valor Total + valor Adicionais -->
                                         <Label Grid.Column="2" 
-                                               Text="{Binding ValorTotal, Mode=TwoWay, StringFormat='Valor Total: R$ {0:C}'}"
-                                               FontSize="11" FontAttributes="Bold"
+                                               Text="{Binding ValorTotaleAdicionais, Mode=TwoWay, StringFormat='Valor Total: {0:C}'}"
+                                               FontSize="11.5" FontAttributes="Bold"
                                                TextColor="{StaticResource grayPrimary}"
                                                LineBreakMode="TailTruncation" />
-
                                     </StackLayout>
                                 </Grid>
                             </StackLayout>
@@ -63,88 +69,50 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <StackLayout Margin="5,0,5,0"  HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
-                <StackLayout.Resources>
-                    <Style TargetType="StackLayout">
-                        <Setter Property="VisualStateManager.VisualStateGroups">
-                            <VisualStateGroupList>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal">
-                                        <VisualState.Setters>
-                                            <Setter Property="Scale" Value="1"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="Pressed">
-                                        <VisualState.Setters>
-                                            <Setter Property="Scale" Value="0.8"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateGroupList>
-                        </Setter>
-                    </Style>
-                </StackLayout.Resources>
-                <ImageButton Source="delete"              
-                                 Aspect="AspectFit"                                                      
-                                 BackgroundColor="Transparent"
-                                 HeightRequest="30"
-                                 WidthRequest="30" >
-                   
-                </ImageButton>
-                <Label Margin="0,3" Text="Excluir Todos os Pedidos!" TextColor="DarkCyan"></Label>
-            </StackLayout>
-            <StackLayout BackgroundColor="#E53935">
-                <Grid HeightRequest="200">
+            <Grid HeightRequest="100" Margin="5,0,5,0" BackgroundColor="#E53935">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="300" />
-                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="320" />
+                        <ColumnDefinition Width="35" />
                     </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="120" />
+                </Grid.RowDefinitions>
 
-                    <Label x:Name="lbl_Entrega" Margin="0,30" Grid.Column="0" TextColor="White"/>
-                    <Label x:Name="lbl_Total_Pedido" Grid.Column="0" Margin="0,10" Text="Total do Pedido: " FontAttributes="Bold" TextColor="White"/>
-                    <Label Text="Total: " FontSize="16" Grid.Column="1" TextColor="White"/>
-                    <Label x:Name="lbl_Valor_Total" Margin="-20,15" HorizontalTextAlignment="Start" Grid.Column="1" FontSize="20" FontAttributes="Bold" TextColor="White"/>
+                <!--Informações parciais -->
+                <Label x:Name="lbl_Total_Pedido" Grid.Row="0" FontSize="12" Grid.Column="0" Margin="5,10"  TextColor="White"/>
+                <Label x:Name="lbl_Entrega" Margin="5,27" Grid.Row="0" FontSize="12" Grid.Column="0" TextColor="White"/>
+                <Label x:Name="lbl_Valor_Adicionais" Grid.Row="0" IsVisible="False" FontSize="12" Grid.Column="0" Margin="5,43" TextColor="White"/>
+                 <!--Informação do Valor Total a ser Pago -->
+                <Label Text="Total: " Margin="-90,15" Grid.Row="0" FontAttributes="Bold" HorizontalTextAlignment="Start" FontSize="20" Grid.Column="1" TextColor="White"/>
+                <Label x:Name="lbl_Valor_Total" Margin="-105,43" Grid.Row="0" HorizontalTextAlignment="Start" Grid.Column="1" FontSize="21" FontAttributes="Bold" TextColor="White"/>
+
                 </Grid>
-                <Button x:Name="Finalizar_Pedido"  BackgroundColor="White" Clicked="Finalizar_Pedido_Clicked" TextColor="#E53935" Text="Finalizar Pedido"/>
-            </StackLayout>
+                <!--<Button x:Name="ExcluirPedido" Margin="0,110,0,5" Text="Excluir Pedido" BackgroundColor="White" 
+                    HorizontalOptions="CenterAndExpand" 
+                    WidthRequest="400" Clicked="DeleteAllPedido_Clicked" TextColor="#E53935"/>-->       
+           
         </StackLayout>
     </ContentPage>
+    <!--Tela de FinaliZar o pedido-->
+    <ContentPage Title="FINALIZAR PEDIDO!" Icon="ic_Finalizar">
+        <StackLayout Margin="5,0,0,0" >
+            <!--Dados do Usuario-->
+            <Label x:Name="lbl_InfoComplementar" FontSize="14" Margin="0,5,0,5" FontAttributes="Bold" 
+                   HorizontalTextAlignment="Center" Text="Informações Pessoais:"                   
+                   TextColor="{StaticResource asphaltPrimary}"/>
+            <!--Nome e Sobrenome-->
+            <StackLayout Orientation="Horizontal" >
+                <Label Text="Nome:" Margin="0,15" TextColor="Black"/>
+                <Entry x:Name="EntNome" WidthRequest="115" Placeholder="Seu Nome" Margin="0,0,0,10" />
 
-    <ContentPage x:Name="DadosPessoais" Title="Confirmar Identidade" >
-        <StackLayout Margin="5,0,0,5" >
-
-            <StackLayout Orientation="Vertical" >
-                <Label Text="Nome:" TextColor="Black"/>
-                <Entry x:Name="EntNome" Placeholder="Primeiro Nome" Margin="0,0,0,10" >
-                    <VisualStateManager.VisualStateGroups>
-                        <VisualStateGroup x:Name="CommonStates">
-                            <VisualState x:Name="Normal">
-                                <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="Transparent" />
-                                </VisualState.Setters>
-                            </VisualState>
-
-                            <VisualState x:Name="Focused">
-                                <VisualState.Setters>
-                                    <Setter Property="FontSize" Value="36" />
-                                </VisualState.Setters>
-                            </VisualState>
-
-                            <VisualState x:Name="Disabled">
-                                <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="Red" />
-                                </VisualState.Setters>
-                            </VisualState>
-                        </VisualStateGroup>
-                    </VisualStateManager.VisualStateGroups>
-                </Entry>
-
-                <Label Text="Sobrenome:" TextColor="Black" />
-                <Entry x:Name="EntSobrenome" Placeholder="Segundo Nome" Margin="0,0,0,10"/>
+                <Label x:Name="Sobrenome" Margin="0,15" Text="Sobrenome:" TextColor="Black" />
+                <Entry x:Name="EntSobrenome" WidthRequest="115" Placeholder="Sobrenome" Margin="0,0,0,10"/>
             </StackLayout>
 
             <StackLayout Orientation="Vertical">
+                <!--Informação do Endereço do usuario-->
                 <StackLayout VerticalOptions="EndAndExpand">
+                    <!--Endereço-->
                     <Label Text="Endereço:" TextColor="Black" />
                     <Entry x:Name="EntEndereco" Placeholder="Rua Gov. Jose Augusto" />
                 </StackLayout>
@@ -152,30 +120,55 @@
             <StackLayout Orientation="Vertical" >
                 <StackLayout Orientation="Horizontal">
                     <StackLayout WidthRequest="50">
+                        <!--Numero-->
                         <Label Text="Numero:" TextColor="Black" />
-                        <Entry x:Name="EntNumero" Placeholder="100" />
+                        <Entry x:Name="EntNumero" Keyboard="Numeric" Placeholder="62" />
                     </StackLayout>
                     <StackLayout WidthRequest="150">
+                        <!--Cidade-->
                         <Label Text="Cidade:" TextColor="Black" />
                         <Entry x:Name="EntCidade" IsEnabled="False" Placeholder="" />
                     </StackLayout>
                     <StackLayout WidthRequest="150">
+                        <!--Bairro-->
                         <Label Text="Bairro:" TextColor="Black" />
                         <Entry x:Name="EntBairro" Placeholder="Centro" />
                     </StackLayout>
-
+                </StackLayout>
+                <StackLayout VerticalOptions="EndAndExpand">
+                    <!--Ponto de Refêrencia-->
+                    <Label Text="Ponto de Referência:" TextColor="Black" />
+                    <Entry x:Name="EntReferencia" Placeholder="Proximo a casa de João" />
                 </StackLayout>
             </StackLayout>
-            <Button x:Name="SalvareEnviar" 
-                    Clicked="SalvareEnviar_Clicked" 
-                    Text="Salvar e Enviar Pedido!" 
-                    BackgroundColor="#E53935"
-                    Margin="5,0,5,0" BorderRadius="5" 
-                    TextColor="White" />
+            <!--Forma de Pagamento e Troco-->
+            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" Margin="5,0,5,5" Spacing="13">
+                <!--Forma de Pagamento-->
+                <Label x:Name="lbl_FormaPagamento" FontSize="15" Margin="0,5,0,5" FontAttributes="Bold" 
+                       HorizontalTextAlignment="Center" Text="Forma de Pagamento:"                   
+                       TextColor="{StaticResource asphaltPrimary}"/>
+                <!--Tipos de Pagamento!-->
+                <input:RadioButtonGroupView Orientation="Horizontal" Spacing="5" >
+                    <input:RadioButton x:Name="Tipo_Dinheiro" Clicked="Tipo_Dinheiro_Clicked" Text="Dinheiro" Color="#EF5350" CircleColor="#EF5350" TextFontSize="12" IsChecked="True" />
+                    <input:RadioButton x:Name="Tipo_Cartao" Clicked="Tipo_Cartao_Clicked" Text="Cartão de Credito" Color="#EF5350" CircleColor="#EF5350" TextFontSize="12" />
+                </input:RadioButtonGroupView>
+                <!--Troco-->
+                <StackLayout x:Name="stck_Troco" Orientation="Horizontal">
+                    <Label FontSize="15" Margin="0,15,0,5" FontAttributes="Bold" 
+                           HorizontalTextAlignment="Center" Text="Troco para:"                   
+                           TextColor="{StaticResource asphaltPrimary}"/>
+
+                    <Entry x:Name="Ent_Troco" WidthRequest="90" HorizontalTextAlignment="Center" TextColor="Black" MaxLength="3" Keyboard="Numeric" Placeholder="Ex: R$ 54" />
+                </StackLayout>
+            </StackLayout>
+            <!--Enviar pedido e Salvar-->
+            <Button x:Name="SalvareEnviar" Text="Enviar Pedido!" 
+                    Clicked="SalvareEnviar_Clicked" TextColor="White"                   
+                    BackgroundColor="#E53935" BorderRadius="5"
+                    Margin="5,5,5,5"  /> 
+                    
         </StackLayout>
-     
          
-      
     </ContentPage>
        
 </TabbedPage>
