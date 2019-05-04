@@ -59,7 +59,8 @@ namespace DeLivre.Views
                         if (i > 0)
                         {                                                                     
                             activity_indicator.IsRunning = false;
-                            activity_indicator.IsVisible = false;                            
+                            activity_indicator.IsVisible = false;    
+                            boxLinha.IsVisible = true;
                         }                       
                     }
                     else
@@ -78,8 +79,7 @@ namespace DeLivre.Views
                     else
                     {
                         activity_indicator.IsRunning = true;
-                        GetListEstab();
-                        
+                        GetListEstab();                        
                     }
                 }
             }

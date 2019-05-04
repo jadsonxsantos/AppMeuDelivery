@@ -1,4 +1,5 @@
-﻿using DeLivre.Models;
+﻿using Com.OneSignal;
+using DeLivre.Models;
 using System;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
@@ -15,10 +16,12 @@ namespace DeLivre
             InitializeComponent();
 
             MainPage = new MainPage();
+            OneSignal.Current.StartInit("aed63aa3-9fbf-4f23-a9b2-26ee4666d096").EndInit();
         }
 
         protected override void OnStart()
-        {            
+        {
+            OneSignal.Current.RegisterForPushNotifications();
         }
 
         protected override void OnSleep()

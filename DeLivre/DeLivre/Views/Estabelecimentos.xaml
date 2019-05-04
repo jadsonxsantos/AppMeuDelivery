@@ -2,23 +2,23 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
-             x:Class="DeLivre.Views.Estabelecimentos">
+             x:Class="DeLivre.Views.Estabelecimentos" BackgroundImage="fundoapp">
 
-    <StackLayout BackgroundColor="White" >
+    <StackLayout>
 
             <controls:CircleImage Source="logotipo_color.png" WidthRequest="200" HeightRequest="70" 
                                   HorizontalOptions="CenterAndExpand" BorderThickness="1" 
                                   BorderColor="White" Margin="0,5" Aspect="AspectFit"/>
 
-           <BoxView Margin="3"  HeightRequest="1"  WidthRequest="10" Color="Black" />
-                                                                     
-        <ActivityIndicator 
+        <!--<BoxView Margin="3"  HeightRequest="1" WidthRequest="10" Color="Black" />-->
+
+        <StackLayout BackgroundColor="White" Margin="0,0">
+            <ActivityIndicator 
                 IsRunning="true" x:Name="activity_indicator"
                 AbsoluteLayout.LayoutBounds="0.5,0,100,100" 
                 AbsoluteLayout.LayoutFlags="PositionProportional"
                 Color="#EF5350" />
-        
-        <StackLayout>
+            <BoxView x:Name="boxLinha" Margin="3" HeightRequest="1" IsVisible="False" WidthRequest="10" Color="#EF5350" />
             <ListView x:Name="ListaEstabelecimento"
                       CachingStrategy="RecycleElement"
                       BackgroundColor="White"                    
@@ -30,14 +30,15 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal" Spacing="10" BackgroundColor="White" Margin="0,3,0,1">
-                                <BoxView Margin="3"
-                                     HeightRequest="1"
-                                     WidthRequest="1.5"
-                                     Color="#EF5350" />
-                                
-                                <controls:CircleImage Source="{Binding Logo}" BorderColor="#EF5350" BorderThickness="2" Margin="1,0,1,0" WidthRequest="60" HeightRequest="60" Aspect="AspectFit"/>
-                                <Grid VerticalOptions="FillAndExpand" Padding="5" Margin="5,0,5,0" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+                            <StackLayout Orientation="Horizontal" Spacing="10" BackgroundColor="White" Margin="0,0,0,1">
+                                <BoxView Margin="3" HeightRequest="1" WidthRequest="1.5" Color="#EF5350" />                                
+                                   
+                                <controls:CircleImage Source="{Binding Logo}" BorderColor="#EF5350" 
+                                                      BorderThickness="2" Margin="-7,0,0,0" 
+                                                      WidthRequest="60" HeightRequest="60" 
+                                                      Aspect="AspectFit"/>
+
+                                <Grid VerticalOptions="FillAndExpand" Padding="5" Margin="-3,0,0,0" HorizontalOptions="FillAndExpand" BackgroundColor="White">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="Auto"/>
@@ -49,7 +50,7 @@
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
-                                        
+
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="230"></ColumnDefinition>
                                             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -79,7 +80,7 @@
                                         <StackLayout Grid.Row="2" Orientation="Horizontal">
                                         </StackLayout>
                                     </Grid>
-                                    <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="5"  Margin="-6,0,-10,0" HorizontalOptions="FillAndExpand" BackgroundColor="#EF5350">
+                                    <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="5" Margin="-7,0,0,0" HorizontalOptions="FillAndExpand" BackgroundColor="#EF5350">
                                         <Image WidthRequest="25" HeightRequest="25" Source="ic_Tempo"  />
                                         <Label HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro" Text="{Binding Entrega_}"/>
                                         <Image WidthRequest="25" HeightRequest="25" Source="ic_Entrega" />

@@ -1,4 +1,4 @@
-﻿
+﻿using Com.OneSignal;
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
@@ -7,10 +7,8 @@ using Plugin.CurrentActivity;
 
 namespace DeLivre.Droid
 {
-    [Activity(Label = "Meu Delivery", 
-        Icon = "@drawable/icon", 
-        Theme = "@style/MainTheme", 
-        MainLauncher = false, 
+    [Activity(Label = "Meu Delivery", Icon = "@drawable/icon",
+        Theme = "@style/MainTheme", MainLauncher = false,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
@@ -24,6 +22,7 @@ namespace DeLivre.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
           
             ImageCircleRenderer.Init();
+            OneSignal.Current.StartInit("aed63aa3-9fbf-4f23-a9b2-26ee4666d096").EndInit();
             global::Xamarin.Forms.FormsMaterial.Init(this, bundle);
             CrossCurrentActivity.Current.Init(this, bundle);
             Rg.Plugins.Popup.Popup.Init(this, bundle);

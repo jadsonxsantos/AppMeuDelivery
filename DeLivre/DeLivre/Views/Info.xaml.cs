@@ -1,16 +1,12 @@
 ﻿using DeLivre.Models;
 using Rg.Plugins.Popup.Pages;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace DeLivre.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Info : PopupPage
     {
         Estabelecimento MeuEstabelecimento;
@@ -40,13 +36,16 @@ namespace DeLivre.Views
             Application.Current.Properties["_Whatsapp"] = MeuEstabelecimento.Whatsapp;
             //Armaenando o Numero do Whatsapp!
             Application.Current.Properties["_Estabelecimento_"] = MeuEstabelecimento.Nome;
+                       
+        }
 
+        private void Btn_instagram_Clicked(object sender, EventArgs e)
+        {
             foreach (var item in MeuEstabelecimento.Redes_Sociais)
             {
-                Instagram.Text = item.Instagram;
-                Facebook.Text = item.Facebook;
+                Device.OpenUri(new Uri(item.Instagram));
             }
-            
+           
         }
     }
 }

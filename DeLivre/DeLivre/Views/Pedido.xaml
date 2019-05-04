@@ -138,7 +138,7 @@
                 <StackLayout VerticalOptions="EndAndExpand">
                     <!--Ponto de Refêrencia-->
                     <Label Text="Ponto de Referência:" TextColor="Black" />
-                    <Entry x:Name="EntReferencia" Placeholder="Proximo a casa de João" />
+                    <Entry x:Name="EntReferencia" Placeholder="Próximo a casa de João" />
                 </StackLayout>
             </StackLayout>
             <!--Forma de Pagamento e Troco-->

@@ -16,7 +16,7 @@
               DurationIn="500"
               EasingIn="SpringIn"/>
     </pages:PopupPage.Animation>
-    
+
     <StackLayout WidthRequest="350" HeightRequest="350" BackgroundColor="White" Padding="5,10" IsClippedToBounds="True" HorizontalOptions="Center" VerticalOptions="Center">
         <cardView:CardView x:Name="CardEstabelecimento" BackgroundColor="White" CardViewHasShadow="True">
             <cardView:CardView.CardViewContent>
@@ -82,23 +82,28 @@
                 </StackLayout>
             </cardView:CardView.CardViewContent>
         </cardView:CardView>
-        <Label x:Name="lbl_Endereco" Margin="0,-80"                                        
-                           HorizontalTextAlignment="Center"
-                           TextColor="{StaticResource asphaltPrimary}"                         
-                           FontAttributes="Italic"
-                           FontSize="13" />
+            <Label x:Name="lbl_Endereco" Margin="0,-80"                                        
+                   HorizontalTextAlignment="Center"
+                   TextColor="{StaticResource asphaltPrimary}"                         
+                   FontAttributes="Italic"
+                   FontSize="13" />
 
-        <Label x:Name="lbl_Descricao" Margin="0,80"                                         
-                           HorizontalTextAlignment="Center"
-                           TextColor="{StaticResource asphaltPrimary}"                           
-                           FontSize="13" />
+            <Label x:Name="lbl_Descricao" Margin="0,80"                                         
+                   HorizontalTextAlignment="Center"
+                   TextColor="{StaticResource asphaltPrimary}"                           
+                   FontSize="13" />
 
-        <StackLayout>
-            <Label x:Name="Instagram" FontAttributes="Italic" FontSize="15"></Label>
-            <Label x:Name="Facebook" FontAttributes="Italic" FontSize="15"></Label>
-        </StackLayout>
-        
+        <Label Text="REDES SOCIAIS" TextColor="Black" HorizontalTextAlignment="Center" FontSize="16"></Label>
+        <Button x:Name="btn_instagram" FontSize="12"
+                Text="SIGA-NOS NO INSTAGRAM"
+                TextColor="White"
+                BorderRadius="10" 
+                WidthRequest="300"
+                HeightRequest="40"                         
+                Clicked="Btn_instagram_Clicked"
+                BackgroundColor="#E53935"
+                HorizontalOptions="Center" 
+                VerticalOptions="Center"></Button>
     </StackLayout>
 
- 
 </pages:PopupPage>
