@@ -81,7 +81,7 @@
                                         <StackLayout Grid.Row="2" Orientation="Horizontal">
                                         </StackLayout>
                                     </Grid>
-                                    <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="5"  Margin="-8,0,-10,0" HorizontalOptions="FillAndExpand" BackgroundColor="#EF5350">
+                                    <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="5" Margin="-8,0,-10,0" HorizontalOptions="FillAndExpand" BackgroundColor="#EF5350">
                                         <Image WidthRequest="25" HeightRequest="25" Source="ic_Tempo"  />
                                         <Label HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro" Text="{Binding Entrega_}"/>
                                         <Image WidthRequest="25" HeightRequest="25" Source="ic_Entrega" />

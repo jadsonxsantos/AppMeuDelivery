@@ -26,7 +26,7 @@ namespace DeLivre
         {           
             string Local = "Pinhao";
             Application.Current.Properties["_Cidade"] = Local;
-            App.Current.MainPage = new NavigationPage(new Views.Estabelecimentos(Local));        
+            App.Current.MainPage = new NavigationPage(new Views.Estabelecimentos());        
         }
 
         private void Btn_Parceria_Clicked(object sender, EventArgs e)

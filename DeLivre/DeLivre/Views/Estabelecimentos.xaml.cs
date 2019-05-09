@@ -21,11 +21,11 @@ namespace DeLivre.Views
         private HttpClient _client = new HttpClient();
         ObservableCollection<Estabelecimento> Estabelecimento_;
         string Url_Api;
-        public Estabelecimentos(string Estab_)
+        public Estabelecimentos(/*string Estab_*/)
         {
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
-            Local_Name = Estab_;
+            //Local_Name = Estab_;
             GetListEstab();         
         }      
 
@@ -46,12 +46,7 @@ namespace DeLivre.Views
                         // deserialize o Json para o Modelo de Dados Estabelecimento
                         var ItensJson = JsonConvert.DeserializeObject<List<Estabelecimento>>(await response.Content.ReadAsStringAsync());
                         // Adiciona os dados em uma Lista!
-                        Estabelecimento_ = new ObservableCollection<Estabelecimento>(ItensJson);
-                        //bool StatusEstab = Estabelecimento_.Where(x => x.Aberto);
-                        //if (StatusEstab == true)
-                        //{
-
-                        //}
+                        Estabelecimento_ = new ObservableCollection<Estabelecimento>(ItensJson);                       
                         //Atribui os dados para a ListaView 
                         ListaEstabelecimento.ItemsSource = Estabelecimento_.Where(x => x.Ativo == true);                                     
                         //Verificação da lista
@@ -67,7 +62,7 @@ namespace DeLivre.Views
                       await DisplayAlert("Servidor em Manutenção", "Olá, Estamos fazendo manutenção em nossos servidores, aguarde e tente mais tarde.", "OK");
                     }
                 }
-                catch (Exception)
+                catch
                 {
                     activity_indicator.IsVisible = false;
                     var resp = await DisplayAlert("Servidor em Manutenção", "Olá, Estamos fazendo manutenção nos nossos servidores, aguarde e tente mais tarde.", "OK", "Atualizar");
