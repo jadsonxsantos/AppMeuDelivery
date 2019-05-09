@@ -15,7 +15,7 @@
 
             <Label x:Name="lbCidade"
                    Text="Qual sua cidade?" 
-                   Margin="5,10,5,0"
+                   Margin="5,-2,5,0"
                    FontSize="29" FontAttributes="Bold"
                    TextColor="#E53935"
                    HorizontalOptions="Center"
