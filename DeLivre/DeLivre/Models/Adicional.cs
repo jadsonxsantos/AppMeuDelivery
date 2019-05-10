@@ -15,7 +15,10 @@ namespace DeLivre.Models
         {
             get
             {
-                return string.Format(" {0} • R$ {1} ", Nome, Valor);
+                if (!String.IsNullOrEmpty(Nome) && (!String.IsNullOrEmpty(Valor)))
+                    return string.Format(" {0} • R$ {1} ", Nome, Valor);
+                else
+                    return null;
             }
         }
     }

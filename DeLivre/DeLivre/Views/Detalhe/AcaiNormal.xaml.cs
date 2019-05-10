@@ -78,55 +78,191 @@ namespace DeLivre.Views.Detalhe
                 }            
             try
             {
-                Adicional_00.Text = MeuEstabelecimento.Adicionais[0].Adicional_Info.ToString();
+                if (!String.IsNullOrEmpty(MeuEstabelecimento.Adicionais[0].Adicional_Info.ToString()))
+                    Adicional_00.Text = MeuEstabelecimento.Adicionais[0].Adicional_Info.ToString();
+                else
+                    Adicional_00.IsVisible = false;
 
-                Adicional_01.Text = MeuEstabelecimento.Adicionais[1].Adicional_Info.ToString();
+                if (!String.IsNullOrEmpty(MeuEstabelecimento.Adicionais[1].Adicional_Info.ToString()))
+                    Adicional_01.Text = MeuEstabelecimento.Adicionais[1].Adicional_Info.ToString();
+                else
+                    Adicional_01.IsVisible = false;
 
-                Adicional_02.Text = MeuEstabelecimento.Adicionais[2].Adicional_Info.ToString();
+                if (!String.IsNullOrEmpty(MeuEstabelecimento.Adicionais[2].Adicional_Info.ToString()))
+                    Adicional_02.Text = MeuEstabelecimento.Adicionais[2].Adicional_Info.ToString();
+                else
+                    Adicional_02.IsVisible = false;
 
-                Adicional_03.Text = MeuEstabelecimento.Adicionais[3].Adicional_Info.ToString();
+                if (!String.IsNullOrEmpty(MeuEstabelecimento.Adicionais[3].Adicional_Info.ToString()))
+                    Adicional_03.Text = MeuEstabelecimento.Adicionais[3].Adicional_Info.ToString();
+                else
+                    Adicional_03.IsVisible = false;
 
-                Adicional_04.Text = MeuEstabelecimento.Adicionais[4].Adicional_Info.ToString();
+                if (!String.IsNullOrEmpty(MeuEstabelecimento.Adicionais[4].Adicional_Info.ToString()))
+                    Adicional_04.Text = MeuEstabelecimento.Adicionais[4].Adicional_Info.ToString();
+                else
+                    Adicional_04.IsVisible = false;
 
-                Adicional_05.Text = MeuEstabelecimento.Adicionais[5].Adicional_Info.ToString();
+                if (!String.IsNullOrEmpty(MeuEstabelecimento.Adicionais[5].Adicional_Info.ToString()))
+                    Adicional_05.Text = MeuEstabelecimento.Adicionais[5].Adicional_Info.ToString();
+                else
+                    Adicional_05.IsVisible = false;
 
-                Adicional_06.Text = MeuEstabelecimento.Adicionais[6].Adicional_Info.ToString();
+                if (!String.IsNullOrEmpty(MeuEstabelecimento.Adicionais[6].Adicional_Info.ToString()))
+                    Adicional_06.Text = MeuEstabelecimento.Adicionais[6].Adicional_Info.ToString();
+                else
+                    Adicional_06.IsVisible = false;
 
-                Adicional_07.Text = MeuEstabelecimento.Adicionais[7].Adicional_Info.ToString();
+                if (!String.IsNullOrEmpty(MeuEstabelecimento.Adicionais[7].Adicional_Info.ToString()))
+                    Adicional_07.Text = MeuEstabelecimento.Adicionais[7].Adicional_Info.ToString();
+                else
+                    Adicional_07.IsVisible = false;
 
-                Adicional_08.Text = MeuEstabelecimento.Adicionais[8].Adicional_Info.ToString();
+                if (!String.IsNullOrEmpty(MeuEstabelecimento.Adicionais[8].Adicional_Info.ToString()))
+                    Adicional_08.Text = MeuEstabelecimento.Adicionais[8].Adicional_Info.ToString();
+                else
+                    Adicional_08.IsVisible = false;
 
-                Adicional_09.Text = MeuEstabelecimento.Adicionais[9].Adicional_Info.ToString();
+                if (!String.IsNullOrEmpty(MeuEstabelecimento.Adicionais[9].Adicional_Info.ToString()))
+                    Adicional_09.Text = MeuEstabelecimento.Adicionais[9].Adicional_Info.ToString();
+                else
+                    Adicional_09.IsVisible = false;
 
-                Adicional_10.Text = MeuEstabelecimento.Adicionais[10].Adicional_Info.ToString();
+                if (!String.IsNullOrEmpty(MeuEstabelecimento.Adicionais[10].Adicional_Info.ToString()))
+                    Adicional_10.Text = MeuEstabelecimento.Adicionais[10].Adicional_Info.ToString();
+                else
+                    Adicional_10.IsVisible = false;
 
-                Adicional_11.Text = MeuEstabelecimento.Adicionais[11].Adicional_Info.ToString();
+                if (!String.IsNullOrEmpty(MeuEstabelecimento.Adicionais[11].Adicional_Info.ToString()))
+                    Adicional_11.Text = MeuEstabelecimento.Adicionais[11].Adicional_Info.ToString();
+                else
+                    Adicional_11.IsVisible = false;
 
-                Adicional_12.Text = MeuEstabelecimento.Adicionais[12].Adicional_Info.ToString();
+                if (!String.IsNullOrEmpty(MeuEstabelecimento.Adicionais[12].Adicional_Info.ToString()))
+                    Adicional_12.Text = MeuEstabelecimento.Adicionais[12].Adicional_Info.ToString();
+                else
+                    Adicional_12.IsVisible = false;
 
-                Adicional_13.Text = MeuEstabelecimento.Adicionais[13].Adicional_Info.ToString();
+                if (!String.IsNullOrEmpty(MeuEstabelecimento.Adicionais[13].Adicional_Info.ToString()))
+                    Adicional_13.Text = MeuEstabelecimento.Adicionais[13].Adicional_Info.ToString();
+                else
+                    Adicional_13.IsVisible = false;
 
-                Adicional_14.Text = MeuEstabelecimento.Adicionais[14].Adicional_Info.ToString();
+                if (!String.IsNullOrEmpty(MeuEstabelecimento.Adicionais[14].Adicional_Info.ToString()))
+                    Adicional_14.Text = MeuEstabelecimento.Adicionais[14].Adicional_Info.ToString();
+                else
+                    Adicional_14.IsVisible = false;
 
-                Adicional_15.Text = MeuEstabelecimento.Adicionais[15].Adicional_Info.ToString();
+                if (!String.IsNullOrEmpty(MeuEstabelecimento.Adicionais[15].Adicional_Info.ToString()))
+                    Adicional_15.Text = MeuEstabelecimento.Adicionais[15].Adicional_Info.ToString();
+                else
+                    Adicional_15.IsVisible = false;
 
-                Adicional_16.Text = MeuEstabelecimento.Adicionais[16].Adicional_Info.ToString();
+                if (!String.IsNullOrEmpty(MeuEstabelecimento.Adicionais[16].Adicional_Info.ToString()))
+                    Adicional_16.Text = MeuEstabelecimento.Adicionais[16].Adicional_Info.ToString();
+                else
+                    Adicional_16.IsVisible = false;
 
-                Adicional_17.Text = MeuEstabelecimento.Adicionais[17].Adicional_Info.ToString();
+                if (!String.IsNullOrEmpty(MeuEstabelecimento.Adicionais[17].Adicional_Info.ToString()))
+                    Adicional_17.Text = MeuEstabelecimento.Adicionais[17].Adicional_Info.ToString();
+                else
+                    Adicional_17.IsVisible = false;
 
-                Adicional_18.Text = MeuEstabelecimento.Adicionais[18].Adicional_Info.ToString();
+                if (!String.IsNullOrEmpty(MeuEstabelecimento.Adicionais[18].Adicional_Info.ToString()))
+                    Adicional_18.Text = MeuEstabelecimento.Adicionais[18].Adicional_Info.ToString();
+                else
+                    Adicional_18.IsVisible = false;
 
-                Adicional_19.Text = MeuEstabelecimento.Adicionais[19].Adicional_Info.ToString();
+                if (!String.IsNullOrEmpty(MeuEstabelecimento.Adicionais[19].Adicional_Info.ToString()))
+                    Adicional_19.Text = MeuEstabelecimento.Adicionais[19].Adicional_Info.ToString();
+                else
+                    Adicional_19.IsVisible = false;
 
-                Adicional_20.Text = MeuEstabelecimento.Adicionais[20].Adicional_Info.ToString();
+                if (!String.IsNullOrEmpty(MeuEstabelecimento.Adicionais[20].Adicional_Info.ToString()))
+                    Adicional_20.Text = MeuEstabelecimento.Adicionais[20].Adicional_Info.ToString();
+                else
+                    Adicional_20.IsVisible = false;
 
-                Adicional_21.Text = MeuEstabelecimento.Adicionais[21].Adicional_Info.ToString();
+                if (!String.IsNullOrEmpty(MeuEstabelecimento.Adicionais[21].Adicional_Info.ToString()))
+                    Adicional_21.Text = MeuEstabelecimento.Adicionais[21].Adicional_Info.ToString();
+                else
+                    Adicional_21.IsVisible = false;
 
-                Adicional_22.Text = MeuEstabelecimento.Adicionais[22].Adicional_Info.ToString();
+                if (!String.IsNullOrEmpty(MeuEstabelecimento.Adicionais[22].Adicional_Info.ToString()))
+                    Adicional_22.Text = MeuEstabelecimento.Adicionais[22].Adicional_Info.ToString();
+                else
+                    Adicional_22.IsVisible = false;
 
-                Adicional_23.Text = MeuEstabelecimento.Adicionais[23].Adicional_Info.ToString();
+                if (!String.IsNullOrEmpty(MeuEstabelecimento.Adicionais[23].Adicional_Info.ToString()))
+                    Adicional_23.Text = MeuEstabelecimento.Adicionais[23].Adicional_Info.ToString();
+                else
+                    Adicional_23.IsVisible = false;
 
-                Adicional_24.Text = MeuEstabelecimento.Adicionais[24].Adicional_Info.ToString();
+                if (!String.IsNullOrEmpty(MeuEstabelecimento.Adicionais[24].Adicional_Info.ToString()))
+                    Adicional_24.Text = MeuEstabelecimento.Adicionais[24].Adicional_Info.ToString();
+                else
+                    Adicional_24.IsVisible = false;
+
+                if ((Adicional_00.IsVisible = false) && (Adicional_01.IsVisible = false) && (Adicional_02.IsVisible = false) && (Adicional_03.IsVisible = false) 
+                    && (Adicional_04.IsVisible = false) && (Adicional_05.IsVisible = false) && (Adicional_06.IsVisible = false) && (Adicional_07.IsVisible = false)
+                    && (Adicional_08.IsVisible = false) && (Adicional_09.IsVisible = false) && (Adicional_10.IsVisible = false) && (Adicional_11.IsVisible = false)
+                    && (Adicional_12.IsVisible = false) && (Adicional_13.IsVisible = false) && (Adicional_14.IsVisible = false) && (Adicional_15.IsVisible = false)
+                    && (Adicional_16.IsVisible = false) && (Adicional_17.IsVisible = false) && (Adicional_18.IsVisible = false) && (Adicional_19.IsVisible = false)
+                    && (Adicional_20.IsVisible = false) && (Adicional_21.IsVisible = false) && (Adicional_22.IsVisible = false) && (Adicional_23.IsVisible = false)
+                    && (Adicional_24.IsVisible = false))
+                {
+                    lbl_Adicionais.IsVisible = false;
+                }
+
+                //Adicional_00.Text = MeuEstabelecimento.Adicionais[0].Adicional_Info.ToString();
+
+                //Adicional_01.Text = MeuEstabelecimento.Adicionais[1].Adicional_Info.ToString();
+
+                //Adicional_02.Text = MeuEstabelecimento.Adicionais[2].Adicional_Info.ToString();
+
+                //Adicional_03.Text = MeuEstabelecimento.Adicionais[3].Adicional_Info.ToString();
+
+                //Adicional_04.Text = MeuEstabelecimento.Adicionais[4].Adicional_Info.ToString();
+
+                //Adicional_05.Text = MeuEstabelecimento.Adicionais[5].Adicional_Info.ToString();
+
+                //Adicional_06.Text = MeuEstabelecimento.Adicionais[6].Adicional_Info.ToString();
+
+                //Adicional_07.Text = MeuEstabelecimento.Adicionais[7].Adicional_Info.ToString();
+
+                //Adicional_08.Text = MeuEstabelecimento.Adicionais[8].Adicional_Info.ToString();
+
+                //Adicional_09.Text = MeuEstabelecimento.Adicionais[9].Adicional_Info.ToString();
+
+                //Adicional_10.Text = MeuEstabelecimento.Adicionais[10].Adicional_Info.ToString();
+
+                //Adicional_11.Text = MeuEstabelecimento.Adicionais[11].Adicional_Info.ToString();
+
+                //Adicional_12.Text = MeuEstabelecimento.Adicionais[12].Adicional_Info.ToString();
+
+                //Adicional_13.Text = MeuEstabelecimento.Adicionais[13].Adicional_Info.ToString();
+
+                //Adicional_14.Text = MeuEstabelecimento.Adicionais[14].Adicional_Info.ToString();
+
+                //Adicional_15.Text = MeuEstabelecimento.Adicionais[15].Adicional_Info.ToString();
+
+                //Adicional_16.Text = MeuEstabelecimento.Adicionais[16].Adicional_Info.ToString();
+
+                //Adicional_17.Text = MeuEstabelecimento.Adicionais[17].Adicional_Info.ToString();
+
+                //Adicional_18.Text = MeuEstabelecimento.Adicionais[18].Adicional_Info.ToString();
+
+                //Adicional_19.Text = MeuEstabelecimento.Adicionais[19].Adicional_Info.ToString();
+
+                //Adicional_20.Text = MeuEstabelecimento.Adicionais[20].Adicional_Info.ToString();
+
+                //Adicional_21.Text = MeuEstabelecimento.Adicionais[21].Adicional_Info.ToString();
+
+                //Adicional_22.Text = MeuEstabelecimento.Adicionais[22].Adicional_Info.ToString();
+
+                //Adicional_23.Text = MeuEstabelecimento.Adicionais[23].Adicional_Info.ToString();
+
+                //Adicional_24.Text = MeuEstabelecimento.Adicionais[24].Adicional_Info.ToString();
 
                 
                 //Adicional_25.Text = MeuEstabelecimento.Adicionais[25].Adicional_Info.ToString();
@@ -181,7 +317,7 @@ namespace DeLivre.Views.Detalhe
             OnClose();
         }
 
-        private async void Btn_selecionar_Clicked(object sender, EventArgs e)
+        private void Btn_selecionar_Clicked(object sender, EventArgs e)
         {
             try
             {

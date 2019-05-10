@@ -59,7 +59,7 @@
                         <input:RadioButton x:Name="Tipo_G" TextFontSize="12" Color="#EF5350" CircleColor="#EF5350" />
                     </input:RadioButtonGroupView>
                 </StackLayout>
-                <Label x:Name="lbl_Tamaho" FontSize="15" FontAttributes="Bold" 
+                <Label x:Name="lbl_Adicionais" FontSize="15" FontAttributes="Bold" 
                            HorizontalTextAlignment="Center" Text="Adicionais:"                   
                            TextColor="{StaticResource asphaltPrimary}"/>
 
