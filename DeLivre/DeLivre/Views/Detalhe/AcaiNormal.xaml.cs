@@ -203,13 +203,7 @@ namespace DeLivre.Views.Detalhe
                 else
                     Adicional_24.IsVisible = false;
 
-                if ((Adicional_00.IsVisible = false) && (Adicional_01.IsVisible = false) && (Adicional_02.IsVisible = false) && (Adicional_03.IsVisible = false) 
-                    && (Adicional_04.IsVisible = false) && (Adicional_05.IsVisible = false) && (Adicional_06.IsVisible = false) && (Adicional_07.IsVisible = false)
-                    && (Adicional_08.IsVisible = false) && (Adicional_09.IsVisible = false) && (Adicional_10.IsVisible = false) && (Adicional_11.IsVisible = false)
-                    && (Adicional_12.IsVisible = false) && (Adicional_13.IsVisible = false) && (Adicional_14.IsVisible = false) && (Adicional_15.IsVisible = false)
-                    && (Adicional_16.IsVisible = false) && (Adicional_17.IsVisible = false) && (Adicional_18.IsVisible = false) && (Adicional_19.IsVisible = false)
-                    && (Adicional_20.IsVisible = false) && (Adicional_21.IsVisible = false) && (Adicional_22.IsVisible = false) && (Adicional_23.IsVisible = false)
-                    && (Adicional_24.IsVisible = false))
+                if (MeuEstabelecimento.Adicionais[0].Adicional_Info == "")
                 {
                     lbl_Adicionais.IsVisible = false;
                 }
@@ -264,7 +258,7 @@ namespace DeLivre.Views.Detalhe
 
                 //Adicional_24.Text = MeuEstabelecimento.Adicionais[24].Adicional_Info.ToString();
 
-                
+
                 //Adicional_25.Text = MeuEstabelecimento.Adicionais[25].Adicional_Info.ToString();
 
             }

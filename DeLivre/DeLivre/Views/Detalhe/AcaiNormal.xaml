@@ -60,8 +60,8 @@
                     </input:RadioButtonGroupView>
                 </StackLayout>
                 <Label x:Name="lbl_Adicionais" FontSize="15" FontAttributes="Bold" 
-                           HorizontalTextAlignment="Center" Text="Adicionais:"                   
-                           TextColor="{StaticResource asphaltPrimary}"/>
+                       HorizontalTextAlignment="Center" Text="Adicionais:"                   
+                       TextColor="{StaticResource asphaltPrimary}"/>
 
                 <StackLayout Orientation="Horizontal">
                     <StackLayout Spacing="2" Orientation="Vertical" Margin="5,0,5,0">

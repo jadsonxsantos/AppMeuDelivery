@@ -117,7 +117,7 @@ namespace DeLivre.Views
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Entre em contato com o Desenvolvedor!", ex.ToString() + " ", "OK");
+                await DisplayAlert("Verifique sua conexão",  "por favor verifique sua conexão e tente novamente mais tarde", "OK");
             }
         }        
         

@@ -90,7 +90,7 @@ namespace DeLivre.Views.Detalhe
             OnClose();
         }
 
-        private void Btn_selecionar_Clicked(object sender, EventArgs e)
+        private async void Btn_selecionar_Clicked(object sender, EventArgs e)
         {
             try
             {
@@ -159,7 +159,7 @@ namespace DeLivre.Views.Detalhe
             }
             catch (Exception)
             {
-                throw;
+                await DisplayAlert("Atenção!", "Selecione o tipo/tamanho!", "OK");
             }
            
         }

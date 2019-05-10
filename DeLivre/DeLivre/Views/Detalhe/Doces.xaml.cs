@@ -159,7 +159,7 @@ namespace DeLivre.Views.Detalhe
             }
             catch (Exception)
             {
-                throw;
+                await DisplayAlert("Atenção!", "Selecione o tipo/tamanho!", "OK");
             }
            
         }

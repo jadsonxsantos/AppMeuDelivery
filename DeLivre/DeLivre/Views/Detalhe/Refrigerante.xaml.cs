@@ -93,63 +93,71 @@ namespace DeLivre.Views.Detalhe
 
         private async void Btn_selecionar_Clicked(object sender, EventArgs e)
         {
-            if (Tipo_P.IsChecked == true)
+            try
             {
-                MeusPedido.Valor_RB = MeusPedido.Valor_P;
-                Tamanho = MeusPedido.Valor_P_Title;
+                if (Tipo_P.IsChecked == true)
+                {
+                    MeusPedido.Valor_RB = MeusPedido.Valor_P;
+                    Tamanho = MeusPedido.Valor_P_Title;
+                }
+                if (Tipo_B.IsChecked == true)
+                {
+                    MeusPedido.Valor_RB = MeusPedido.Valor_B;
+                    Tamanho = MeusPedido.Valor_B_Title;
+                }
+                if (Tipo_M.IsChecked == true)
+                {
+                    MeusPedido.Valor_RB = MeusPedido.Valor_M;
+                    Tamanho = MeusPedido.Valor_M_Title;
+                }
+                if (Tipo_G.IsChecked == true)
+                {
+                    MeusPedido.Valor_RB = MeusPedido.Valor_G;
+                    Tamanho = MeusPedido.Valor_G_Title;
+                }
+
+                double valorunit = 0.00;
+
+                int Qt_item = Convert.ToInt32(Qt_Pedido.Text);
+
+                valorunit = Convert.ToDouble(MeusPedido.Valor_RB);
+                CalculoValorxQtd = Qt_item * valorunit;
+                EnviarPedido(Qt_item);
+                // Verificando se o mesmo produto esta no pedido!
+                //Cardapio Check_Nome = App.Meus_Pedidos.FirstOrDefault(cf => cf.Nome.Contains(lbl_Nome_lanche.Text));
+
+                //if (Check_Nome == null)
+                //{
+                //    Cardapio Check_Tipo = App.Meus_Pedidos.FirstOrDefault(cf => cf.Tipo.Contains(lbl_Tipo_lanche.Text));
+
+                //    if (Check_Tipo == null)
+                //    {
+                //        App.Meus_Pedidos.Add(new Cardapio()
+                //        {
+                //            Tipo = lbl_Tipo_lanche.Text.Replace("x", " ").Replace(",", ":"),
+                //            Nome = lbl_Nome_lanche.Text + ": " + Tamanho,
+                //            Descricao = lbl_Descricao.Text,
+                //            ValorUnit = Convert.ToDouble(MeusPedido.Valor_RB),
+                //            ValorTotal = CalculoValorxQtd,
+                //            Quantidade = Qt_item,
+                //            TrocaInfo = Lbl_Troca.Text
+                //        });
+                //        //await Navigation.PushAsync(new Pedido(App.Meus_Pedidos));
+                //        DependencyService.Get<IMessage>().ShortAlert("Pedido Adicionado ao Carrinho!");
+                //        OnClose();
+                //    }
+                //}
+                //else
+                //{
+                //    await DisplayAlert("Atenção!", "Você já adicionou esse Lanche ao Pedido!", "OK");
+                //    OnClose();
+                //}          
             }
-            if (Tipo_B.IsChecked == true)
+            catch (Exception)
             {
-                MeusPedido.Valor_RB = MeusPedido.Valor_B;
-                Tamanho = MeusPedido.Valor_B_Title ;
+                await DisplayAlert("Atenção!", "Selecione o tipo/tamanho!", "OK");
             }
-            if (Tipo_M.IsChecked == true)
-            {
-                MeusPedido.Valor_RB = MeusPedido.Valor_M;
-                Tamanho = MeusPedido.Valor_M_Title ;
-            }
-            if (Tipo_G.IsChecked == true)
-            {
-                MeusPedido.Valor_RB = MeusPedido.Valor_G;
-                Tamanho = MeusPedido.Valor_G_Title ;
-            }
-
-            double valorunit = 0.00;
-           
-            int Qt_item = Convert.ToInt32(Qt_Pedido.Text);        
-
-            valorunit = Convert.ToDouble(MeusPedido.Valor_RB);
-            CalculoValorxQtd = Qt_item * valorunit;
-            EnviarPedido(Qt_item);
-            // Verificando se o mesmo produto esta no pedido!
-            //Cardapio Check_Nome = App.Meus_Pedidos.FirstOrDefault(cf => cf.Nome.Contains(lbl_Nome_lanche.Text));
-
-            //if (Check_Nome == null)
-            //{
-            //    Cardapio Check_Tipo = App.Meus_Pedidos.FirstOrDefault(cf => cf.Tipo.Contains(lbl_Tipo_lanche.Text));
-
-            //    if (Check_Tipo == null)
-            //    {
-            //        App.Meus_Pedidos.Add(new Cardapio()
-            //        {
-            //            Tipo = lbl_Tipo_lanche.Text.Replace("x", " ").Replace(",", ":"),
-            //            Nome = lbl_Nome_lanche.Text + ": " + Tamanho,
-            //            Descricao = lbl_Descricao.Text,
-            //            ValorUnit = Convert.ToDouble(MeusPedido.Valor_RB),
-            //            ValorTotal = CalculoValorxQtd,
-            //            Quantidade = Qt_item,
-            //            TrocaInfo = Lbl_Troca.Text
-            //        });
-            //        //await Navigation.PushAsync(new Pedido(App.Meus_Pedidos));
-            //        DependencyService.Get<IMessage>().ShortAlert("Pedido Adicionado ao Carrinho!");
-            //        OnClose();
-            //    }
-            //}
-            //else
-            //{
-            //    await DisplayAlert("Atenção!", "Você já adicionou esse Lanche ao Pedido!", "OK");
-            //    OnClose();
-            //}          
+          
         }
 
         private void OnClose()

@@ -113,7 +113,7 @@
                            HorizontalTextAlignment="Center" Text="Informações Pessoais:"                   
                            TextColor="{StaticResource asphaltPrimary}"/>
 
-                    <Entry x:Name="Lbl_Troca" Placeholder="Ex.: Picolé" 
+                    <Entry x:Name="Lbl_Troca" Placeholder="Ex.: " 
                            Margin="0,5" HeightRequest="60" WidthRequest="200"
                            HorizontalTextAlignment="Center" FontSize="13" />
 
