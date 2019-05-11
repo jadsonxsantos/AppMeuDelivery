@@ -206,65 +206,11 @@ namespace DeLivre.Views.Detalhe
                 if (MeuEstabelecimento.Adicionais[0].Adicional_Info == "")
                 {
                     lbl_Adicionais.IsVisible = false;
-                }
-
-                //Adicional_00.Text = MeuEstabelecimento.Adicionais[0].Adicional_Info.ToString();
-
-                //Adicional_01.Text = MeuEstabelecimento.Adicionais[1].Adicional_Info.ToString();
-
-                //Adicional_02.Text = MeuEstabelecimento.Adicionais[2].Adicional_Info.ToString();
-
-                //Adicional_03.Text = MeuEstabelecimento.Adicionais[3].Adicional_Info.ToString();
-
-                //Adicional_04.Text = MeuEstabelecimento.Adicionais[4].Adicional_Info.ToString();
-
-                //Adicional_05.Text = MeuEstabelecimento.Adicionais[5].Adicional_Info.ToString();
-
-                //Adicional_06.Text = MeuEstabelecimento.Adicionais[6].Adicional_Info.ToString();
-
-                //Adicional_07.Text = MeuEstabelecimento.Adicionais[7].Adicional_Info.ToString();
-
-                //Adicional_08.Text = MeuEstabelecimento.Adicionais[8].Adicional_Info.ToString();
-
-                //Adicional_09.Text = MeuEstabelecimento.Adicionais[9].Adicional_Info.ToString();
-
-                //Adicional_10.Text = MeuEstabelecimento.Adicionais[10].Adicional_Info.ToString();
-
-                //Adicional_11.Text = MeuEstabelecimento.Adicionais[11].Adicional_Info.ToString();
-
-                //Adicional_12.Text = MeuEstabelecimento.Adicionais[12].Adicional_Info.ToString();
-
-                //Adicional_13.Text = MeuEstabelecimento.Adicionais[13].Adicional_Info.ToString();
-
-                //Adicional_14.Text = MeuEstabelecimento.Adicionais[14].Adicional_Info.ToString();
-
-                //Adicional_15.Text = MeuEstabelecimento.Adicionais[15].Adicional_Info.ToString();
-
-                //Adicional_16.Text = MeuEstabelecimento.Adicionais[16].Adicional_Info.ToString();
-
-                //Adicional_17.Text = MeuEstabelecimento.Adicionais[17].Adicional_Info.ToString();
-
-                //Adicional_18.Text = MeuEstabelecimento.Adicionais[18].Adicional_Info.ToString();
-
-                //Adicional_19.Text = MeuEstabelecimento.Adicionais[19].Adicional_Info.ToString();
-
-                //Adicional_20.Text = MeuEstabelecimento.Adicionais[20].Adicional_Info.ToString();
-
-                //Adicional_21.Text = MeuEstabelecimento.Adicionais[21].Adicional_Info.ToString();
-
-                //Adicional_22.Text = MeuEstabelecimento.Adicionais[22].Adicional_Info.ToString();
-
-                //Adicional_23.Text = MeuEstabelecimento.Adicionais[23].Adicional_Info.ToString();
-
-                //Adicional_24.Text = MeuEstabelecimento.Adicionais[24].Adicional_Info.ToString();
-
-
-                //Adicional_25.Text = MeuEstabelecimento.Adicionais[25].Adicional_Info.ToString();
-
+                }              
             }
             catch (Exception)
             {
-                throw;
+                DependencyService.Get<IMessage>().ShortAlert("Ops algo está errado!");
             }
             Application.Current.Properties["_TrocaInfo"] = Lbl_Troca.Text;
         }

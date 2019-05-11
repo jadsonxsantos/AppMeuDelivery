@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,25 +15,23 @@ namespace DeLivre.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Estabelecimentos : ContentPage
-    {
-        string Local_Name;
-       
+    {       
         // Request do JSON 
         private HttpClient _client = new HttpClient();
         ObservableCollection<Estabelecimento> Estabelecimento_;
         string Url_Api;
-        public Estabelecimentos(string Estab_)
+        public Estabelecimentos()
         {
             NavigationPage.SetHasNavigationBar(this, false);
-            InitializeComponent();
-            Local_Name = Estab_;
-            GetListEstab();         
+            InitializeComponent();        
+            GetListEstab();           
         }      
 
         protected async void GetListEstab()
         {
             if (CrossConnectivity.Current.IsConnected)
             {
+                activity_indicator.IsRunning = true;
                 try
                 {                  
                     Url_Api = "https://meudelivery-47bcc.firebaseio.com/.json";
@@ -112,10 +111,10 @@ namespace DeLivre.Views
                 // Abre tela e envia os parâmetros.    
                 if (_Estabelecimento != null)
                 {
-                    await Navigation.PushAsync(new Cardapios(_Estabelecimento));
+                    await Navigation.PushAsync(new Cardapios(_Estabelecimento));             
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 await DisplayAlert("Verifique sua conexão",  "por favor verifique sua conexão e tente novamente mais tarde", "OK");
             }
@@ -127,13 +126,35 @@ namespace DeLivre.Views
 
             if (e.Item == null)
             {
-                return; //ItemSelected is called on deselection which results in SelectedItem being set to null
+                return; 
             }
          
             var item = (Estabelecimento)e.Item;
             NavegarToCardapio(item.Nome.ToString());
 
             lv.SelectedItem = null;
-        }             
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            GetListEstab();
+        }
+
+        private async void ListaEstabelecimento_Refreshing(object sender, EventArgs e)
+        {
+            try
+            {
+                GetListEstab();
+            }
+            catch
+            {
+                await DisplayAlert("Verifique sua conexão", "Por favor verifique sua conexão e tente novamente mais tarde", "OK");
+            }
+            finally
+            {
+                ListaEstabelecimento.EndRefresh();
+            }  
+        }
     }
 }

@@ -24,8 +24,8 @@
                       BackgroundColor="White"                    
                       VerticalOptions="FillAndExpand"
                       HasUnevenRows="true"
-                      SeparatorColor="Black"
-                      Margin="0,-5,0,5"             
+                      SeparatorColor="Black" Refreshing="ListaEstabelecimento_Refreshing"
+                      Margin="0,-5,0,5" IsPullToRefreshEnabled="True"             
                       ItemTapped="ListaVagas_ItemTapped" >
                 <ListView.ItemTemplate>
                     <DataTemplate>

@@ -19,18 +19,19 @@ namespace DeLivre.Views
 
         public Cardapios(Estabelecimento MeusEstabelecimentos)
         {
+            NavigationPage.SetHasBackButton(this, false);
             InitializeComponent();          
             MeuEstabelecimento = new Estabelecimento();
             MeuEstabelecimento = MeusEstabelecimentos;
             MeusCadapios = new List<Cardapio>();
             MeusCadapios = MeusEstabelecimentos.Cardapios;
-            Title = MeuEstabelecimento.Nome;
+            BindingContext = MeuEstabelecimento;
+            ListaCardapio.ItemsSource = MeuEstabelecimento.Cardapios;
             DadosEstabelecimentos();
-            ListaCardapio.ItemsSource = MeuEstabelecimento.Cardapios;                  
         }
 
         private void  DadosEstabelecimentos()
-        {
+        {            
             //Armaenando o valor do Frete!    
             string ValorFrete = MeuEstabelecimento.Frete;
             Application.Current.Properties["_Frete"] = ValorFrete;
@@ -141,6 +142,11 @@ namespace DeLivre.Views
             {
                 await DisplayAlert("Carrinho vazio!", "Você não tem nenhum pedido no carrinho!", "OK");
             }                     
+        }
+
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            await PopupNavigation.Instance.PushAsync(new Info(MeuEstabelecimento));
         }
     }
 }

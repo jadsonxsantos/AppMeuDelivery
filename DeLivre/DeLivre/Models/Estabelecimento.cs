@@ -13,6 +13,7 @@ namespace DeLivre.Models
         public string Notificacao { get; set; }
         public bool Ativo { get; set; }
         public bool Aberto { get; set; }
+        public string Pedido_Minimo { get; set; }
         public string Juros_Cartao { get; set; }
         public string Local { get; set; }
         public string Endereco { get; set; }

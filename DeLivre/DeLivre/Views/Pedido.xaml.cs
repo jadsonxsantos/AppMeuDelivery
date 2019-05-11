@@ -244,7 +244,7 @@ namespace DeLivre.Views
             if (!String.IsNullOrEmpty(EntNome.Text) && (!String.IsNullOrEmpty(EntEndereco.Text)) && 
                 (!String.IsNullOrEmpty(EntNumero.Text)) && (!String.IsNullOrEmpty(EntBairro.Text))&& 
                 (!String.IsNullOrEmpty(EntReferencia.Text))) 
-            {
+            {                
                 double valorTotal = Convert.ToDouble(lbl_Valor_Total.Text.Replace("R$", ""));
                 double valorTroco = Convert.ToDouble(Ent_Troco.Text);
                 if(Tipo_Dinheiro.IsChecked == true)

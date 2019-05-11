@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.lurasoft.AppMeuDelivery" android:installLocation="auto" android:versionName="1.1" android:versionCode="11">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.lurasoft.AppMeuDelivery" android:installLocation="auto" android:versionName="1.3" android:versionCode="13">
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="28" />
 	<permission android:name="com.lurasoft.AppMeuDelivery.permission.C2D_MESSAGE" android:protectionLevel="signature" />
 	<uses-permission android:name="com.lurasoft.AppMeuDelivery.permission.C2D_MESSAGE" />
