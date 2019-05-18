@@ -82,11 +82,11 @@
                                     </Grid>
                                     <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="5" Margin="-7,0,0,0" HorizontalOptions="FillAndExpand" BackgroundColor="#EF5350">
                                         <Image WidthRequest="25" HeightRequest="25" Source="ic_Tempo"  />
-                                        <Label HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro" Text="{Binding Entrega_}"/>
+                                        <Label Text="{Binding Entrega_, Mode=TwoWay}" HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro" />
                                         <Image WidthRequest="25" HeightRequest="25" Source="ic_Entrega" />
-                                        <Label HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro" Text="{Binding Frete, Mode=TwoWay, StringFormat='R$ {0:C}'}"/>
+                                        <Label Text="{Binding Frete, Mode=TwoWay, StringFormat='R$ {0:C}'}" HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro"/>
                                         <Image WidthRequest="25" HeightRequest="25" Source="ic_Funcionamento" />
-                                        <Label HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro" Text="{Binding Horario_Funcionamento}"/>
+                                        <Label Text="{Binding Horario_Funcionamento, Mode=TwoWay}" HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro"/>
                                     </StackLayout>
                                 </Grid>
                             </StackLayout>

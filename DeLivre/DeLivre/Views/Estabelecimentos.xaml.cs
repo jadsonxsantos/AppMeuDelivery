@@ -4,6 +4,7 @@ using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -20,10 +21,17 @@ namespace DeLivre.Views
         private HttpClient _client = new HttpClient();
         ObservableCollection<Estabelecimento> Estabelecimento_;
         string Url_Api;
+        public Estabelecimento horari { get; }
+
         public Estabelecimentos()
         {
             NavigationPage.SetHasNavigationBar(this, false);
-            InitializeComponent();        
+            InitializeComponent();
+            //horari = new Estabelecimento
+            //{
+            //    Horario = "545",
+            //};
+            //BindingContext = horari;
             GetListEstab();           
         }      
 
@@ -50,6 +58,35 @@ namespace DeLivre.Views
                         //if (StatusEstab == true)
                         //{
 
+                        DateTime aDate = DateTime.Now;
+                        DateTime dateValue;
+                     
+                        dateValue = DateTime.Parse(aDate.ToString("MM/dd/yyyy"), CultureInfo.InvariantCulture);
+                       string dia = dateValue.ToString("dddd", new CultureInfo("pt-BR"));
+
+                        if(dia == "quarta-feira")
+                        {
+                            foreach (var item in Estabelecimento_)
+                            {
+                              var x= item.Horarios_Funcionamento;
+
+                                foreach (var horario in x)
+                                {
+                                    //horari = new Horario_Funcionamento
+                                    //{
+                                    //    Nome = "Usuario exemplo",
+                                    //    Idade = 20
+                                    //};
+                                    //var modelo = new Estabelecimento
+                                    //{
+                                    //    Horario = horario.Quarta_Feira,                                        
+                                    //};
+                                    
+                                        //BindingContext = modelo;
+                                }
+
+                            }
+                        }
                         //}
                         //Atribui os dados para a ListaView 
                         ListaEstabelecimento.ItemsSource = Estabelecimento_.Where(x => x.Ativo == true);                                     
@@ -64,13 +101,13 @@ namespace DeLivre.Views
                     }
                     else
                     {
-                      await DisplayAlert("Servidor em Manutenção", "Olá, Estamos fazendo manutenção em nossos servidores, aguarde e tente mais tarde.", "OK");
+                      await DisplayAlert("Manutenção", "Olá, Estamos fazendo manutenção em nossos servidores, aguarde e tente mais tarde.", "OK");
                     }
                 }
                 catch (Exception)
                 {
                     activity_indicator.IsVisible = false;
-                    var resp = await DisplayAlert("Servidor em Manutenção", "Olá, Estamos fazendo manutenção nos nossos servidores, aguarde e tente mais tarde.", "OK", "Atualizar");
+                    var resp = await DisplayAlert("Manutenção", "Olá, Estamos fazendo manutenção nos nossos servidores, aguarde e tente mais tarde.", "OK", "Atualizar");
                     if (resp)
                     {
 
@@ -98,7 +135,8 @@ namespace DeLivre.Views
         }          
 
         private async void NavegarToCardapio(string Nome_estabelecimento)
-        {            
+        {           
+          
             try
             {             
                 //Visibilidade do indicador
@@ -107,12 +145,13 @@ namespace DeLivre.Views
                 var content = await _client.GetStringAsync(Url_Api);
                 ObservableCollection<Estabelecimento> _Estabelecimentos = JsonConvert.DeserializeObject<ObservableCollection<Estabelecimento>>(content);
                 // Selecionar o objeto no Json.
-                Estabelecimento _Estabelecimento = _Estabelecimentos.FirstOrDefault(cf => cf.Nome.Equals(Nome_estabelecimento));                      
-                // Abre tela e envia os parâmetros.    
+                Estabelecimento _Estabelecimento = _Estabelecimentos.FirstOrDefault(cf => cf.Nome.Equals(Nome_estabelecimento));
+                // Abre tela e envia os parâmetros.
+
                 if (_Estabelecimento != null)
                 {
                     await Navigation.PushAsync(new Cardapios(_Estabelecimento));             
-                }
+                }             
             }
             catch
             {
@@ -135,11 +174,11 @@ namespace DeLivre.Views
             lv.SelectedItem = null;
         }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            GetListEstab();
-        }
+        //protected override void OnAppearing()
+        //{
+        //    base.OnAppearing();
+        //    GetListEstab();
+        //}
 
         private async void ListaEstabelecimento_Refreshing(object sender, EventArgs e)
         {

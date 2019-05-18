@@ -63,17 +63,14 @@
                 </VisualStateManager.VisualStateGroups>
             </Button>
         </StackLayout>
-        <Button x:Name="btn_Parceria"  FontSize="15"
+        <Button x:Name="btn_Parceria" FontSize="15"
                 Text="MEU ESTABELECIMENTO NO APP?"
-                TextColor="White"
-                BorderRadius="10" 
-                WidthRequest="300"
-                HeightRequest="40"
-                Margin="5,200,5,0"                
-                Clicked="Btn_Parceria_Clicked"
-                BackgroundColor="#E53935"
+                TextColor="White" BorderRadius="10"                 
+                WidthRequest="300" HeightRequest="40"                
+                Margin="5,220,5,0" BackgroundColor="#E53935"                
+                Clicked="Btn_Parceria_Clicked"                
                 HorizontalOptions="Center" 
-                VerticalOptions="Center"></Button>
+                VerticalOptions="End"/>
     </StackLayout>
 
 </ContentPage>

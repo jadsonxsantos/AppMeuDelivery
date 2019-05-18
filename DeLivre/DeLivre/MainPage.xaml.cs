@@ -17,9 +17,9 @@ namespace DeLivre
 
         private async void Animacoes()
         {
-           await lbCidade.FadeTo(1, 2000);
+           await lbCidade.FadeTo(1, 1000);
            //await btnAracaju.FadeTo(1, 1500);
-           await btnPinhao.FadeTo(1, 1500);
+           await btnPinhao.FadeTo(1, 500);
         }
 
         private void BtnPinhao_Clicked(object sender, EventArgs e)

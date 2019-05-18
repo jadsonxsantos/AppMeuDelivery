@@ -8,10 +8,8 @@
     <ContentPage Title="PEDIDOS" Icon="ic_Pedidos">
         <StackLayout Margin="0,0,0,0">
             <StackLayout x:Name="stck_Listalimpa" BackgroundColor="Transparent" IsVisible="False" VerticalOptions="CenterAndExpand" Orientation="Vertical">
-
                 <Label x:Name="lbl_Listalimpa" FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Center" TextColor="Black" Text="Seu carrinho está vazio!"/>
                 <Image Source="semitens.png" BackgroundColor="Transparent" HeightRequest="100" WidthRequest="100" ></Image>
-
             </StackLayout>
             <ListView x:Name="ListaCardapio" BackgroundColor="White" HasUnevenRows="true"                                          
                       SeparatorColor="{StaticResource grayPrimary}"
@@ -50,14 +48,14 @@
                                         </StackLayout>
                                         <!--Valor Unitario-->
                                         <Label x:Name="lbl_valor_Unit"
-                                               Grid.Column="2"                                               
+                                               Grid.Column="2" Margin="5,0,0,0"                                              
                                                Text="{Binding ValorUnit, Mode=TwoWay, StringFormat='Valor Unit.: {0:C}'}"
                                                FontSize="12"
                                                FontAttributes="Italic"
                                                TextColor="{StaticResource grayPrimary}"
                                                LineBreakMode="TailTruncation" />
                                         <!--Valor Total + valor Adicionais -->
-                                        <Label Grid.Column="2" 
+                                        <Label Grid.Column="2" Margin="5,0,0,0"  
                                                Text="{Binding ValorTotaleAdicionais, Mode=TwoWay, StringFormat='Valor Total: {0:C}'}"
                                                FontSize="11.5" FontAttributes="Bold"
                                                TextColor="{StaticResource grayPrimary}"

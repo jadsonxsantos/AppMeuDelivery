@@ -36,7 +36,52 @@ namespace DeLivre.Views
             Application.Current.Properties["_Whatsapp"] = MeuEstabelecimento.Whatsapp;
             //Armaenando o Numero do Whatsapp!
             Application.Current.Properties["_Estabelecimento_"] = MeuEstabelecimento.Nome;
-                       
+
+            foreach (var item in MeuEstabelecimento.Horarios_Funcionamento)
+            {
+                lbl_Segunda.Text = "SEGUNDA: " +  item.Segunda_Feira;
+                lbl_Terca.Text = "TERÇA: " + item.Terca_Feira;
+                lbl_Quarta.Text = "QUARTA: " + item.Terca_Feira;
+                lbl_Quinta.Text = "QUINTA: " + item.Quinta_Feira;
+                lbl_Sexta.Text = "SEXTA: " + item.Sexta_Feira;
+                lbl_Sabado.Text = "SÁBADO: " + item.Sabado;
+                lbl_Domingo.Text = "DOMINGO: " + item.Domingo;
+            }
+            //Carregar Horario de Funconamento dos Estabelecimentos
+            //if (!String.IsNullOrEmpty(MeuEstabelecimento.Horarios_Funcionamento[0].Segunda_Feira))
+            //    lbl_Segunda.Text = MeuEstabelecimento.Horarios_Funcionamento[0].Segunda_Feira;
+            //else
+            //    lbl_Segunda.Text = "Fechado";
+
+            //if (!String.IsNullOrEmpty(MeuEstabelecimento.Horarios_Funcionamento[1].Terca_Feira))
+            //    lbl_Terca.Text = MeuEstabelecimento.Horarios_Funcionamento[1].Terca_Feira;
+            //else
+            //    lbl_Terca.Text = "Fechado";
+
+            //if (!String.IsNullOrEmpty(MeuEstabelecimento.Horarios_Funcionamento[2].Quarta_Feira))
+            //    lbl_Quarta.Text = MeuEstabelecimento.Horarios_Funcionamento[2].Quarta_Feira;
+            //else
+            //    lbl_Quarta.Text = "Fechado";
+
+            //if (!String.IsNullOrEmpty(MeuEstabelecimento.Horarios_Funcionamento[3].Quinta_Feira))
+            //    lbl_Quinta.Text = MeuEstabelecimento.Horarios_Funcionamento[3].Quinta_Feira;
+            //else
+            //    lbl_Quinta.Text = "Fechado";
+
+            //if (!String.IsNullOrEmpty(MeuEstabelecimento.Horarios_Funcionamento[4].Sexta_Feira))
+            //    lbl_Sexta.Text = MeuEstabelecimento.Horarios_Funcionamento[4].Sexta_Feira;
+            //else
+            //    lbl_Sexta.Text = "Fechado";
+
+            //if (!String.IsNullOrEmpty(MeuEstabelecimento.Horarios_Funcionamento[5].Sabado))
+            //    lbl_Sabado.Text = MeuEstabelecimento.Horarios_Funcionamento[5].Sabado;
+            //else
+            //    lbl_Sabado.Text = "Fechado";
+
+            //if (!String.IsNullOrEmpty(MeuEstabelecimento.Horarios_Funcionamento[6].Domingo))
+            //    lbl_Domingo.Text = MeuEstabelecimento.Horarios_Funcionamento[6].Domingo;
+            //else
+            //    lbl_Domingo.Text = "Fechado";
         }
 
         private void Btn_instagram_Clicked(object sender, EventArgs e)

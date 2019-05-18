@@ -37,9 +37,12 @@ namespace DeLivre.Views
             Application.Current.Properties["_Frete"] = ValorFrete;
             //Armaenando o Numero do Whatsapp!
             Application.Current.Properties["_Whatsapp"] = MeuEstabelecimento.Whatsapp;
-            //Armaenando o Numero do Whatsapp!
+            //Nome do Estabelecimento
             Application.Current.Properties["_Estabelecimento_"] = MeuEstabelecimento.Nome;
-            Application.Current.Properties["_JurosCartao"] = MeuEstabelecimento.Juros_Cartao;
+            //Verifica se aceita cartão de credito
+            Application.Current.Properties["_AceitaCartao"] = MeuEstabelecimento.Cartao_Credito;
+            //Juros do Cartão caso aceite
+            Application.Current.Properties["_JurosCartao"] = MeuEstabelecimento.Juros_Cartao;           
         }
         
         private async void ListaCardapio_ItemSelected(object sender, SelectedItemChangedEventArgs e)

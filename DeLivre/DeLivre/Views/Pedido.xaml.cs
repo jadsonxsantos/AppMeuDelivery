@@ -15,8 +15,8 @@ namespace DeLivre.Views
         ObservableCollection<Cardapio> MeusPedido;     
         double Valor_Pedido, Valor_Total, Valor_Adicionais, ValorJurosCartao = 0;
         string Valor_Frete, Number_Whatsapp, Nome_Estabelecimento, TrocaInfo, Valor_Troco, Tipo_Pagamento, Juros_Cartao, ValorEntrega;
-        string BreakLine, Endereco, ClienteDados, infoDados, Saudacao;
-
+        string BreakLine, Endereco, ClienteDados, infoDados, Saudacao;      
+        bool AceitaCartao;
         public Pedido(ObservableCollection<Cardapio> pedido)
         {
             NavigationPage.SetHasNavigationBar(this, false);
@@ -31,6 +31,7 @@ namespace DeLivre.Views
         {
             if(App.Meus_Pedidos.Count <= 0)
                 stck_Listalimpa.IsVisible = true;
+
 
             try
             {
@@ -69,7 +70,7 @@ namespace DeLivre.Views
             }
             catch (Exception)
             {
-                throw;
+                DependencyService.Get<IMessage>().LongAlert("Tente novamente");
             }        
         }
        
@@ -117,6 +118,16 @@ namespace DeLivre.Views
         {
             try
             {
+                if (Application.Current.Properties.ContainsKey("_AceitaCartao"))
+                {
+                    AceitaCartao = Convert.ToBoolean(Application.Current.Properties["_AceitaCartao"]);
+
+                    if (AceitaCartao == false)
+                        Tipo_Cartao.IsVisible = false;
+                    else
+                        Tipo_Cartao.IsVisible = true;
+
+                }
                 if (Application.Current.Properties.ContainsKey("_Pagamento"))
                 {
                     Tipo_Pagamento = Application.Current.Properties["_Pagamento"] as string;
@@ -176,7 +187,7 @@ namespace DeLivre.Views
             }
             catch (Exception)
             {
-                throw;
+                DependencyService.Get<IMessage>().LongAlert("Tente novamente");
             }
            
         }
@@ -277,26 +288,28 @@ namespace DeLivre.Views
             }
         }
         private void CheckMetodoPagamento()
-        {
-            // Verificando de o Estabelecimento aceita cartão de Credito
-            if(Tipo_Dinheiro.IsChecked == true)
-            {
-                Tipo_Pagamento = "Dinheiro";                  
-            }
-            if(Tipo_Cartao.IsChecked == true)
-            {
-                Ent_Troco.Text = null;
-                if(Juros_Cartao != "")
+        {            
+                // Verificando de o Estabelecimento aceita cartão de Credito
+                if (Tipo_Dinheiro.IsChecked == true)
                 {
-                    Tipo_Pagamento =  String.Format(@"Cartão: R$ {0}\Juros", Juros_Cartao);
-                    ValorJurosCartao = Convert.ToDouble(Juros_Cartao);
-                    Load_Valores();
+                    Tipo_Pagamento = "Dinheiro";
                 }
-                else
+                if (Tipo_Cartao.IsChecked == true)
                 {
-                    Tipo_Pagamento = "Cartão";
-                }                              
-            }
+
+                    Ent_Troco.Text = null;
+                    if (Juros_Cartao != "")
+                    {
+                        Tipo_Pagamento = String.Format(@"Cartão: R$ {0}\Juros", Juros_Cartao);
+                        ValorJurosCartao = Convert.ToDouble(Juros_Cartao);
+                        Load_Valores();
+                    }
+                    else
+                    {
+                        Tipo_Pagamento = "Cartão";
+
+                    }
+                }                     
         }
 
         private void Tipo_Cartao_Clicked(object sender, EventArgs e)
