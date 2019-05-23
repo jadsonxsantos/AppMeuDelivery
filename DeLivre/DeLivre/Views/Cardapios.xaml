@@ -6,7 +6,7 @@
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              x:Class="DeLivre.Views.Cardapios" 
-             BackgroundColor="#EF5350" >
+             BackgroundColor="#EF5350">
     
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="OnInformacoes" Order="Primary" Icon="ic_Info" Clicked="OnInformacoes_Clicked" Text="Carrinho" Priority="0" />

@@ -9,7 +9,7 @@ namespace DeLivre.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Info : PopupPage
     {
-        Estabelecimento MeuEstabelecimento;
+        Estabelecimento MeuEstabelecimento; 
 
         public Info (Estabelecimento MeusEstabelecimentos)
 		{
@@ -23,7 +23,7 @@ namespace DeLivre.Views
         {
             Title = MeuEstabelecimento.Nome;
             ImagemEstab.Source = MeuEstabelecimento.Logo;
-            lbl_Horario_Funcionamento.Text = MeuEstabelecimento.Horario_Funcionamento;
+            lbl_Horario_Funcionamento.Text = String.Format("R$ {0:C}", MeuEstabelecimento.Pedido_Minimo);
             lbl_Local.Text = MeuEstabelecimento.Local;
             lbl_Frete.Text = String.Format("R$ {0:C}", MeuEstabelecimento.Frete);
             lbl_Tempo.Text = MeuEstabelecimento.Entrega_;
@@ -36,6 +36,8 @@ namespace DeLivre.Views
             Application.Current.Properties["_Whatsapp"] = MeuEstabelecimento.Whatsapp;
             //Armaenando o Numero do Whatsapp!
             Application.Current.Properties["_Estabelecimento_"] = MeuEstabelecimento.Nome;
+            //Valor do Pedido Minimo 
+            Application.Current.Properties["_PedidoMinimo"] = MeuEstabelecimento.Pedido_Minimo;
 
             foreach (var item in MeuEstabelecimento.Horarios_Funcionamento)
             {

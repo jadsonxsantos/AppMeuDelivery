@@ -60,7 +60,7 @@ namespace DeLivre.Views
 
                     if (item != null)
                     {
-                        if (item.Tipo == "Pizza" || item.Tipo == "Pizza Doce" || item.Tipo == "Lazanha")
+                        if (item.Tipo == "Pizza" || item.Tipo == "Pizza Doce" || item.Tipo == "Lazanha" || item.Tipo == "Porções")
                         {
                             var page = new Detalhe.Pizza(item);
                             await PopupNavigation.Instance.PushAsync(page);

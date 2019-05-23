@@ -1,11 +1,15 @@
 ﻿using DeLivre.Components;
 using DeLivre.Models;
 using System;
+using Firebase.Database;
+using Firebase.Database.Query;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Rg.Plugins.Popup.Services;
 
 namespace DeLivre.Views
 {
@@ -14,9 +18,13 @@ namespace DeLivre.Views
     {       
         ObservableCollection<Cardapio> MeusPedido;     
         double Valor_Pedido, Valor_Total, Valor_Adicionais, ValorJurosCartao = 0;
-        string Valor_Frete, Number_Whatsapp, Nome_Estabelecimento, TrocaInfo, Valor_Troco, Tipo_Pagamento, Juros_Cartao, ValorEntrega;
+        string Valor_Frete, Number_Whatsapp, Nome_Estabelecimento, Pedido_Minimo, TrocaInfo, Valor_Troco, Tipo_Pagamento, Juros_Cartao, ValorEntrega;
         string BreakLine, Endereco, ClienteDados, infoDados, Saudacao;      
         bool AceitaCartao;
+        static int count;
+
+        FirebaseClient firebase = new FirebaseClient("https://deliverypedido-d2451.firebaseio.com/");
+
         public Pedido(ObservableCollection<Cardapio> pedido)
         {
             NavigationPage.SetHasNavigationBar(this, false);
@@ -24,14 +32,38 @@ namespace DeLivre.Views
             MeusPedido = pedido;                
             ListaCardapio.ItemsSource = MeusPedido;
             VerificarIdentidade();
-            Load_Valores();         
-        }   
+            Load_Valores();               
+            CurrentPageChanged += Pedido_CurrentPageChanged;
+        }
+
+        private async void Pedido_CurrentPageChanged(object sender, EventArgs e)
+        {
+           var pedido = (TabbedPage) sender;
+            var Content = pedido.CurrentPage.Title;
+
+            if(Content == "FINALIZAR PEDIDO")
+            {
+               double PedidoMinimo, valorTotal;
+                PedidoMinimo = Convert.ToDouble(Pedido_Minimo);
+                valorTotal = Convert.ToDouble(lbl_Valor_Total.Text.Replace("R$", ""));
+                if (PedidoMinimo < valorTotal)
+                {
+                    CurrentPage = ctp_Pedidos;
+
+                    DependencyService.Get<IMessage>().ShortAlert("O valor do Pedido minimo é de R$: " + PedidoMinimo);
+                }
+                else
+                {
+                    var page = new Detalhe.Aviso();
+                    await PopupNavigation.Instance.PushAsync(page);
+                }                
+            }
+        }      
 
         private void Load_Valores()
         {
-            if(App.Meus_Pedidos.Count <= 0)
+            if (App.Meus_Pedidos.Count <= 0)
                 stck_Listalimpa.IsVisible = true;
-
 
             try
             {
@@ -68,7 +100,7 @@ namespace DeLivre.Views
                 //Valor_Total = Convert.ToDouble(Valor_Total.ToString());
                 lbl_Valor_Total.Text = String.Format("{0:C2}", Valor_Total);
             }
-            catch (Exception)
+            catch
             {
                 DependencyService.Get<IMessage>().LongAlert("Tente novamente");
             }        
@@ -81,10 +113,9 @@ namespace DeLivre.Views
             if (item == null)
                 return;           
          
-            var DeleteItem = await DisplayAlert("Quer deletar este pedido?", "Tem Certeza?", "Sim", "Cancelar");
+            var DeleteItem = await DisplayAlert("Quer deletar este item?", "Tem Certeza?", "Sim", "Cancelar");
             if (DeleteItem == true) // Sim
             {
-                //await Navigation.PushAsync(new Teste());
                 App.Meus_Pedidos.Remove(item);
                 Load_Valores();
             }
@@ -97,27 +128,31 @@ namespace DeLivre.Views
             //ListaCardapio.EndRefresh();
         }
 
-        private async void DeleteAllPedido_Clicked(object sender, EventArgs e)
-        {
-            var Delete = await DisplayAlert("Tem Certeza?", "Quer deletar todos os pedidos?", "Sim", "Cancelar");
-            if (Delete == true) // Sim
-            {
-                App.Meus_Pedidos.Clear();
-                ListaCardapio.BeginRefresh();
-                ListaCardapio.EndRefresh();
-                DependencyService.Get<IMessage>().LongAlert("Todos os Itens foram Deletados");
-            }
-            else // Cancelar
-            {
-                return; 
-            }           
-        }
+        //private async void DeleteAllPedido_Clicked(object sender, EventArgs e)
+        //{
+        //    var Delete = await DisplayAlert("Tem Certeza?", "Quer deletar todos os pedidos?", "Sim", "Cancelar");
+        //    if (Delete == true) // Sim
+        //    {
+        //        App.Meus_Pedidos.Clear();
+        //        ListaCardapio.BeginRefresh();
+        //        ListaCardapio.EndRefresh();
+        //        DependencyService.Get<IMessage>().LongAlert("Todos os Itens foram Deletados");
+        //    }
+        //    else // Cancelar
+        //    {
+        //        return; 
+        //    }           
+        //}
 
         #region ConfirmarIdentidade
         private void VerificarIdentidade()
         {
             try
             {
+                if (Application.Current.Properties.ContainsKey("_PedidoMinimo"))
+                {
+                    Pedido_Minimo = Application.Current.Properties["_PedidoMinimo"] as string;
+                }
                 if (Application.Current.Properties.ContainsKey("_AceitaCartao"))
                 {
                     AceitaCartao = Convert.ToBoolean(Application.Current.Properties["_AceitaCartao"]);
@@ -205,8 +240,8 @@ namespace DeLivre.Views
 
         #endregion
 
-        private void EnviarPedido()
-        {
+        private async void EnviarPedido(int codigoPedido)
+        {  
             // Apresentações iniciais!
             BreakLine = Environment.NewLine;
             Endereco = EntEndereco.Text + ", %20" + "Nº: " + EntNumero.Text + " - " + EntBairro.Text + " - %20" + EntCidade.Text + " - " + EntReferencia.Text + ".";
@@ -239,18 +274,46 @@ namespace DeLivre.Views
                 MeuPedido += BreakLine + item.Quantidade + "x " + item.Tipo + " " + item.Nome + " "
                          + " - *Valor R$ " + item.ValorTotal + "*." + BreakLine + newTrocaInfo + newItemAdicional;
             }
-            // Passando todo o pedido para a API do Whatsapp
-            Device.OpenUri(new Uri("https://wa.me/" + Number_Whatsapp + "?text="
-                   + Saudacao + "%20" + BreakLine + infoDados + BreakLine
-                   + MeuPedido + BreakLine + 
-                   "*VALOR FRETE:* " + Valor_Frete + BreakLine
-                   + "*PAGAMENTO:* " + Tipo_Pagamento + BreakLine
-                   + "*VALOR TOTAL:* " + lbl_Valor_Total.Text + BreakLine +
-                     BreakLine +
-                     Valor_Troco));
+                     
+            string today = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
+            try
+            {
+               
+                await AddPedido(codigoPedido, ClienteDados, today, lbl_Valor_Total.Text);                             
+            }
+            catch
+            {
+                DependencyService.Get<IMessage>().ShortAlert("Verifique sua internet...");
+            }
+            finally
+            {
+                // Passando todo o pedido para a API do Whatsapp
+                Device.OpenUri(new Uri("https://wa.me/" + Number_Whatsapp + "?text="
+                       + Saudacao + "%20" + BreakLine + infoDados + BreakLine
+                       + MeuPedido + BreakLine +
+                       "*VALOR FRETE:* " + Valor_Frete + BreakLine
+                       + "*PAGAMENTO:* " + Tipo_Pagamento + BreakLine
+                       + "*VALOR TOTAL:* " + lbl_Valor_Total.Text + BreakLine +
+                         BreakLine +
+                         Valor_Troco));
+            }                      
         }
 
-        private void VerificareEnviar()
+        public async Task AddPedido(int id, string nome, string datapedido, string valor )
+        {
+            string Dia = DateTime.Now.ToString("dd-MM-yyyy");           
+            await firebase
+                  .Child("Pedidos").Child(Nome_Estabelecimento).Child(Dia)
+                  .PostAsync(new DeLivre.Models.Pedido()
+                  {
+                      Id = id,
+                      Nome = nome,
+                      DataPedido = datapedido,
+                      ValorPedido = valor
+                  });
+        }      
+
+        private void VerificareEnviar(int idpedido)
         {
             if (!String.IsNullOrEmpty(EntNome.Text) && (!String.IsNullOrEmpty(EntEndereco.Text)) && 
                 (!String.IsNullOrEmpty(EntNumero.Text)) && (!String.IsNullOrEmpty(EntBairro.Text))&& 
@@ -264,7 +327,7 @@ namespace DeLivre.Views
                     {
                         if (valorTroco >= valorTotal)
                         {
-                            EnviarPedido();                         
+                            EnviarPedido(idpedido);                         
                         }
                         else
                         {
@@ -273,13 +336,13 @@ namespace DeLivre.Views
                     }
                     else
                     {                       
-                        EnviarPedido();
+                        EnviarPedido(idpedido);
                     }
                    
                 }
                 if(Tipo_Cartao.IsChecked == true)
                 {                    
-                    EnviarPedido();
+                    EnviarPedido(idpedido);
                 }                        
             }
             else
@@ -287,6 +350,7 @@ namespace DeLivre.Views
                 DependencyService.Get<IMessage>().ShortAlert("Preencha todos os campos para proseguir!");
             }
         }
+
         private void CheckMetodoPagamento()
         {            
                 // Verificando de o Estabelecimento aceita cartão de Credito
@@ -307,7 +371,6 @@ namespace DeLivre.Views
                     else
                     {
                         Tipo_Pagamento = "Cartão";
-
                     }
                 }                     
         }
@@ -323,11 +386,21 @@ namespace DeLivre.Views
         }
              
         private void SalvareEnviar_Clicked(object sender, EventArgs e)
-        {
+        {          
+            int CodigoPedido = count++;
             SalvarDados();
             CheckMetodoPagamento();           
-            VerificareEnviar();          
-        }       
+            VerificareEnviar(CodigoPedido);
+            SalvareEnviar.Text = "Aguarde! Enviando pedido...";
+            SalvareEnviar.IsEnabled = false;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            SalvareEnviar.Text = "Enviar Pedido!";
+            SalvareEnviar.IsEnabled = true;
+        }
     }
 }
 

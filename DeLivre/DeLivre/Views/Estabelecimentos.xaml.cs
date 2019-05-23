@@ -121,6 +121,10 @@ namespace DeLivre.Views
             }
             else
             {
+                activity_indicator.IsVisible = true;
+                if (Estabelecimento_ == null)
+                    stck_Listalimpa.IsVisible = true;
+
                 activity_indicator.IsVisible = false;
                 var resp = await DisplayAlert("Sem conexão com a internet", "Conecte a internet e tente novamente", "Tentar novamente", "OK");
                 if (resp)

@@ -18,6 +18,11 @@
                 AbsoluteLayout.LayoutBounds="0.5,0,100,100" 
                 AbsoluteLayout.LayoutFlags="PositionProportional"
                 Color="#EF5350" />
+
+            <StackLayout x:Name="stck_Listalimpa" BackgroundColor="Transparent" IsVisible="False" VerticalOptions="CenterAndExpand" Orientation="Vertical">
+                <Label x:Name="lbl_Listalimpa" FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Center" TextColor="Black" Text="Verifique sua conexão com a internet!"/>
+                <Image Source="SemConexao" BackgroundColor="Transparent" HeightRequest="100" WidthRequest="100" ></Image>
+            </StackLayout>
             <BoxView x:Name="boxLinha" Margin="3" HeightRequest="1" IsVisible="False" WidthRequest="10" Color="#EF5350" />
             <ListView x:Name="ListaEstabelecimento"
                       CachingStrategy="RecycleElement"
@@ -82,9 +87,9 @@
                                     </Grid>
                                     <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="5" Margin="-7,0,0,0" HorizontalOptions="FillAndExpand" BackgroundColor="#EF5350">
                                         <Image WidthRequest="25" HeightRequest="25" Source="ic_Tempo"  />
-                                        <Label Text="{Binding Entrega_, Mode=TwoWay}" HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro" />
+                                        <Label Text="{Binding Entrega_}" HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro" />
                                         <Image WidthRequest="25" HeightRequest="25" Source="ic_Entrega" />
-                                        <Label Text="{Binding Frete, Mode=TwoWay, StringFormat='R$ {0:C}'}" HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro"/>
+                                        <Label Text="{Binding Frete, StringFormat='R$ {0:C}'}" HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro"/>
                                         <Image WidthRequest="25" HeightRequest="25" Source="ic_Funcionamento" />
                                         <Label Text="{Binding Horario_Funcionamento, Mode=TwoWay}" HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro"/>
                                     </StackLayout>

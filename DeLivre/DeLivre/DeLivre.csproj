@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="Com.OneSignal" Version="3.0.1" />
+    <PackageReference Include="FirebaseDatabase.net" Version="4.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="Rg.Plugins.Popup" Version="1.1.4.168" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
@@ -27,6 +28,9 @@
     </Compile>
     <Compile Update="Views\Detalhe\Doces.xaml.cs">
       <DependentUpon>Doces.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Detalhe\Aviso.xaml.cs">
+      <DependentUpon>Aviso.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Detalhe\Refrigerante.xaml.cs">
       <DependentUpon>Refrigerante.xaml</DependentUpon>

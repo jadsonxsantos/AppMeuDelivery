@@ -32,18 +32,25 @@
                         <controls:CircleImage x:Name="ImagemEstab" Grid.Column="1" 
                                               BorderColor="#EF5350" 
                                               BorderThickness="2" 
-                                              Margin="0,-45,0,0" 
+                                              Margin="0,-40,0,0" 
                                               WidthRequest="300" 
                                               HeightRequest="300"                                                 
                                               Aspect="AspectFit"/>
 
-                        <Label x:Name="lbl_Entrega"                                              
+                        <!--<Label x:Name="lbl_Entrega"                                              
                                Grid.Column="0"
-                               Text="ENTREGA"
+                               Text="ENTREGA" 
+                               HorizontalTextAlignment="Center"
+                               TextColor="#E53935"                              
+                               FontSize="14" FontAttributes="Bold"/>-->
+
+                        <Label                                      
+                               Grid.Column="0"
+                               Text="TEMPO"  Margin="0, 17"
                                HorizontalTextAlignment="Center"
                                TextColor="{StaticResource asphaltPrimary}"                              
-                               FontSize="14" FontAttributes="Bold"/>
-
+                               FontSize="12" FontAttributes="Bold"/>
+                        
                         <Label x:Name="lbl_Tempo"                              
                                Grid.Column="0"
                                HorizontalTextAlignment="Center"
@@ -51,21 +58,35 @@
                                Margin="0,30,0,0"
                                FontSize="13"/>
 
+                        <Label x:Name="lbl_TitleFrete"                                              
+                               Grid.Column="0"
+                               Text="FRETE" Margin="0,47"
+                               HorizontalTextAlignment="Center"
+                               TextColor="{StaticResource asphaltPrimary}"                              
+                               FontSize="12" FontAttributes="Bold"/>
+                        
                         <Label x:Name="lbl_Frete"                                            
                                Grid.Column="0"
                                HorizontalTextAlignment="Center"
                                TextColor="{StaticResource asphaltPrimary}"
                                Margin="0,60,0,0"
                                FontSize="13" />
-
-
-                        <Label x:Name="Entrega"                                             
+                       
+                        
+                        <!--<Label x:Name="Entrega"                                             
                                Grid.Column="2"
                                HorizontalTextAlignment="Center"
                                Text="FUNCIONAMENTO"
-                               TextColor="{StaticResource asphaltPrimary}"                              
-                               FontSize="14" FontAttributes="Bold"/>
+                               TextColor="#E53935"                              
+                               FontSize="14" FontAttributes="Bold"/>-->
 
+                        <Label x:Name="lbl_pedidominimo"                                              
+                               Grid.Column="2" Margin="0,17"
+                               Text="PEDIDO MINIMO" 
+                               HorizontalTextAlignment="Center"
+                               TextColor="{StaticResource asphaltPrimary}"                              
+                               FontSize="12" FontAttributes="Bold"/>
+                        
                         <Label x:Name="lbl_Horario_Funcionamento"                                             
                                TextColor="{StaticResource asphaltPrimary}"
                                Grid.Column="2" 
@@ -73,6 +94,12 @@
                                Margin="0,30,0,0"
                                FontSize="13"/>
 
+                        <Label Text="LOCAL"                                        
+                               Grid.Column="2" Margin="0,47"                              
+                               HorizontalTextAlignment="Center"
+                               TextColor="{StaticResource asphaltPrimary}"                              
+                               FontSize="12" FontAttributes="Bold"/>
+                        
                         <Label x:Name="lbl_Local"                                              
                                Grid.Column="2"
                                Margin="0,60,0,0"
@@ -83,22 +110,22 @@
                 </StackLayout>
             </cardView:CardView.CardViewContent>
         </cardView:CardView>
-        <Label x:Name="lbl_Endereco" Margin="0,-40"                                     
+        <Label x:Name="lbl_Endereco" Margin="0,-55"                                     
                    HorizontalTextAlignment="Center"
                    TextColor="{StaticResource asphaltPrimary}"                         
                    FontAttributes="Italic"
                    FontSize="13" />
 
-        <Label x:Name="lbl_Descricao" Margin="0,40"                                       
+        <Label x:Name="lbl_Descricao" Margin="0,55"                                       
                    HorizontalTextAlignment="Center"
                    TextColor="{StaticResource asphaltPrimary}"                           
                    FontSize="13" />
 
-        <Label Text="HORÁRIO DE FUNCIONAMENTO" FontAttributes="Bold" 
-               TextColor="{StaticResource asphaltPrimary}" Margin="0,-25" 
+        <Label Text="HORÁRIOS DE FUNCIONAMENTO" FontAttributes="Bold" 
+               TextColor="{StaticResource asphaltPrimary}" Margin="0,-45,0,10" 
                HorizontalTextAlignment="Center" FontSize="14"/>
 
-        <StackLayout Orientation="Horizontal" Margin="0,25,0,0">
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,0,0,0">
             <StackLayout Spacing="2" Orientation="Vertical" VerticalOptions="Start" Margin="5,0,5,0">
                 <Label x:Name="lbl_Segunda"                                        
                        HorizontalTextAlignment="Start"

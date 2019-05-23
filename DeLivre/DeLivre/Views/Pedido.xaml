@@ -5,11 +5,11 @@
             x:Class="DeLivre.Views.Pedido">
     
     <!--Pedidos -->
-    <ContentPage Title="PEDIDOS" Icon="ic_Pedidos">
+    <ContentPage x:Name="ctp_Pedidos" Title="PEDIDOS" Icon="ic_Pedidos">
         <StackLayout Margin="0,0,0,0">
             <StackLayout x:Name="stck_Listalimpa" BackgroundColor="Transparent" IsVisible="False" VerticalOptions="CenterAndExpand" Orientation="Vertical">
-                <Label x:Name="lbl_Listalimpa" FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Center" TextColor="Black" Text="Seu carrinho está vazio!"/>
-                <Image Source="semitens.png" BackgroundColor="Transparent" HeightRequest="100" WidthRequest="100" ></Image>
+                <Label x:Name="lbl_Listalimpa" FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Center" TextColor="Black" Text="Seu carrinho está vazio!"/>
+                <Image Source="CarrinhoVazio" BackgroundColor="Transparent" HeightRequest="100" WidthRequest="100" ></Image>
             </StackLayout>
             <ListView x:Name="ListaCardapio" BackgroundColor="White" HasUnevenRows="true"                                          
                       SeparatorColor="{StaticResource grayPrimary}"
@@ -92,7 +92,7 @@
         </StackLayout>
     </ContentPage>
     <!--Tela de FinaliZar o pedido-->
-    <ContentPage Title="FINALIZAR PEDIDO!" Icon="ic_Finalizar">
+    <ContentPage Title="FINALIZAR PEDIDO" Icon="ic_Finalizar">
         <StackLayout Margin="5,0,0,0" >
             <!--Dados do Usuario-->
             <Label x:Name="lbl_InfoComplementar" FontSize="14" Margin="0,5,0,5" FontAttributes="Bold" 
