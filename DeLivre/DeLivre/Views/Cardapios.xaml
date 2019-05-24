@@ -37,55 +37,52 @@
                       ItemSelected="ListaCardapio_ItemSelected"
                       ItemsSource="{Binding Cardapios}"
                       CachingStrategy="RecycleElement">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <StackLayout>
-                                        <StackLayout>
-                                            <StackLayout Orientation="Horizontal">
-                                                <Label Text="{Binding Tipo, StringFormat=' {0},'}" 
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Tipo, StringFormat=' {0},'}" 
                                                        FontSize="15"
                                                        FontAttributes="Bold"                                      
                                                        Margin="5"
                                                        TextColor="#EF5350" />
 
-                                                <Label x:Name="NomeLanche" Text="{Binding Nome}" 
+                                    <Label x:Name="NomeLanche" Text="{Binding Nome}" 
                                                        FontSize="13"                                         
                                                        Margin="-5,7"
-                                                       TextColor="{StaticResource asphaltPrimary}" />   
+                                                       TextColor="{StaticResource asphaltPrimary}" />
 
-                                            </StackLayout>
+                                </StackLayout>
 
-                                            <Label Text="{Binding Descricao, StringFormat='({0})'}" 
+                                <Label Text="{Binding Descricao, StringFormat='({0})'}" 
                                                    FontSize="16"
                                                    Margin="3,-10"
-                                                   TextColor="{StaticResource grayPrimary}" />  
+                                                   TextColor="{StaticResource grayPrimary}" />
 
-                                        </StackLayout>
+                            </StackLayout>
 
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                               <ColumnDefinition Width="*" />
-                                           </Grid.ColumnDefinitions>
-                                            
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="*"/>
-                                            </Grid.RowDefinitions>
-                                           
-                                            <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="0" Margin="5,0,5,0" HorizontalOptions="EndAndExpand">
-                                                  <Label Text="{Binding ValorExibicao}" 
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="0" Margin="5,0,5,0" HorizontalOptions="EndAndExpand">
+                                    <Label Text="{Binding ValorExibicao}" 
                                                          Grid.Row="0" Grid.Column="1" TextColor="#E53935" 
                                                          FontAttributes="Bold" VerticalTextAlignment="Center" 
                                                          HorizontalTextAlignment="End" FontSize="13" />
-                                            </StackLayout>
-                                        </Grid>
-                                    </StackLayout>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </StackLayout>
-            <!--</cardView:CardView.CardViewContent>
-        </cardView:CardView>-->
-    <!--</StackLayout>-->
+                                </StackLayout>
+                            </Grid>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>

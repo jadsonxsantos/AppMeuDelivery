@@ -27,11 +27,6 @@ namespace DeLivre.Views
         {
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
-            //horari = new Estabelecimento
-            //{
-            //    Horario = "545",
-            //};
-            //BindingContext = horari;
             GetListEstab();           
         }      
 
@@ -139,8 +134,7 @@ namespace DeLivre.Views
         }          
 
         private async void NavegarToCardapio(string Nome_estabelecimento)
-        {           
-          
+        {                     
             try
             {             
                 //Visibilidade do indicador

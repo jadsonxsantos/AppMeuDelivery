@@ -92,7 +92,7 @@
         </StackLayout>
     </ContentPage>
     <!--Tela de FinaliZar o pedido-->
-    <ContentPage Title="FINALIZAR PEDIDO" Icon="ic_Finalizar">
+    <ContentPage x:Name="FinalizarPedido" Title="FINALIZAR PEDIDO" Icon="ic_Finalizar">
         <StackLayout Margin="5,0,0,0" >
             <!--Dados do Usuario-->
             <Label x:Name="lbl_InfoComplementar" FontSize="14" Margin="0,5,0,5" FontAttributes="Bold" 

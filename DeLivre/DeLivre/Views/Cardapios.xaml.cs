@@ -42,7 +42,9 @@ namespace DeLivre.Views
             //Verifica se aceita cartão de credito
             Application.Current.Properties["_AceitaCartao"] = MeuEstabelecimento.Cartao_Credito;
             //Juros do Cartão caso aceite
-            Application.Current.Properties["_JurosCartao"] = MeuEstabelecimento.Juros_Cartao;           
+            Application.Current.Properties["_JurosCartao"] = MeuEstabelecimento.Juros_Cartao;
+            //Valor do Pedido Minimo 
+            Application.Current.Properties["_PedidoMinimo"] = MeuEstabelecimento.Pedido_Minimo;
         }
         
         private async void ListaCardapio_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -137,14 +139,22 @@ namespace DeLivre.Views
 
         private async void OnCarrinho_Clicked(object sender, EventArgs e)
         {
-            if(App.Meus_Pedidos.Count > 0)
+            if (MeuEstabelecimento.Horario_Funcionamento != "Fechado")
             {
-                await Navigation.PushAsync(new Pedido(App.Meus_Pedidos));               
+                if (App.Meus_Pedidos.Count > 0)
+                {
+                    await Navigation.PushAsync(new Pedido(App.Meus_Pedidos));
+                }
+                else
+                {
+                    await DisplayAlert("Carrinho vazio!", "Você não tem nenhum pedido no carrinho!", "OK");
+                }
+
             }
             else
             {
-                await DisplayAlert("Carrinho vazio!", "Você não tem nenhum pedido no carrinho!", "OK");
-            }                     
+                await DisplayAlert("Estamos Fechado!", "Verifique nossos horários de funcionamento e tente mais tarde!", "OK");
+            }                         
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)

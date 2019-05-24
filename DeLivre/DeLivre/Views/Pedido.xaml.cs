@@ -38,19 +38,25 @@ namespace DeLivre.Views
 
         private async void Pedido_CurrentPageChanged(object sender, EventArgs e)
         {
-           var pedido = (TabbedPage) sender;
+            VerificarIdentidade();
+            var pedido = (TabbedPage) sender;
             var Content = pedido.CurrentPage.Title;
-
-            if(Content == "FINALIZAR PEDIDO")
+            if (Application.Current.Properties.ContainsKey("_PedidoMinimo"))
             {
-               double PedidoMinimo, valorTotal;
+                Pedido_Minimo = Application.Current.Properties["_PedidoMinimo"] as string;
+            }
+            if (Content == "FINALIZAR PEDIDO")
+            {
+              
+                double PedidoMinimo, valorTotal;
                 PedidoMinimo = Convert.ToDouble(Pedido_Minimo);
                 valorTotal = Convert.ToDouble(lbl_Valor_Total.Text.Replace("R$", ""));
-                if (PedidoMinimo < valorTotal)
+                if (valorTotal < PedidoMinimo)
                 {
-                    CurrentPage = ctp_Pedidos;
-
-                    DependencyService.Get<IMessage>().ShortAlert("O valor do Pedido minimo é de R$: " + PedidoMinimo);
+                    SalvareEnviar.IsEnabled = false;
+                    //CurrentPage = ctp_Pedidos;
+                    SalvareEnviar.Text = "Valor Mínimo para o pedido R$: " + PedidoMinimo;
+                    DependencyService.Get<IMessage>().ShortAlert("O valor mínimo do pedido é de R$: " + PedidoMinimo);
                 }
                 else
                 {
@@ -148,11 +154,7 @@ namespace DeLivre.Views
         private void VerificarIdentidade()
         {
             try
-            {
-                if (Application.Current.Properties.ContainsKey("_PedidoMinimo"))
-                {
-                    Pedido_Minimo = Application.Current.Properties["_PedidoMinimo"] as string;
-                }
+            {                
                 if (Application.Current.Properties.ContainsKey("_AceitaCartao"))
                 {
                     AceitaCartao = Convert.ToBoolean(Application.Current.Properties["_AceitaCartao"]);
@@ -391,15 +393,13 @@ namespace DeLivre.Views
             SalvarDados();
             CheckMetodoPagamento();           
             VerificareEnviar(CodigoPedido);
-            SalvareEnviar.Text = "Aguarde! Enviando pedido...";
-            SalvareEnviar.IsEnabled = false;
+            SalvareEnviar.Text = "Aguarde! Enviando pedido...";           
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            SalvareEnviar.Text = "Enviar Pedido!";
-            SalvareEnviar.IsEnabled = true;
+            SalvareEnviar.Text = "Enviar Pedido!";        
         }
     }
 }
