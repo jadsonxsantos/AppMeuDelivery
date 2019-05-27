@@ -18,5 +18,13 @@ namespace DeLivre.Views.Detalhe
         {
             Device.OpenUri(new Uri("https://www.youtube.com/watch?v=B4zwIkR5TGo"));
         }
+       
+        private void Ocultar_Aviso_CheckChanged(object sender, EventArgs e)
+        {
+            if(Ocultar_Aviso.IsChecked == true)
+               Application.Current.Properties["_OcultarAviso"] = true;
+            else
+               Application.Current.Properties["_OcultarAviso"] = false;          
+        }
     }
 }

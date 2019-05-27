@@ -67,28 +67,23 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Grid HeightRequest="100" Margin="5,0,5,0" BackgroundColor="#E53935">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="320" />
-                        <ColumnDefinition Width="35" />
-                    </Grid.ColumnDefinitions>
+            <Grid HeightRequest="100" Margin="-5,0,-5,0" BackgroundColor="#E53935">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="320" />
+                    <ColumnDefinition Width="35" />
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="120" />
                 </Grid.RowDefinitions>
 
                 <!--Informações parciais -->
-                <Label x:Name="lbl_Total_Pedido" Grid.Row="0" FontSize="12" Grid.Column="0" Margin="5,10"  TextColor="White"/>
-                <Label x:Name="lbl_Entrega" Margin="5,27" Grid.Row="0" FontSize="12" Grid.Column="0" TextColor="White"/>
-                <Label x:Name="lbl_Valor_Adicionais" Grid.Row="0" IsVisible="False" FontSize="12" Grid.Column="0" Margin="5,43" TextColor="White"/>
-                 <!--Informação do Valor Total a ser Pago -->
-                <Label Text="Total: " Margin="-90,15" Grid.Row="0" FontAttributes="Bold" HorizontalTextAlignment="Start" FontSize="20" Grid.Column="1" TextColor="White"/>
-                <Label x:Name="lbl_Valor_Total" Margin="-105,43" Grid.Row="0" HorizontalTextAlignment="Start" Grid.Column="1" FontSize="21" FontAttributes="Bold" TextColor="White"/>
-
-                </Grid>
-                <!--<Button x:Name="ExcluirPedido" Margin="0,110,0,5" Text="Excluir Pedido" BackgroundColor="White" 
-                    HorizontalOptions="CenterAndExpand" 
-                    WidthRequest="400" Clicked="DeleteAllPedido_Clicked" TextColor="#E53935"/>-->       
-           
+                <Label x:Name="lbl_Total_Pedido" Grid.Row="0" FontSize="13" Grid.Column="0" Margin="10,10"  TextColor="White"/>
+                <Label x:Name="lbl_Entrega" Margin="10,27" Grid.Row="0" FontSize="13" Grid.Column="0" TextColor="White"/>
+                <Label x:Name="lbl_Valor_Adicionais" Grid.Row="0" IsVisible="False" FontSize="13" Grid.Column="0" Margin="10,43" TextColor="White"/>
+                <!--Informação do Valor Total a ser Pago -->
+                <Label Text="Total: " Margin="-50,15" Grid.Row="0" FontAttributes="Bold" HorizontalTextAlignment="Start" FontSize="20" Grid.Column="1" TextColor="White"/>
+                <Label x:Name="lbl_Valor_Total" Margin="-65,43" Grid.Row="0" HorizontalTextAlignment="Start" Grid.Column="1"  FontSize="21" FontAttributes="Bold" TextColor="White"/>
+            </Grid>
         </StackLayout>
     </ContentPage>
     <!--Tela de FinaliZar o pedido-->

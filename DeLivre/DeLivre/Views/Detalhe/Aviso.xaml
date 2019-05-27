@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
                 xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"              
                 x:Class="DeLivre.Views.Detalhe.Aviso">
@@ -15,14 +16,14 @@
               EasingIn="SpringIn"/>
     </pages:PopupPage.Animation>
 
-    <StackLayout WidthRequest="300" HeightRequest="350" BackgroundColor="White" Padding="5" IsClippedToBounds="True" HorizontalOptions="Center" VerticalOptions="Center">
-        <Label x:Name="lbl_Titulo" Margin="0,10"                                     
+    <StackLayout WidthRequest="300" HeightRequest="355" BackgroundColor="White" Padding="5" IsClippedToBounds="True" HorizontalOptions="Center" VerticalOptions="Center">
+        <Label x:Name="lbl_Titulo" Margin="0,5"                                     
                    HorizontalTextAlignment="Center"
                    Text="⚠️ AVISO IMPORTANTE! ⚠️"                                     
                    FontAttributes="Bold" TextColor="Red"
                    FontSize="20" />
 
-        <Label x:Name="lbl_Aviso" Margin="0,8"                                       
+        <Label x:Name="lbl_Aviso" Margin="0,5"                                       
                    HorizontalTextAlignment="Center"
                    Text="Após clicar em 'ENVIAR PEDIDO', é necessario também clicar no botão de enviar do Whatsapp, para que o estabelecimento possa receber seu pedido. conforme imagem abaixo!"
                    TextColor="{StaticResource asphaltPrimary}"                           
@@ -36,13 +37,17 @@
 
         <Button x:Name="btn_Video" FontSize="12"
                 Text="ASSISTA AO VÍDEO!"
-                TextColor="White"
-                BorderRadius="10" 
-                WidthRequest="300"
-                HeightRequest="40"  
+                TextColor="White"  BorderRadius="10"                               
+                HeightRequest="40" WidthRequest="300" 
                 Clicked="Btn_Video_Clicked"
                 BackgroundColor="#E53935"
                 HorizontalOptions="Center" 
                 VerticalOptions="Center"/>
+
+        <input:CheckBox x:Name="Ocultar_Aviso" IsChecked="False" 
+                        TextFontSize="11" CheckChanged="Ocultar_Aviso_CheckChanged" 
+                        Margin="0,5,5,0" Text="NÃO EXIBIR MAIS ESSE AVISO!"
+                        HorizontalOptions="StartAndExpand" 
+                        Type="Material" />
     </StackLayout>
 </pages:PopupPage>

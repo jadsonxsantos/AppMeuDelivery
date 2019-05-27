@@ -1,5 +1,6 @@
 ﻿using Com.OneSignal;
 using DeLivre.Models;
+using DLToolkit.Forms.Controls;
 using System;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
@@ -14,7 +15,7 @@ namespace DeLivre
         public App()
         {
             InitializeComponent();
-
+            FlowListView.Init();
             MainPage = new MainPage();
             OneSignal.Current.StartInit("aed63aa3-9fbf-4f23-a9b2-26ee4666d096").EndInit();
         }

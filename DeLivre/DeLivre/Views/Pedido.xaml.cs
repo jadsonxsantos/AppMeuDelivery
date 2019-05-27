@@ -20,7 +20,7 @@ namespace DeLivre.Views
         double Valor_Pedido, Valor_Total, Valor_Adicionais, ValorJurosCartao = 0;
         string Valor_Frete, Number_Whatsapp, Nome_Estabelecimento, Pedido_Minimo, TrocaInfo, Valor_Troco, Tipo_Pagamento, Juros_Cartao, ValorEntrega;
         string BreakLine, Endereco, ClienteDados, infoDados, Saudacao;      
-        bool AceitaCartao;
+        bool AceitaCartao, OcultarAviso;
         static int count;
 
         FirebaseClient firebase = new FirebaseClient("https://deliverypedido-d2451.firebaseio.com/");
@@ -41,10 +41,17 @@ namespace DeLivre.Views
             VerificarIdentidade();
             var pedido = (TabbedPage) sender;
             var Content = pedido.CurrentPage.Title;
+
             if (Application.Current.Properties.ContainsKey("_PedidoMinimo"))
             {
                 Pedido_Minimo = Application.Current.Properties["_PedidoMinimo"] as string;
             }
+
+            if (Application.Current.Properties.ContainsKey("_OcultarAviso"))
+            {
+                OcultarAviso = Convert.ToBoolean(Application.Current.Properties["_OcultarAviso"] as string);
+            }
+
             if (Content == "FINALIZAR PEDIDO")
             {
               
@@ -60,8 +67,8 @@ namespace DeLivre.Views
                 }
                 else
                 {
-                    var page = new Detalhe.Aviso();
-                    await PopupNavigation.Instance.PushAsync(page);
+                   if(OcultarAviso != true)                              
+                      await PopupNavigation.Instance.PushAsync(new Detalhe.Aviso());             
                 }                
             }
         }      
@@ -243,7 +250,8 @@ namespace DeLivre.Views
         #endregion
 
         private async void EnviarPedido(int codigoPedido)
-        {  
+        {
+            SalvareEnviar.Text = "Aguarde! Enviando pedido...";
             // Apresentações iniciais!
             BreakLine = Environment.NewLine;
             Endereco = EntEndereco.Text + ", %20" + "Nº: " + EntNumero.Text + " - " + EntBairro.Text + " - %20" + EntCidade.Text + " - " + EntReferencia.Text + ".";
@@ -279,8 +287,7 @@ namespace DeLivre.Views
                      
             string today = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
             try
-            {
-               
+            {               
                 await AddPedido(codigoPedido, ClienteDados, today, lbl_Valor_Total.Text);                             
             }
             catch
@@ -392,8 +399,7 @@ namespace DeLivre.Views
             int CodigoPedido = count++;
             SalvarDados();
             CheckMetodoPagamento();           
-            VerificareEnviar(CodigoPedido);
-            SalvareEnviar.Text = "Aguarde! Enviando pedido...";           
+            VerificareEnviar(CodigoPedido);                  
         }
 
         protected override void OnAppearing()
