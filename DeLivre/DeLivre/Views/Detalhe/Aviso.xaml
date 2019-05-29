@@ -37,7 +37,7 @@
 
         <Button x:Name="btn_Video" FontSize="12"
                 Text="ASSISTA AO VÍDEO!"
-                TextColor="White"  BorderRadius="10"                               
+                TextColor="White" BorderRadius="10"                               
                 HeightRequest="40" WidthRequest="300" 
                 Clicked="Btn_Video_Clicked"
                 BackgroundColor="#E53935"
@@ -46,7 +46,7 @@
 
         <input:CheckBox x:Name="Ocultar_Aviso" IsChecked="False" 
                         TextFontSize="11" CheckChanged="Ocultar_Aviso_CheckChanged" 
-                        Margin="0,5,5,0" Text="NÃO EXIBIR MAIS ESSE AVISO!"
+                        Margin="0,0,0,0" Text="NÃO EXIBIR MAIS ESSE AVISO!"
                         HorizontalOptions="StartAndExpand" 
                         Type="Material" />
     </StackLayout>

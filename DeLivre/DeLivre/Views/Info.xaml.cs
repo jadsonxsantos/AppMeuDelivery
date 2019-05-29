@@ -51,31 +51,31 @@ namespace DeLivre.Views
 
         private void Btn_instagram_Clicked(object sender, EventArgs e)
         {
-            foreach (var item in MeuEstabelecimento.Horario_Funcionamento)
-            {
-
-                int InicioExpediente = 8;
-                int FimExpediente = 23;
-
-                //Data que será verificada e tratada
-                DateTime DataConsulta = DateTime.Now;
-
-                //Verifica se o horário já ultrapassou o final do expediente
-                if (DataConsulta.Hour >= FimExpediente)
-                {
-                    lbl_Segunda.Text = "Fechado!";
-                }
-                else if (DataConsulta.Hour < InicioExpediente)
-                {
-                    lbl_Segunda.Text = "Fechado";
-                }               
-            }
-
-         
-            //foreach (var item in MeuEstabelecimento.Redes_Sociais)
+            //foreach (var item in MeuEstabelecimento.Horario_Funcionamento)
             //{
-            //    Device.OpenUri(new Uri(item.Instagram));
-            //}           
+
+            //    int InicioExpediente = 8;
+            //    int FimExpediente = 23;
+
+            //    //Data que será verificada e tratada
+            //    DateTime DataConsulta = DateTime.Now;
+
+            //    //Verifica se o horário já ultrapassou o final do expediente
+            //    if (DataConsulta.Hour >= FimExpediente)
+            //    {
+            //        lbl_Segunda.Text = "Fechado!";
+            //    }
+            //    else if (DataConsulta.Hour < InicioExpediente)
+            //    {
+            //        lbl_Segunda.Text = "Fechado";
+            //    }               
+            //}
+
+
+            foreach (var item in MeuEstabelecimento.Redes_Sociais)
+            {
+                Device.OpenUri(new Uri(item.Instagram));
+            }
         }
     }
 }

@@ -197,5 +197,8 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\SemConexao.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Lanches.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

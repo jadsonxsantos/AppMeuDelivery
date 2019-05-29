@@ -20,7 +20,7 @@ namespace DeLivre.Views
         double Valor_Pedido, Valor_Total, Valor_Adicionais, ValorJurosCartao = 0;
         string Valor_Frete, Number_Whatsapp, Nome_Estabelecimento, Pedido_Minimo, TrocaInfo, Valor_Troco, Tipo_Pagamento, Juros_Cartao, ValorEntrega;
         string BreakLine, Endereco, ClienteDados, infoDados, Saudacao;      
-        bool AceitaCartao, OcultarAviso;
+        bool AceitaCartao, OcultarAviso = true;
         static int count;
 
         FirebaseClient firebase = new FirebaseClient("https://deliverypedido-d2451.firebaseio.com/");
@@ -67,8 +67,8 @@ namespace DeLivre.Views
                 }
                 else
                 {
-                   if(OcultarAviso != true)                              
-                      await PopupNavigation.Instance.PushAsync(new Detalhe.Aviso());             
+                   if(OcultarAviso == true)                              
+                      await PopupNavigation.Instance.PushAsync(new Detalhe.Aviso());                      
                 }                
             }
         }      

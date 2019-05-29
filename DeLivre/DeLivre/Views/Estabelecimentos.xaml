@@ -28,15 +28,8 @@
             
             <!--<ScrollView Orientation="Horizontal">
                 <StackLayout Margin="20,0,20,0" Orientation="Horizontal">
-                    <custom:PancakeView BackgroundColor="#EF5350" Margin="0,0,4,0" HeightRequest="60" WidthRequest="160" CornerRadius="12">
-                        <Label HorizontalTextAlignment="Center" VerticalOptions="Center" FontSize="16" TextColor="White">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text=" "/>
-                                    <Span FontSize="16" Text="ALIMENTAÇÃO" />
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
+                    <custom:PancakeView BackgroundColor="#EF5350" Margin="0,0,4,0" HeightRequest="60" WidthRequest="60" CornerRadius="10">
+                        <Image Source="Lanches.png" BackgroundColor="Transparent" HeightRequest="10" WidthRequest="10" ></Image>
                     </custom:PancakeView>
                     <custom:PancakeView BackgroundColor="#EF5350" Margin="0,0,4,0" HeightRequest="60" WidthRequest="160" CornerRadius="12">
                         <Label HorizontalTextAlignment="Center" VerticalOptions="Center" FontSize="16" TextColor="White">
@@ -48,7 +41,7 @@
                             </Label.FormattedText>
                         </Label>
                     </custom:PancakeView>
-                    --><!--<custom:PancakeView BackgroundColor="#2687ee" Margin="0,0,4,0" HeightRequest="60" WidthRequest="160" CornerRadius="12">
+                    <custom:PancakeView BackgroundColor="#2687ee" Margin="0,0,4,0" HeightRequest="60" WidthRequest="160" CornerRadius="12">
                         <Label HorizontalTextAlignment="Center" VerticalOptions="Center" FontSize="16" TextColor="#fff">
                             <Label.FormattedText>
                                 <FormattedString>
@@ -57,10 +50,10 @@
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
-                    </custom:PancakeView>--><!--
+                    </custom:PancakeView>
                 </StackLayout>
             </ScrollView>-->
-            
+
             <ListView x:Name="ListaEstabelecimento"
                       CachingStrategy="RecycleElement"
                       BackgroundColor="White" HasUnevenRows="true"                    
@@ -72,8 +65,8 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" Spacing="10" BackgroundColor="White" Margin="0,0,0,1">
-                                <BoxView Margin="3" HeightRequest="1" WidthRequest="1.5" Color="#EF5350" />                                
-                                   
+                                <BoxView Margin="3" HeightRequest="1" WidthRequest="1.5" Color="#EF5350" />
+
                                 <controls:CircleImage Source="{Binding Logo}" BorderColor="#EF5350" 
                                                       BorderThickness="2" Margin="-7,0,0,0" 
                                                       WidthRequest="60" HeightRequest="60" 
@@ -135,7 +128,6 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
         </StackLayout>
     </StackLayout>
 </ContentPage>

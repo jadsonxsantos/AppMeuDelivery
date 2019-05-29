@@ -126,7 +126,7 @@ namespace DeLivre.Views
             if (string.IsNullOrWhiteSpace(e.NewTextValue))
                 ListaCardapio.ItemsSource = MeuEstabelecimento.Cardapios;
             else
-                ListaCardapio.ItemsSource = MeuEstabelecimento.Cardapios.Where(x => x.Tipo.ToLower().Contains(texto.ToLower()));
+                ListaCardapio.ItemsSource = MeuEstabelecimento.Cardapios.Where(x => x.Nome.ToLower().Contains(texto.ToLower()));
 
             ListaCardapio.EndRefresh();
         }
@@ -144,11 +144,10 @@ namespace DeLivre.Views
 
         private async void OnCarrinho_Clicked(object sender, EventArgs e)
         {
-            InicioExpediente = new TimeSpan(8, 00, 0);
-            FinalExpediente = new TimeSpan(21, 00, 0);
+            //InicioExpediente = new TimeSpan(8, 00, 0);
+            //FinalExpediente = new TimeSpan(21, 00, 0);
 
-            DateTime HoraAtual = DateTime.Now;
-
+            //DateTime HoraAtual = DateTime.Now;
              
             //string variavelHora = "23:50";
 
