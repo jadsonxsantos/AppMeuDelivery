@@ -31,7 +31,7 @@ namespace DeLivre
 
         private void Btn_Parceria_Clicked(object sender, EventArgs e)
         {
-            Device.OpenUri(new Uri("https://wa.me/557996122327?text=Ol%C3%A1%2C%20tenho%20interesse%20em%20saber%20mais%20sobre%20o%20App%20Meu%20Delivery!"));
+            Device.OpenUri(new Uri("https://www.instagram.com/appmeudelivery/"));
         }
     }
 }
