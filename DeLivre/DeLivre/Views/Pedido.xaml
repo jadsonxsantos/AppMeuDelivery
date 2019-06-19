@@ -88,6 +88,7 @@
     </ContentPage>
     <!--Tela de FinaliZar o pedido-->
     <ContentPage x:Name="FinalizarPedido" Title="FINALIZAR PEDIDO" Icon="ic_Finalizar">
+        <ScrollView>
         <StackLayout Margin="5,0,0,0" >
             <!--Dados do Usuario-->
             <Label x:Name="lbl_InfoComplementar" FontSize="14" Margin="0,5,0,5" FontAttributes="Bold" 
@@ -158,10 +159,11 @@
             <Button x:Name="SalvareEnviar" Text="Enviar Pedido!" 
                     Clicked="SalvareEnviar_Clicked" TextColor="White"                   
                     BackgroundColor="#E53935" BorderRadius="5"
-                    Margin="5,5,5,5"  /> 
-                    
+                    Margin="5,5,5,5"  />
+
+       
         </StackLayout>
-         
+        </ScrollView>
     </ContentPage>
        
 </TabbedPage>

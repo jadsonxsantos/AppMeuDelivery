@@ -15,28 +15,24 @@ namespace DeLivre.Views
     {
         ObservableCollection<Cardapio> ListaPedido = new ObservableCollection<Cardapio>();
         Estabelecimento MeuEstabelecimento;
-        List<Cardapio> MeusCadapios;
-
-        static TimeSpan InicioExpediente;
-        static TimeSpan FinalExpediente;
-        static TimeSpan CompensarTempo = new TimeSpan();
-
+        List<Cardapio> MeuCardapio;
 
         public Cardapios(Estabelecimento MeusEstabelecimentos)
         {
             NavigationPage.SetHasBackButton(this, false);
-            InitializeComponent();          
+            InitializeComponent();
             MeuEstabelecimento = new Estabelecimento();
             MeuEstabelecimento = MeusEstabelecimentos;
-            MeusCadapios = new List<Cardapio>();
-            MeusCadapios = MeusEstabelecimentos.Cardapios;
-            BindingContext = MeuEstabelecimento;
-            ListaCardapio.ItemsSource = MeuEstabelecimento.Cardapios;
+            MeuCardapio = new List<Cardapio>();
+            MeuCardapio = MeusEstabelecimentos.Cardapios;
+            BindingContext = MeuEstabelecimento;            
+            TipoDrop.ItemsSource = MeuCardapio.Select(x => x.Tipo).Distinct().ToList();               
+            ListaCardapio.ItemsSource = MeuCardapio;            
             DadosEstabelecimentos();
         }
 
         private void  DadosEstabelecimentos()
-        {            
+        {                                  
             //Armaenando o valor do Frete!    
             string ValorFrete = MeuEstabelecimento.Frete;
             Application.Current.Properties["_Frete"] = ValorFrete;
@@ -120,15 +116,15 @@ namespace DeLivre.Views
 
         private void CardapioPesquisa_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ListaCardapio.BeginRefresh();
-            var texto = CardapioPesquisa.Text;
+            //ListaCardapio.BeginRefresh();
+            //var texto = CardapioPesquisa.Text;
 
-            if (string.IsNullOrWhiteSpace(e.NewTextValue))
-                ListaCardapio.ItemsSource = MeuEstabelecimento.Cardapios;
-            else
-                ListaCardapio.ItemsSource = MeuEstabelecimento.Cardapios.Where(x => x.Nome.ToLower().Contains(texto.ToLower()));
+            //if (string.IsNullOrWhiteSpace(e.NewTextValue))
+            //    ListaCardapio.ItemsSource = MeuEstabelecimento.Cardapios;
+            //else
+            //    ListaCardapio.ItemsSource = MeuEstabelecimento.Cardapios.Where(x => x.Nome.ToLower().Contains(texto.ToLower()));
 
-            ListaCardapio.EndRefresh();
+            //ListaCardapio.EndRefresh();
         }
 
         protected override bool OnBackButtonPressed()
@@ -198,6 +194,18 @@ namespace DeLivre.Views
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
             await PopupNavigation.Instance.PushAsync(new Info(MeuEstabelecimento));
+        }
+
+        private void TipoDrop_SelectedItemChanged(object sender, Plugin.InputKit.Shared.Utils.SelectedItemChangedArgs e)
+        {
+            ListaCardapio.BeginRefresh();
+
+            if(TipoDrop.Text == "Todos")
+                ListaCardapio.ItemsSource = MeuEstabelecimento.Cardapios.OrderBy(x => x.Valor);
+            else
+                ListaCardapio.ItemsSource = MeuEstabelecimento.Cardapios.Where(x => x.Tipo.ToLower().Contains(TipoDrop.Text.ToLower()));
+
+            ListaCardapio.EndRefresh();
         }
     }
 }

@@ -17,6 +17,7 @@ namespace DeLivre.Models
         public string Valor { get; set; }
         public double ValorTotal { get; set; }
         public string Escolha { get; set; }
+        public string TitleAdcorSab { get; set; }
         public double ValorAdicionais { get; set; }
         public double ValorUnit { get; set; }
         public string Valor_P { get; set; }
@@ -52,7 +53,7 @@ namespace DeLivre.Models
                 else
                   return string.Format("R$ {0:C}", Valor); ;
             }
-        }
+        }       
 
         public string Pedidos
         {       

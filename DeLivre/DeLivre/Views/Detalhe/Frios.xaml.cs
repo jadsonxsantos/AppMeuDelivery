@@ -542,6 +542,7 @@ namespace DeLivre.Views.Detalhe
                 Nome = lbl_Nome_lanche.Text + ": " + TipoFrio,
                 Descricao = lbl_Descricao.Text,
                 Adicionais_itens = adicionais,
+                TitleAdcorSab = "Sabores",
                 ValorAdicionais = 0,
                 ValorUnit = Convert.ToDouble(MeusPedido.Valor_RB),
                 ValorTotal = CalculoValorxQtd,

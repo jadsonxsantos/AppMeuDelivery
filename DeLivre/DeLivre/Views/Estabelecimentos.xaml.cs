@@ -1,4 +1,6 @@
 ﻿using DeLivre.Models;
+using Firebase.Database;
+using Firebase.Database.Query;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
 using System;
@@ -22,7 +24,7 @@ namespace DeLivre.Views
         ObservableCollection<Estabelecimento> Estabelecimento_;
         string Url_Api;
         public Estabelecimento horari { get; }
-
+        FirebaseClient firebase = new FirebaseClient("https://meudelivery-47bcc.firebaseio.com/");
         public Estabelecimentos()
         {
             NavigationPage.SetHasNavigationBar(this, false);
@@ -48,43 +50,29 @@ namespace DeLivre.Views
                         // deserialize o Json para o Modelo de Dados Estabelecimento
                         var ItensJson = JsonConvert.DeserializeObject<List<Estabelecimento>>(await response.Content.ReadAsStringAsync());
                         // Adiciona os dados em uma Lista!
-                        Estabelecimento_ = new ObservableCollection<Estabelecimento>(ItensJson);
-                        //bool StatusEstab = Estabelecimento_.Where(x => x.Aberto);
-                        //if (StatusEstab == true)
+                        Estabelecimento_ = new ObservableCollection<Estabelecimento>(ItensJson);                       
+
+                        //DateTime aDate = DateTime.Now;
+                        //DateTime dateValue;
+
+                        //dateValue = DateTime.Parse(aDate.ToString("MM/dd/yyyy"), CultureInfo.InvariantCulture);
+                        //string dia = dateValue.ToString("dddd", new CultureInfo("pt-BR"));
+
+                        //if (dia == "terça-feira")
                         //{
-
-                        DateTime aDate = DateTime.Now;
-                        DateTime dateValue;
-                     
-                        dateValue = DateTime.Parse(aDate.ToString("MM/dd/yyyy"), CultureInfo.InvariantCulture);
-                       string dia = dateValue.ToString("dddd", new CultureInfo("pt-BR"));
-
-                        if(dia == "quarta-feira")
-                        {
-                            foreach (var item in Estabelecimento_)
-                            {
-                              var x= item.Horarios_Funcionamento;
-
-                                foreach (var horario in x)
-                                {
-                                    //horari = new Horario_Funcionamento
-                                    //{
-                                    //    Nome = "Usuario exemplo",
-                                    //    Idade = 20
-                                    //};
-                                    //var modelo = new Estabelecimento
-                                    //{
-                                    //    Horario = horario.Quarta_Feira,                                        
-                                    //};
-                                    
-                                        //BindingContext = modelo;
-                                }
-
-                            }
-                        }
+                        //    foreach (var item in ItensJson)
+                        //    {
+                               
+                        //        string segunda = item.Horarios_Funcionamento.Select(h => h.Segunda_Feira).ToString();
+                        //        string NomeEstab = Estabelecimento_.Select(x => x.Nome).ToString();
+                        //        string horario = Estabelecimento_.Select(X => X.Horario_Funcionamento).ToString();
+                        //        string codigo = Estabelecimento_.Select(X => X.Id).ToString();
+                        //        await Att_Horario(codigo, NomeEstab, horario, segunda);
+                        //    }
                         //}
-                        //Atribui os dados para a ListaView 
-                        ListaEstabelecimento.ItemsSource = Estabelecimento_.Where(x => x.Ativo == true);                                     
+                    
+                    //Atribui os dados para a ListaView 
+                    ListaEstabelecimento.ItemsSource = Estabelecimento_.Where(x => x.Ativo == true);                                     
                         //Verificação da lista
                         int i = Estabelecimento_.Count;
                         if (i > 0)
@@ -102,7 +90,7 @@ namespace DeLivre.Views
                 catch (Exception)
                 {
                     activity_indicator.IsVisible = false;
-                    var resp = await DisplayAlert("Manutenção", "Olá, Estamos fazendo manutenção nos nossos servidores, aguarde e tente mais tarde.", "OK", "Atualizar");
+                    var resp = await DisplayAlert("Problema na conexão", "Verifique sua internet e tente novamente!", "OK", "Atualizar");
                     if (resp)
                     {
 
@@ -131,7 +119,19 @@ namespace DeLivre.Views
                     GetListEstab();
                 }
             }
-        }          
+        }
+
+        public async Task Att_Horario(string codigo, string estabelecimento, string horario, string horarioatt)
+        {            
+
+            await firebase
+                  .Child(codigo).Child(estabelecimento).Child(horario)
+                  .PostAsync(new DeLivre.Models.Estabelecimento()
+                  {
+                      Horario_Funcionamento =  horarioatt                    
+                  });
+        }
+
 
         private async void NavegarToCardapio(string Nome_estabelecimento)
         {                     

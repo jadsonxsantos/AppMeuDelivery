@@ -68,7 +68,7 @@ namespace DeLivre.Views
             //    else if (DataConsulta.Hour < InicioExpediente)
             //    {
             //        lbl_Segunda.Text = "Fechado";
-            //    }               
+            //    }
             //}
 
 

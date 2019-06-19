@@ -24,13 +24,14 @@ namespace DeLivre
 
         private void BtnPinhao_Clicked(object sender, EventArgs e)
         {           
-            string Local = "Pinhao";
+            string Local = "Pinhão";
             Application.Current.Properties["_Cidade"] = Local;
             App.Current.MainPage = new NavigationPage(new Views.Estabelecimentos());        
         }
 
         private void Btn_Parceria_Clicked(object sender, EventArgs e)
-        {
+        {           
+            //App.Current.MainPage = new NavigationPage(new Views.MenuCardapio());
             Device.OpenUri(new Uri("https://www.instagram.com/appmeudelivery/"));
         }
     }

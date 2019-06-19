@@ -21,12 +21,15 @@ namespace DeLivre.Droid
             
             global::Xamarin.Forms.Forms.Init(this, bundle);
           
-            ImageCircleRenderer.Init();
-            OneSignal.Current.StartInit("aed63aa3-9fbf-4f23-a9b2-26ee4666d096").EndInit();
-            global::Xamarin.Forms.FormsMaterial.Init(this, bundle);
+            ImageCircleRenderer.Init();            
+            global::Xamarin.Forms.FormsMaterial.Init(this, bundle);            
+            
             CrossCurrentActivity.Current.Init(this, bundle);
+            Plugin.InputKit.Platforms.Droid.Config.Init(this, bundle);
             Rg.Plugins.Popup.Popup.Init(this, bundle);
+            OneSignal.Current.StartInit("aed63aa3-9fbf-4f23-a9b2-26ee4666d096").EndInit();
             LoadApplication(new App());
+            
         }
 
         public override void OnBackPressed()

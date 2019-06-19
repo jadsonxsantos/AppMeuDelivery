@@ -78,7 +78,7 @@
                            HorizontalTextAlignment="Center" Text="Informações Pessoais:"                   
                            TextColor="{StaticResource asphaltPrimary}"/>
 
-                    <Entry x:Name="Lbl_Troca" Placeholder="Ex.: Gelada." 
+                    <Entry x:Name="Lbl_Troca" Placeholder="Ex.: Sabor, natural, gelada etc." 
                            Margin="0,5" HeightRequest="60" WidthRequest="200"
                            HorizontalTextAlignment="Center" FontSize="13" />
 

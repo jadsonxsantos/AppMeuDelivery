@@ -12,6 +12,7 @@ namespace DeLivre.Models
         public string Estabelecimento { get; set; }
         public string DataPedido { get; set; }
         public string NomePedido { get; set; }
-        public string ValorPedido { get; set; }
+        public double ValorPedido { get; set; }
+        public double ValorTotal { get; set; }
     }
 }

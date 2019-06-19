@@ -17,6 +17,8 @@
     </pages:PopupPage.Animation>
 
     <StackLayout WidthRequest="300" HeightRequest="355" BackgroundColor="White" Padding="5" IsClippedToBounds="True" HorizontalOptions="Center" VerticalOptions="Center">
+        <ScrollView>
+            <StackLayout>
         <Label x:Name="lbl_Titulo" Margin="0,5"                                     
                    HorizontalTextAlignment="Center"
                    Text="⚠️ AVISO IMPORTANTE! ⚠️"                                     
@@ -49,5 +51,8 @@
                         Margin="0,0,0,0" Text="NÃO EXIBIR MAIS ESSE AVISO!"
                         HorizontalOptions="StartAndExpand" 
                         Type="Material" />
+            </StackLayout>
+        </ScrollView>
     </StackLayout>
+        
 </pages:PopupPage>

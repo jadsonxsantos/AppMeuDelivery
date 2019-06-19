@@ -5,7 +5,7 @@
              x:Class="DeLivre.Views.MenuCardapio">
     <ContentPage.Content>
         <StackLayout>
-            <CollectionView ItemsSource="{Binding Monkeys}"
+            <CollectionView x:Name="listaProdutos" ItemsSource="{Binding produtos}"
                 ItemsLayout="{x:Static ListItemsLayout.HorizontalList}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -19,14 +19,14 @@
                                 <ColumnDefinition Width="140" />
                             </Grid.ColumnDefinitions>
                             <Image Grid.RowSpan="2"
-                       Source="{Binding ImageUrl}"
-                       Aspect="AspectFill"
-                       HeightRequest="60"
-                       WidthRequest="60" />
+                                   Source="{Binding Imagem}"
+                                   Aspect="AspectFill"
+                                   HeightRequest="60"
+                                   WidthRequest="60" />
                             <Label Grid.Column="1"
-                       Text="{Binding Name}"
-                       FontAttributes="Bold"
-                       LineBreakMode="TailTruncation" />
+                                   Text="{Binding Nome}"
+                                   FontAttributes="Bold"
+                                   LineBreakMode="TailTruncation" />
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

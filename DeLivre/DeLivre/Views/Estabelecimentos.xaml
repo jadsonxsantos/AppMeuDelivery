@@ -9,11 +9,11 @@
 
             <controls:CircleImage Source="logotipo_color.png" WidthRequest="200" HeightRequest="70" 
                                   HorizontalOptions="CenterAndExpand" BorderThickness="1" 
-                                  BorderColor="White" Margin="0,5" Aspect="AspectFit"/>
+                                  BorderColor="White" Margin="0,5,0,5" Aspect="AspectFit"/>
 
         <!--<BoxView Margin="3"  HeightRequest="1" WidthRequest="10" Color="Black" />-->
 
-        <StackLayout BackgroundColor="White" Margin="0,0">
+        <StackLayout BackgroundColor="White" Margin="0,-5">
             <ActivityIndicator 
                 IsRunning="true" x:Name="activity_indicator"
                 AbsoluteLayout.LayoutBounds="0.5,0,100,100" 
@@ -92,19 +92,19 @@
 
                                         <ContentView x:Name="FundoOpenOrClose" 
                                                      Grid.Row="0"
-                                                     IsVisible="False"
+                                                     IsVisible="false"
                                                      Grid.Column="1"
                                                      BackgroundColor="#EF5350"
                                                      HorizontalOptions="FillAndExpand"
                                                      VerticalOptions="FillAndExpand"
                                                      HeightRequest="24"
-                                                     WidthRequest="40">
+                                                     WidthRequest="30">
 
                                             <Label x:Name="OpenOrClose"
-                                                   IsVisible="false"
+                                                   IsVisible="False"
                                                    Text="{Binding Aberto}"
                                                    FontAttributes="Bold"
-                                                   FontSize="12"
+                                                   FontSize="10"
                                                    VerticalOptions="Center"
                                                    HorizontalOptions="Center"/>
 
@@ -114,7 +114,7 @@
                                         <StackLayout Grid.Row="2" Orientation="Horizontal">
                                         </StackLayout>
                                     </Grid>
-                                    <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="5" Margin="-7,0,0,0" HorizontalOptions="FillAndExpand" BackgroundColor="#EF5350">
+                                    <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="5" Margin="-7,-5,0,0" HorizontalOptions="FillAndExpand" BackgroundColor="#EF5350">
                                         <Image WidthRequest="25" HeightRequest="25" Source="ic_Tempo"  />
                                         <Label Text="{Binding Entrega_}" HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro" />
                                         <Image WidthRequest="25" HeightRequest="25" Source="ic_Entrega" />
