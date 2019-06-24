@@ -3,6 +3,7 @@ using Firebase.Database;
 using Firebase.Database.Query;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,23 +24,26 @@ namespace DeLivre.Views
         private HttpClient _client = new HttpClient();
         ObservableCollection<Estabelecimento> Estabelecimento_;
         string Url_Api;
-        public Estabelecimento horari { get; }
+        bool OcultarLocal;
+        string MeuLocal;
+        string Cidade;
         FirebaseClient firebase = new FirebaseClient("https://meudelivery-47bcc.firebaseio.com/");
-        public Estabelecimentos()
+        public Estabelecimentos(string cidade)
         {
             NavigationPage.SetHasNavigationBar(this, false);
-            InitializeComponent();
+            InitializeComponent();           
+            Cidade = cidade;
             GetListEstab();           
-        }      
-
-        protected async void GetListEstab()
+        }
+        
+        private async void CarregarEstabelecimentos(string UrlServer)
         {
             if (CrossConnectivity.Current.IsConnected)
             {
                 activity_indicator.IsRunning = true;
                 try
-                {                  
-                    Url_Api = "https://meudelivery-47bcc.firebaseio.com/.json";
+                {
+                    Url_Api = UrlServer;
                     //Indicador Ativo
                     activity_indicator.IsRunning = true;
                     //Pegando os dados JSON da Web
@@ -50,7 +54,7 @@ namespace DeLivre.Views
                         // deserialize o Json para o Modelo de Dados Estabelecimento
                         var ItensJson = JsonConvert.DeserializeObject<List<Estabelecimento>>(await response.Content.ReadAsStringAsync());
                         // Adiciona os dados em uma Lista!
-                        Estabelecimento_ = new ObservableCollection<Estabelecimento>(ItensJson);                       
+                        Estabelecimento_ = new ObservableCollection<Estabelecimento>(ItensJson);
 
                         //DateTime aDate = DateTime.Now;
                         //DateTime dateValue;
@@ -62,7 +66,7 @@ namespace DeLivre.Views
                         //{
                         //    foreach (var item in ItensJson)
                         //    {
-                               
+
                         //        string segunda = item.Horarios_Funcionamento.Select(h => h.Segunda_Feira).ToString();
                         //        string NomeEstab = Estabelecimento_.Select(x => x.Nome).ToString();
                         //        string horario = Estabelecimento_.Select(X => X.Horario_Funcionamento).ToString();
@@ -70,54 +74,154 @@ namespace DeLivre.Views
                         //        await Att_Horario(codigo, NomeEstab, horario, segunda);
                         //    }
                         //}
-                    
-                    //Atribui os dados para a ListaView 
-                    ListaEstabelecimento.ItemsSource = Estabelecimento_.Where(x => x.Ativo == true);                                     
+
+                        //Atribui os dados para a ListaView 
+                        ListaEstabelecimento.ItemsSource = Estabelecimento_.Where(x => x.Ativo == true);
                         //Verificação da lista
                         int i = Estabelecimento_.Count;
                         if (i > 0)
-                        {                                                                     
+                        {
                             activity_indicator.IsRunning = false;
-                            activity_indicator.IsVisible = false;    
+                            activity_indicator.IsVisible = false;
                             boxLinha.IsVisible = true;
-                        }                       
+                        }
                     }
                     else
                     {
-                      await DisplayAlert("Manutenção", "Olá, Estamos fazendo manutenção em nossos servidores, aguarde e tente mais tarde.", "OK");
+                        await DisplayAlert("Manutenção", "Olá, Estamos fazendo manutenção em nossos servidores, aguarde e tente mais tarde.", "OK");
                     }
                 }
                 catch (Exception)
                 {
                     activity_indicator.IsVisible = false;
                     var resp = await DisplayAlert("Problema na conexão", "Verifique sua internet e tente novamente!", "OK", "Atualizar");
-                    if (resp)
-                    {
-
-                    }
-                    else
-                    {
+                    if (resp != true)
                         activity_indicator.IsRunning = true;
-                        GetListEstab();                        
-                    }
+                    GetListEstab();
                 }
             }
             else
             {
                 activity_indicator.IsVisible = true;
+
                 if (Estabelecimento_ == null)
                     stck_Listalimpa.IsVisible = true;
 
                 activity_indicator.IsVisible = false;
                 var resp = await DisplayAlert("Sem conexão com a internet", "Conecte a internet e tente novamente", "Tentar novamente", "OK");
-                if (resp)
-                {
+                if (resp != true)
+                    GetListEstab();
+            }
+        }
 
+        protected async void GetListEstab()
+        {
+
+            if (Application.Current.Properties.ContainsKey("_OcultarLocal"))
+            {
+                OcultarLocal = Convert.ToBoolean(Application.Current.Properties["_OcultarLocal"] as string);
+            }
+            if (Application.Current.Properties.ContainsKey("_Nome"))
+            {
+                string Nome = Application.Current.Properties["_Nome"] as string;
+                lbl_Nome.Text = "Olá, " + Nome +"!";
+            }
+            else
+            {
+                lbl_Nome.Text = "Olá, Visitante!";
+            }
+
+            if (Application.Current.Properties.ContainsKey("_Cidade"))
+            {
+                MeuLocal = Application.Current.Properties["_Cidade"] as string;
+                lbl_Local.Text = "Local: " + MeuLocal;
+            }
+            else
+            {
+                lbl_Local.Text = " ";
+            }
+
+            if (MeuLocal == "Pinhão")
+            {
+                if (CrossConnectivity.Current.IsConnected)
+                {
+                    activity_indicator.IsRunning = true;
+                    try
+                    {
+                        Url_Api = "https://meudelivery-47bcc.firebaseio.com/.json";
+                        //Indicador Ativo
+                        activity_indicator.IsRunning = true;
+                        //Pegando os dados JSON da Web
+                        HttpResponseMessage response = await _client.GetAsync(Url_Api);
+
+                        if (response.StatusCode == HttpStatusCode.OK)
+                        {
+                            // deserialize o Json para o Modelo de Dados Estabelecimento
+                            var ItensJson = JsonConvert.DeserializeObject<List<Estabelecimento>>(await response.Content.ReadAsStringAsync());
+                            // Adiciona os dados em uma Lista!
+                            Estabelecimento_ = new ObservableCollection<Estabelecimento>(ItensJson);
+
+                            //DateTime aDate = DateTime.Now;
+                            //DateTime dateValue;
+
+                            //dateValue = DateTime.Parse(aDate.ToString("MM/dd/yyyy"), CultureInfo.InvariantCulture);
+                            //string dia = dateValue.ToString("dddd", new CultureInfo("pt-BR"));
+
+                            //if (dia == "terça-feira")
+                            //{
+                            //    foreach (var item in ItensJson)
+                            //    {
+
+                            //        string segunda = item.Horarios_Funcionamento.Select(h => h.Segunda_Feira).ToString();
+                            //        string NomeEstab = Estabelecimento_.Select(x => x.Nome).ToString();
+                            //        string horario = Estabelecimento_.Select(X => X.Horario_Funcionamento).ToString();
+                            //        string codigo = Estabelecimento_.Select(X => X.Id).ToString();
+                            //        await Att_Horario(codigo, NomeEstab, horario, segunda);
+                            //    }
+                            //}
+
+                            //Atribui os dados para a ListaView 
+                            ListaEstabelecimento.ItemsSource = Estabelecimento_.Where(x => x.Ativo == true);
+                            //Verificação da lista
+                            int i = Estabelecimento_.Count;
+                            if (i > 0)
+                            {
+                                activity_indicator.IsRunning = false;
+                                activity_indicator.IsVisible = false;
+                                boxLinha.IsVisible = true;
+                            }
+                        }
+                        else
+                        {
+                            await DisplayAlert("Manutenção", "Olá, Estamos fazendo manutenção em nossos servidores, aguarde e tente mais tarde.", "OK");
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        activity_indicator.IsVisible = false;
+                        var resp = await DisplayAlert("Problema na conexão", "Verifique sua internet e tente novamente!", "OK", "Atualizar");
+                        if (resp != true)
+                            activity_indicator.IsRunning = true;
+                        GetListEstab();
+                    }
                 }
                 else
                 {
-                    GetListEstab();
+                    activity_indicator.IsVisible = true;
+
+                    if (Estabelecimento_ == null)
+                        stck_Listalimpa.IsVisible = true;
+
+                    activity_indicator.IsVisible = false;
+                    var resp = await DisplayAlert("Sem conexão com a internet", "Conecte a internet e tente novamente", "Tentar novamente", "OK");
+                    if (resp != true)
+                        GetListEstab();
                 }
+            }   
+            if(MeuLocal == "Aracajú")
+            {
+                CarregarEstabelecimentos("https://meudelivery-47bcc.firebaseio.com/.json");
+                await DisplayAlert("Teste", "Aracajú", "OK");
             }
         }
 
@@ -131,7 +235,6 @@ namespace DeLivre.Views
                       Horario_Funcionamento =  horarioatt                    
                   });
         }
-
 
         private async void NavegarToCardapio(string Nome_estabelecimento)
         {                     
@@ -172,11 +275,15 @@ namespace DeLivre.Views
             lv.SelectedItem = null;
         }
 
-        //protected override void OnAppearing()
-        //{
-        //    base.OnAppearing();
-        //    GetListEstab();
-        //}
+        private void Selecionar_Cidade_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();          
+        }
 
         private async void ListaEstabelecimento_Refreshing(object sender, EventArgs e)
         {
@@ -192,6 +299,11 @@ namespace DeLivre.Views
             {
                 ListaEstabelecimento.EndRefresh();
             }  
+        }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            App.Current.MainPage = new MainPage();
         }
     }
 }

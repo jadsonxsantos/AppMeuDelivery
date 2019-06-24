@@ -6,10 +6,51 @@
              x:Class="DeLivre.Views.Estabelecimentos" BackgroundImage="fundoapp">
 
     <StackLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="80"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
+            <controls:CircleImage Source="logotipo_color.png" Grid.Column="1"  
+                                  WidthRequest="230" HeightRequest="70" Grid.Row="0"                                  
+                                  HorizontalOptions="CenterAndExpand" BorderThickness="1" 
+                                  BorderColor="White" Margin="20,0,0,-5" Aspect="AspectFit"/>
 
+            <Label                     x:Name="lbl_Nome"                 
+                                       Grid.Column="0"
+                                       Margin="0,10"  Grid.Row="0"
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="{StaticResource asphaltPrimary}"                              
+                                       FontSize="12" FontAttributes="Bold" />
+
+            <Label x:Name="lbl_Local"                              
+                                       Grid.Column="0"  Grid.Row="0"
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="{StaticResource asphaltPrimary}"
+                                       Margin="0,25,0,0"
+                                       FontSize="13"/>
+            <Label x:Name="lbl_Mudar"          Grid.Row="0"             
+                                       Grid.Column="0" Text="(Mudar)"
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="{StaticResource asphaltPrimary}"
+                                       Margin="0,38,0,0"
+                                       FontSize="13">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+            <StackLayout Orientation="Vertical">
+            <!--<Label x:Name="lbl_Local" FontAttributes="Bold" FontSize="14" HorizontalTextAlignment="Center" TextColor="Black" Text="Local"/>
+           
             <controls:CircleImage Source="logotipo_color.png" WidthRequest="200" HeightRequest="70" 
                                   HorizontalOptions="CenterAndExpand" BorderThickness="1" 
-                                  BorderColor="White" Margin="0,5,0,5" Aspect="AspectFit"/>
+                                  BorderColor="White" Margin="0,5,0,5" Aspect="AspectFit"/>-->
+        </StackLayout>
+       
 
         <!--<BoxView Margin="3"  HeightRequest="1" WidthRequest="10" Color="Black" />-->
 
@@ -23,6 +64,12 @@
             <StackLayout x:Name="stck_Listalimpa" BackgroundColor="Transparent" IsVisible="False" VerticalOptions="CenterAndExpand" Orientation="Vertical">
                 <Label x:Name="lbl_Listalimpa" FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Center" TextColor="Black" Text="Verifique sua conexão com a internet!"/>
                 <Image Source="SemConexao" BackgroundColor="Transparent" HeightRequest="100" WidthRequest="100" ></Image>
+            </StackLayout>
+            <StackLayout x:Name="stck_Cidade" BackgroundColor="Transparent" IsVisible="False" VerticalOptions="CenterAndExpand" Orientation="Vertical">
+                <Button x:Name="Selecionar_Cidade" Text="Selecione sua cidade!" 
+                    Clicked="Selecionar_Cidade_Clicked" TextColor="White"                   
+                    BackgroundColor="#E53935" BorderRadius="5"
+                    Margin="5,5,5,5"  />
             </StackLayout>
             <BoxView x:Name="boxLinha" Margin="3" HeightRequest="1" IsVisible="False" WidthRequest="10" Color="#EF5350" />
             

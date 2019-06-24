@@ -289,7 +289,7 @@ namespace DeLivre.Views
             string today = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
             try
             {               
-                await AddPedido(codigoPedido, ClienteDados, today, Convert.ToDouble(lbl_Valor_Total.Text));                             
+                await AddPedido(codigoPedido, ClienteDados, today, lbl_Valor_Total.Text);                             
             }
             catch
             {
@@ -309,11 +309,11 @@ namespace DeLivre.Views
             }                      
         }
 
-        public async Task AddPedido(int id, string nome, string datapedido, double valor )
+        public async Task AddPedido(int id, string nome, string datapedido, string valorPedido )
         {
            
             string Dia = DateTime.Now.ToString("dd-MM-yyyy");
-            double ValorTotalPedido = pedido.Select(x => x.ValorPedido).Sum();
+            //double ValorTotalPedido = pedido.Select(x => x.ValorPedido).Sum();
 
             await firebase
                   .Child("Pedidos").Child(Nome_Estabelecimento).Child(Dia)
@@ -321,9 +321,8 @@ namespace DeLivre.Views
                   {
                       Id = id,
                       Nome = nome,
-                      DataPedido = datapedido,
-                      ValorPedido = valor,
-                      ValorTotal = ValorTotalPedido
+                      DataPedido = datapedido,                     
+                      ValorPedido = valorPedido
                   });
         }      
 

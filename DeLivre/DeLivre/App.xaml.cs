@@ -4,6 +4,7 @@ using DeLivre.Views;
 using DLToolkit.Forms.Controls;
 using System;
 using System.Collections.ObjectModel;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,14 +13,32 @@ namespace DeLivre
 {
     public partial class App : Application
     {
-       public static ObservableCollection<Cardapio> Meus_Pedidos = new ObservableCollection<Cardapio>();
-
+       public static ObservableCollection<Cardapio> Meus_Pedidos = new ObservableCollection<Cardapio>();     
+        string Nome, Cidade;
         public App()
         {
             InitializeComponent();
-            //FlowListView.Init();
-            MainPage = new MainPage();           
+            VersionTracking.Track();
+            LoadPage();
+            //MainPage = new Estabelecimentos(ocultar);           
             OneSignal.Current.StartInit("aed63aa3-9fbf-4f23-a9b2-26ee4666d096").EndInit();
+        }
+
+        private void LoadPage()
+        {            
+
+            if (Application.Current.Properties.ContainsKey("_OcultarLocal") == true)
+            {                       
+                if (Application.Current.Properties.ContainsKey("_Cidade"))
+                {
+                   Cidade = Application.Current.Properties["_Cidade"] as string;                   
+                }
+                MainPage = new Estabelecimentos(Cidade);
+            }
+            else
+            {
+                MainPage = new MainPage();
+            }
         }
 
         protected override void OnStart()

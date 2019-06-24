@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+                xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"              
+                x:Class="DeLivre.Views.Avisos.Localizacao">
+
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+              PositionIn="Bottom"
+              PositionOut="Center"
+              ScaleIn="1"
+              ScaleOut="0.7"
+              DurationIn="500"
+              EasingIn="SpringIn"/>
+    </pages:PopupPage.Animation>
+
+    <StackLayout WidthRequest="300" HeightRequest="355" BackgroundColor="White" Padding="5" IsClippedToBounds="False" HorizontalOptions="Center" VerticalOptions="Center">
+        <ScrollView>
+            <StackLayout>
+
+                <Label x:Name="lbl_Titulo" Margin="0,5"                                     
+                       HorizontalTextAlignment="Center"
+                       Text="Sua localização:"                                     
+                       FontAttributes="Bold" TextColor="Red"
+                       FontSize="20" />
+
+
+                <Button x:Name="btn_Minha_Cidade" FontSize="12"
+                        Text="PINHÃO/SE"
+                        TextColor="White" BorderRadius="30"                              
+                        HeightRequest="40" WidthRequest="300" 
+                        Clicked="Btn_Minha_Cidade_Clicked"
+                        BackgroundColor="#E53935"
+                        HorizontalOptions="Center" 
+                        VerticalOptions="Center"/>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+        
+</pages:PopupPage>

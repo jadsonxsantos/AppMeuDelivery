@@ -34,7 +34,7 @@
                                 <controls:CircleImage x:Name="ImagemEstab" Grid.Column="1" 
                                                       BorderColor="#EF5350" 
                                                       BorderThickness="2" 
-                                                      Margin="0,-40,0,0" 
+                                                      Margin="0,-70,0,0" 
                                                       WidthRequest="300" 
                                                       HeightRequest="300"                                                 
                                                       Aspect="AspectFit"/>
@@ -48,10 +48,10 @@
 
                                 <Label                                      
                                        Grid.Column="0"
-                                       Text="TEMPO" Margin="0, 17"
+                                       Text="TEMPO" Margin="0, 10"
                                        HorizontalTextAlignment="Center"
                                        TextColor="{StaticResource asphaltPrimary}"                              
-                                       FontSize="12" FontAttributes="Bold"/>    
+                                       FontSize="12" FontAttributes="Bold"/>
 
                                 <Label x:Name="lbl_Tempo"                              
                                        Grid.Column="0"
@@ -83,7 +83,7 @@
                                FontSize="14" FontAttributes="Bold"/>-->
 
                                 <Label x:Name="lbl_pedidominimo"                                              
-                                       Grid.Column="2" Margin="0,17"
+                                       Grid.Column="2" Margin="0,10"
                                        Text="PEDIDO MINIMO" 
                                        HorizontalTextAlignment="Center"
                                        TextColor="{StaticResource asphaltPrimary}"                              
@@ -112,62 +112,63 @@
                         </StackLayout>
                     </cardView:CardView.CardViewContent>
                 </cardView:CardView>
-                <Label x:Name="lbl_Endereco" Margin="0,-55"                                     
+                <Label x:Name="lbl_Endereco" Margin="0,-80"                                     
                        HorizontalTextAlignment="Center"
                        TextColor="{StaticResource asphaltPrimary}"                         
                        FontAttributes="Italic"
                        FontSize="13" />
 
-                <Label x:Name="lbl_Descricao" Margin="0,55"                                       
+                <Label x:Name="lbl_Descricao" Margin="0,80"                                       
                        HorizontalTextAlignment="Center"
                        TextColor="{StaticResource asphaltPrimary}"                           
                        FontSize="13" />
 
-                <Label Text="HORÁRIOS DE FUNCIONAMENTO" FontAttributes="Bold" 
-                       TextColor="{StaticResource asphaltPrimary}" Margin="0,-45,0,10" 
+                <StackLayout Orientation="Vertical" Margin="0,-65,0,0">
+                    <Label Text="HORÁRIOS DE FUNCIONAMENTO" FontAttributes="Bold" 
+                       TextColor="{StaticResource asphaltPrimary}" Margin="0,0,0,5" 
                        HorizontalTextAlignment="Center" FontSize="14"/>
 
-                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,0,0,0">
-                    <StackLayout Spacing="2" Orientation="Vertical" VerticalOptions="Start" Margin="5,0,5,0">
-                        <Label x:Name="lbl_Segunda"                                        
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,0,0,0">
+                        <StackLayout Spacing="2" Orientation="Vertical" VerticalOptions="Start" Margin="5,0,5,0">
+                            <Label x:Name="lbl_Segunda"                                        
                                HorizontalTextAlignment="Start"
                                TextColor="{StaticResource asphaltPrimary}"                           
                                FontSize="13" />
-                        <Label x:Name="lbl_Terca"                                        
+                            <Label x:Name="lbl_Terca"                                        
                                HorizontalTextAlignment="Start"
                                TextColor="{StaticResource asphaltPrimary}"                           
                                FontSize="13"/>
-                        <Label x:Name="lbl_Quarta"                                       
+                            <Label x:Name="lbl_Quarta"                                       
                                HorizontalTextAlignment="Start"
                                TextColor="{StaticResource asphaltPrimary}"                           
                                FontSize="13"/>
-                        <Label x:Name="lbl_Quinta"               
+                            <Label x:Name="lbl_Quinta"               
                                HorizontalTextAlignment="Start"
                                TextColor="{StaticResource asphaltPrimary}"                           
                                FontSize="13"/>
+                        </StackLayout>
+
+                        <StackLayout Spacing="2" Orientation="Vertical" Margin="5,0,-10,0">
+                            <Label x:Name="lbl_Sexta"                                       
+                               HorizontalTextAlignment="End"
+                               TextColor="{StaticResource asphaltPrimary}"                           
+                               FontSize="13"/>
+                            <Label x:Name="lbl_Sabado"                                        
+                               HorizontalTextAlignment="End"
+                               TextColor="{StaticResource asphaltPrimary}"                           
+                               FontSize="13"/>
+                            <Label x:Name="lbl_Domingo"                                       
+                               HorizontalTextAlignment="End"
+                               TextColor="{StaticResource asphaltPrimary}"                           
+                               FontSize="13"/>
+                        </StackLayout>
                     </StackLayout>
 
-                    <StackLayout Spacing="2" Orientation="Vertical" Margin="5,0,-10,0">
-                        <Label x:Name="lbl_Sexta"                                       
-                               HorizontalTextAlignment="End"
-                               TextColor="{StaticResource asphaltPrimary}"                           
-                               FontSize="13"/>
-                        <Label x:Name="lbl_Sabado"                                        
-                               HorizontalTextAlignment="End"
-                               TextColor="{StaticResource asphaltPrimary}"                           
-                               FontSize="13"/>
-                        <Label x:Name="lbl_Domingo"                                       
-                               HorizontalTextAlignment="End"
-                               TextColor="{StaticResource asphaltPrimary}"                           
-                               FontSize="13"/>
-                    </StackLayout>
-                </StackLayout>
+                    <Label Text="REDES SOCIAIS" FontAttributes="Bold" 
+                       TextColor="{StaticResource asphaltPrimary}"  Margin="0,5,0,5"               
+                       HorizontalTextAlignment="Center" FontSize="14"/>
 
-                <Label Text="REDES SOCIAIS" FontAttributes="Bold" 
-                       TextColor="{StaticResource asphaltPrimary}"                
-                       HorizontalTextAlignment="Center" FontSize="14"/> 
-
-                <Button x:Name="btn_instagram" FontSize="12"
+                    <Button x:Name="btn_instagram" FontSize="12"
                         Text="SIGA-NOS NO INSTAGRAM"
                         TextColor="White"
                         BorderRadius="10" 
@@ -177,6 +178,7 @@
                         BackgroundColor="#E53935"
                         HorizontalOptions="Center" 
                         VerticalOptions="Center"></Button>
+                </StackLayout>
             </StackLayout>
         </ScrollView>
     </StackLayout>

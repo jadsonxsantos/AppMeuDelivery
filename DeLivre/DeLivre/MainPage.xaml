@@ -11,7 +11,7 @@
                       HeightRequest="100" Aspect="AspectFit"
                       HorizontalOptions="CenterAndExpand" 
                       BorderColor="White" BorderThickness="1" />
-                                
+
             <Label x:Name="lbCidade"
                    Text="Qual sua cidade?" 
                    Margin="5,-5,5,0"
@@ -20,7 +20,8 @@
                    HorizontalOptions="Center"
                    VerticalOptions="CenterAndExpand" />
 
-            <!--<Button x:Name="btnAracaju"
+
+            <Button x:Name="btnAracaju"
                 Text="ARACAJU/SE"
                 TextColor="White"
                 BorderRadius="30" 
@@ -28,10 +29,10 @@
                 HeightRequest="75"
                 Margin="5,60,5,0" 
                 FontSize="30"
-                Clicked="btnPinhao_Clicked"
+                Clicked="BtnAracaju_Clicked"
                 BackgroundColor="#E53935"
                 HorizontalOptions="Center" 
-                VerticalOptions="Center"/>-->
+                VerticalOptions="Center"/>
 
             <Button x:Name="btnPinhao"
                     Text="PINHÃO/SE"
