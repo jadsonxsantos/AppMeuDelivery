@@ -1,9 +1,6 @@
-﻿using Rg.Plugins.Popup.Services;
-using System;
-using DeLivre.Views.Avisos;
+﻿using System;
 using Xamarin.Forms;
 using Xamarin.Essentials;
-using System.Linq;
 
 namespace DeLivre
 {
@@ -13,37 +10,32 @@ namespace DeLivre
         public MainPage()
         {
             InitializeComponent();
-            lbCidade.Opacity = 0;
-            btnPinhao.Opacity = 0;
+            //lbCidade.Opacity = 0;
+            //btnPinhao.Opacity = 0;
             //btnAracaju.Opacity = 0;
-            Animacoes();
+            //Animacoes();
+            Check_Update();
         }
 
-        private async void Animacoes()
+        private void Animacoes()
         {
-           await lbCidade.FadeTo(1, 1000);
+           //await lbCidade.FadeTo(1, 1000);
            //await btnAracaju.FadeTo(1, 1500);
-           await btnPinhao.FadeTo(1, 500);
-            Check_Update();
-
+           //await btnPinhao.FadeTo(1, 500);           
         }
 
         private async void Check_Update()
         {
+            var current = $"{VersionTracking.CurrentBuild} ({VersionTracking.CurrentVersion})";
+            var Previus = $"{VersionTracking.PreviousBuild} ({VersionTracking.PreviousVersion})";
 
-            var previousVersion = VersionTracking.PreviousBuild;
-            var currentVersion = VersionTracking.CurrentBuild;
-
-            //Verifica a versão atual do APP
-            var isLatest = VersionTracking.IsFirstLaunchForCurrentBuild;
-            if (currentVersion != previousVersion)
+            if (VersionTracking.IsFirstLaunchForCurrentBuild)
             {
                 //Avisa o usuario que existe uma versão nova e pergunta se ele quer baixar
-                var update = await DisplayAlert("Nova versão disponivel", "Existe uma nova versão deste app, deseja atualizar?", "Sim", "Não");
+                var update = await DisplayAlert("Nova versão disponível", "Existe uma nova versão do App Meu Delivery, deseja atualizar?", "Sim", "Não");
 
                 if (update)
-                {
-                    //Abre a Loja nativa da plataforma para efetur o Download
+                {                  
                     await Launcher.OpenAsync("https://play.google.com/store/apps/details?id=com.lurasoft.AppMeuDelivery");
                 }
             }
@@ -67,7 +59,7 @@ namespace DeLivre
 
         private void BtnAracaju_Clicked(object sender, EventArgs e)
         {
-            string Local = "Aracajú";
+            string Local = "Aracaju";
             Application.Current.Properties["_Cidade"] = Local;
             Application.Current.Properties["_OcultarLocal"] = true;
             App.Current.MainPage = new NavigationPage(new Views.Estabelecimentos(Local));

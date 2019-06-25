@@ -64,13 +64,7 @@
             <StackLayout x:Name="stck_Listalimpa" BackgroundColor="Transparent" IsVisible="False" VerticalOptions="CenterAndExpand" Orientation="Vertical">
                 <Label x:Name="lbl_Listalimpa" FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Center" TextColor="Black" Text="Verifique sua conexão com a internet!"/>
                 <Image Source="SemConexao" BackgroundColor="Transparent" HeightRequest="100" WidthRequest="100" ></Image>
-            </StackLayout>
-            <StackLayout x:Name="stck_Cidade" BackgroundColor="Transparent" IsVisible="False" VerticalOptions="CenterAndExpand" Orientation="Vertical">
-                <Button x:Name="Selecionar_Cidade" Text="Selecione sua cidade!" 
-                    Clicked="Selecionar_Cidade_Clicked" TextColor="White"                   
-                    BackgroundColor="#E53935" BorderRadius="5"
-                    Margin="5,5,5,5"  />
-            </StackLayout>
+            </StackLayout>           
             <BoxView x:Name="boxLinha" Margin="3" HeightRequest="1" IsVisible="False" WidthRequest="10" Color="#EF5350" />
             
             <!--<ScrollView Orientation="Horizontal">

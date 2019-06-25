@@ -14,55 +14,56 @@
 
             <Label x:Name="lbCidade"
                    Text="Qual sua cidade?" 
-                   Margin="5,-5,5,0"
+                   Margin="5,-5,5,10"
                    FontSize="29" FontAttributes="Bold"
                    TextColor="#E53935"
                    HorizontalOptions="Center"
                    VerticalOptions="CenterAndExpand" />
 
+            <ScrollView>
+                <StackLayout>
+                    <Button x:Name="btnAracaju"
+                            Text="ARACAJU/SE" FontAttributes="Bold"
+                            TextColor="White"
+                            BorderRadius="18" 
+                            WidthRequest="230"
+                            HeightRequest="50"
+                            Margin="5,0,5,0" 
+                            FontSize="25"
+                            Clicked="BtnAracaju_Clicked"
+                            BackgroundColor="#E53935"
+                            HorizontalOptions="Center" 
+                            VerticalOptions="Center"/>
 
-            <Button x:Name="btnAracaju"
-                Text="ARACAJU/SE"
-                TextColor="White"
-                BorderRadius="30" 
-                WidthRequest="250"
-                HeightRequest="75"
-                Margin="5,60,5,0" 
-                FontSize="30"
-                Clicked="BtnAracaju_Clicked"
-                BackgroundColor="#E53935"
-                HorizontalOptions="Center" 
-                VerticalOptions="Center"/>
-
-            <Button x:Name="btnPinhao"
-                    Text="PINHÃO/SE"
-                    TextColor="White"
-                    BorderRadius="30" 
-                    WidthRequest="250"
-                    HeightRequest="75"
-                    Margin="5,60,5,0" 
-                    FontSize="30"
-                    Clicked="BtnPinhao_Clicked"
-                    BackgroundColor="#E53935"
-                    HorizontalOptions="Center" 
-                    VerticalOptions="Center">
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroup x:Name="CommonStates">
-                        <VisualState x:Name="Normal">
-                            <VisualState.Setters>
-                                <Setter Property="Scale" Value="1"/>
-                            </VisualState.Setters>
-                        </VisualState>
-
-                        <VisualState x:Name="Pressed">
-                            <VisualState.Setters>
-                                <Setter Property="Scale" Value="0.8"/>
-                            </VisualState.Setters>
-                        </VisualState>
-
-                    </VisualStateGroup>
-                </VisualStateManager.VisualStateGroups>
-            </Button>
+                    <Button x:Name="btnPinhao"
+                            Text="PINHÃO/SE" FontAttributes="Bold"
+                            TextColor="White"
+                            BorderRadius="18" 
+                            WidthRequest="230"
+                            HeightRequest="50"
+                            Margin="5,0,5,0" 
+                            FontSize="25"
+                            Clicked="BtnPinhao_Clicked"
+                            BackgroundColor="#E53935"
+                            HorizontalOptions="Center" 
+                            VerticalOptions="Center">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale" Value="1"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale" Value="0.8"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Button>
+                </StackLayout>
+            </ScrollView>
         </StackLayout>
         <Button x:Name="btn_Parceria" FontSize="15"
                 Text="MEU ESTABELECIMENTO NO APP?"
