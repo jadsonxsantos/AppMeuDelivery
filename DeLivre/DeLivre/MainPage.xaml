@@ -20,8 +20,35 @@
                    HorizontalOptions="Center"
                    VerticalOptions="CenterAndExpand" />
 
-            <ScrollView>
-                <StackLayout>
+            <!--<ScrollView HeightRequest="200">-->
+                <StackLayout HeightRequest="200">
+                    <Button x:Name="btnPinhao"
+                            Text="PINHÃO/SE" FontAttributes="Bold"
+                            TextColor="White"
+                            BorderRadius="18" 
+                            WidthRequest="230"
+                            HeightRequest="50"
+                            Margin="5,0,5,0" 
+                            FontSize="25"
+                            Clicked="BtnPinhao_Clicked"
+                            BackgroundColor="#E53935"
+                            HorizontalOptions="Center" 
+                            VerticalOptions="Center">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="Scale" Value="1"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Property="Scale" Value="0.8"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Button>
                     <Button x:Name="btnAracaju"
                             Text="ARACAJU/SE" FontAttributes="Bold"
                             TextColor="White"
@@ -35,35 +62,21 @@
                             HorizontalOptions="Center" 
                             VerticalOptions="Center"/>
 
-                    <Button x:Name="btnPinhao"
-                            Text="PINHÃO/SE" FontAttributes="Bold"
+                    <Button x:Name="btnTimon"
+                            Text="TIMON/MA" FontAttributes="Bold"
                             TextColor="White"
                             BorderRadius="18" 
                             WidthRequest="230"
                             HeightRequest="50"
                             Margin="5,0,5,0" 
                             FontSize="25"
-                            Clicked="BtnPinhao_Clicked"
+                            Clicked="BtnTimon_Clicked"
                             BackgroundColor="#E53935"
                             HorizontalOptions="Center" 
-                            VerticalOptions="Center">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal">
-                                        <VisualState.Setters>
-                                            <Setter Property="Scale" Value="1"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="Pressed">
-                                        <VisualState.Setters>
-                                            <Setter Property="Scale" Value="0.8"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                        </Button>
+                            VerticalOptions="Center"/>
+
                 </StackLayout>
-            </ScrollView>
+            <!--</ScrollView>-->
         </StackLayout>
         <Button x:Name="btn_Parceria" FontSize="15"
                 Text="MEU ESTABELECIMENTO NO APP?"

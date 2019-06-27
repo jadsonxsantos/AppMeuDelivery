@@ -209,22 +209,18 @@ namespace DeLivre.Views
                 {
                     EntEndereco.Text = Application.Current.Properties["_Endereco"] as string;
                 }
-
                 if (Application.Current.Properties.ContainsKey("_Numero"))
                 {
                     EntNumero.Text = Application.Current.Properties["_Numero"] as string;
                 }
-
                 if (Application.Current.Properties.ContainsKey("_Cidade"))
                 {
                     EntCidade.Text = Application.Current.Properties["_Cidade"] as string;
                 }
-
                 if (Application.Current.Properties.ContainsKey("_Bairro"))
                 {
                     EntBairro.Text = Application.Current.Properties["_Bairro"] as string;
                 }
-
                 if (Application.Current.Properties.ContainsKey("_PontoReferencia"))
                 {
                     EntReferencia.Text = Application.Current.Properties["_PontoReferencia"] as string;
@@ -316,7 +312,7 @@ namespace DeLivre.Views
             //double ValorTotalPedido = pedido.Select(x => x.ValorPedido).Sum();
 
             await firebase
-                  .Child("Pedidos").Child(Nome_Estabelecimento).Child(Dia)
+                  .Child(EntCidade.Text).Child(Nome_Estabelecimento).Child(Dia)
                   .PostAsync(new DeLivre.Models.Pedido()
                   {
                       Id = id,

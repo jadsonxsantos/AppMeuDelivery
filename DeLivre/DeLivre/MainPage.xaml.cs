@@ -9,20 +9,9 @@ namespace DeLivre
         // Request do JSON        
         public MainPage()
         {
-            InitializeComponent();
-            //lbCidade.Opacity = 0;
-            //btnPinhao.Opacity = 0;
-            //btnAracaju.Opacity = 0;
-            //Animacoes();
+            InitializeComponent();         
             Check_Update();
-        }
-
-        private void Animacoes()
-        {
-           //await lbCidade.FadeTo(1, 1000);
-           //await btnAracaju.FadeTo(1, 1500);
-           //await btnPinhao.FadeTo(1, 500);           
-        }
+        }       
 
         private async void Check_Update()
         {
@@ -60,6 +49,14 @@ namespace DeLivre
         private void BtnAracaju_Clicked(object sender, EventArgs e)
         {
             string Local = "Aracaju";
+            Application.Current.Properties["_Cidade"] = Local;
+            Application.Current.Properties["_OcultarLocal"] = true;
+            App.Current.MainPage = new NavigationPage(new Views.Estabelecimentos(Local));
+        }
+
+        private void BtnTimon_Clicked(object sender, EventArgs e)
+        {
+            string Local = "Timon";
             Application.Current.Properties["_Cidade"] = Local;
             Application.Current.Properties["_OcultarLocal"] = true;
             App.Current.MainPage = new NavigationPage(new Views.Estabelecimentos(Local));
