@@ -1,17 +1,14 @@
 ﻿using DeLivre.Models;
 using Firebase.Database;
-using Firebase.Database.Query;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
-using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -23,21 +20,48 @@ namespace DeLivre.Views
         // Request do JSON 
         private HttpClient _client = new HttpClient();
         ObservableCollection<Estabelecimento> Estabelecimento_;
-        string Url_Api;
+        List<Estabelecimento> ItensJson;
+        string Url_Api, Url_Servidor;
         bool OcultarLocal;
         string MeuLocal;
         string Cidade;
         FirebaseClient firebase = new FirebaseClient("https://meudelivery-47bcc.firebaseio.com/");
-        public Estabelecimentos(string cidade)
+        public Estabelecimentos(string cidade, string urlservidor)
         {
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();           
             Cidade = cidade;
-            GetAllEstabelecimentos();           
+            Url_Servidor = urlservidor;
+            CarregarEstabelecimentos(Url_Servidor);
         }
         
         private async void CarregarEstabelecimentos(string UrlServer)
         {
+            if (Application.Current.Properties.ContainsKey("_OcultarLocal"))
+            {
+                OcultarLocal = Convert.ToBoolean(Application.Current.Properties["_OcultarLocal"] as string);
+            }
+
+            if (Application.Current.Properties.ContainsKey("_Nome"))
+            {
+                string Nome = Application.Current.Properties["_Nome"] as string;
+                lbl_Nome.Text = "Olá, " + Nome + "!";
+            }
+            else
+            {
+                lbl_Nome.Text = "Olá, Visitante!";
+            }
+
+            if (Application.Current.Properties.ContainsKey("_Cidade"))
+            {
+                MeuLocal = Application.Current.Properties["_Cidade"] as string;
+                lbl_Local.Text = "Local: " + MeuLocal;
+            }
+            else
+            {
+                lbl_Local.Text = " ";
+            }
+
             if (CrossConnectivity.Current.IsConnected)
             {
                 activity_indicator.IsRunning = true;
@@ -52,7 +76,7 @@ namespace DeLivre.Views
                     if (response.StatusCode == HttpStatusCode.OK)
                     {
                         // deserialize o Json para o Modelo de Dados Estabelecimento
-                        var ItensJson = JsonConvert.DeserializeObject<List<Estabelecimento>>(await response.Content.ReadAsStringAsync());
+                        ItensJson = JsonConvert.DeserializeObject<List<Estabelecimento>>(await response.Content.ReadAsStringAsync());
                         // Adiciona os dados em uma Lista!
                         Estabelecimento_ = new ObservableCollection<Estabelecimento>(ItensJson);
 
@@ -99,6 +123,7 @@ namespace DeLivre.Views
                         activity_indicator.IsRunning = true;
                     GetAllEstabelecimentos();
                 }
+                Check_Update();
             }
             else
             {
@@ -141,41 +166,60 @@ namespace DeLivre.Views
                 lbl_Local.Text = " ";
             }
 
-            if (MeuLocal == "Pinhão")
+            if (Cidade == "Pinhão")
             {
                 CarregarEstabelecimentos("https://meudelivery-47bcc.firebaseio.com/" + ".json");              
             }   
-            if (MeuLocal == "Aracaju")
+            else if (Cidade == "Aracaju")
             {
                 CarregarEstabelecimentos("https://teste-213d3.firebaseio.com/" + ".json");               
             }
-            if (MeuLocal == "Timon")
+            else if (Cidade == "Timon")
             {
                 CarregarEstabelecimentos("https://amd-timon.firebaseio.com/" + ".json");
             }
         }
 
-        public async Task Att_Horario(string codigo, string estabelecimento, string horario, string horarioatt)
-        {                    
-            await firebase
-                  .Child(codigo).Child(estabelecimento).Child(horario)
-                  .PostAsync(new DeLivre.Models.Estabelecimento()
-                  {
-                      Horario_Funcionamento =  horarioatt                    
-                  });
+        private async void Check_Update()
+        {
+            var current = $"{VersionTracking.CurrentBuild} ({VersionTracking.CurrentVersion})";
+            var Previus = $"{VersionTracking.PreviousBuild} ({VersionTracking.PreviousVersion})";
+
+            if (VersionTracking.IsFirstLaunchForCurrentBuild)
+            {
+                //Avisa o usuario que existe uma versão nova e pergunta se ele quer baixar
+                var update = await DisplayAlert("Nova versão disponível", "Existe uma nova versão do App Meu Delivery, deseja atualizar?", "Sim", "Não");
+
+                if (update)
+                {
+                    await Launcher.OpenAsync("https://play.google.com/store/apps/details?id=com.lurasoft.AppMeuDelivery");
+                }
+            }
         }
 
-        private async void NavegarToCardapio(string Nome_estabelecimento)
-        {                     
+        //public async Task Att_Horario(string codigo, string estabelecimento, string horario, string horarioatt)
+        //{                    
+        //    await firebase
+        //          .Child(codigo).Child(estabelecimento).Child(horario)
+        //          .PostAsync(new DeLivre.Models.Estabelecimento()
+        //          {
+        //              Horario_Funcionamento =  horarioatt                    
+        //          });
+        //}
+
+        private async void NavegarToCardapio(string Nome_estabelecimento, string ApiUrl)
+        {          
             try
             {             
                 //Visibilidade do indicador
                 activity_indicator.IsRunning = true;
                 //Pegando os dados JSON da Servidor
-                var content = await _client.GetStringAsync(Url_Api);
-                ObservableCollection<Estabelecimento> _Estabelecimentos = JsonConvert.DeserializeObject<ObservableCollection<Estabelecimento>>(content);
+                //var content = await _client.GetStringAsync(ApiUrl);
+                //ObservableCollection<Estabelecimento> _Estabelecimentos = JsonConvert.DeserializeObject<ObservableCollection<Estabelecimento>>(ItensJson);
                 // Selecionar o objeto no Json.
-                Estabelecimento _Estabelecimento = _Estabelecimentos.FirstOrDefault(cf => cf.Nome.Equals(Nome_estabelecimento));
+                // Adiciona os dados em uma Lista!
+                Estabelecimento_ = new ObservableCollection<Estabelecimento>(ItensJson);
+                Estabelecimento _Estabelecimento = Estabelecimento_.FirstOrDefault(cf => cf.Nome.Equals(Nome_estabelecimento));
                 // Abre tela e envia os parâmetros.
 
                 if (_Estabelecimento != null)
@@ -199,14 +243,15 @@ namespace DeLivre.Views
             }
          
             var item = (Estabelecimento)e.Item;
-            NavegarToCardapio(item.Nome.ToString());
+            NavegarToCardapio(item.Nome.ToString(), Url_Api);
 
             lv.SelectedItem = null;
         }
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();          
+            base.OnAppearing();
+           
         }
 
         private async void ListaEstabelecimento_Refreshing(object sender, EventArgs e)

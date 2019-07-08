@@ -21,8 +21,8 @@
                    VerticalOptions="CenterAndExpand" />
 
             <!--<ScrollView HeightRequest="200">-->
-                <StackLayout HeightRequest="200">
-                    <Button x:Name="btnPinhao"
+            <StackLayout HeightRequest="200">
+                <Button x:Name="btnPinhao"
                             Text="PINHÃO/SE" FontAttributes="Bold"
                             TextColor="White"
                             BorderRadius="18" 
@@ -34,7 +34,7 @@
                             BackgroundColor="#E53935"
                             HorizontalOptions="Center" 
                             VerticalOptions="Center">
-                        <VisualStateManager.VisualStateGroups>
+                    <!--<VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal">
                                     <VisualState.Setters>
@@ -47,45 +47,44 @@
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-                    </Button>
-                    <Button x:Name="btnAracaju"
+                        </VisualStateManager.VisualStateGroups>-->
+                </Button>
+                <Button x:Name="btnAracaju"
                             Text="ARACAJU/SE" FontAttributes="Bold"
                             TextColor="White"
                             BorderRadius="18" 
                             WidthRequest="230"
                             HeightRequest="50"
                             Margin="5,0,5,0" 
-                            FontSize="25"
+                            FontSize="25" IsVisible="False"
                             Clicked="BtnAracaju_Clicked"
                             BackgroundColor="#E53935"
                             HorizontalOptions="Center" 
                             VerticalOptions="Center"/>
 
-                    <Button x:Name="btnTimon"
+                <Button x:Name="btnTimon"
                             Text="TIMON/MA" FontAttributes="Bold"
                             TextColor="White"
                             BorderRadius="18" 
                             WidthRequest="230"
                             HeightRequest="50"
                             Margin="5,0,5,0" 
-                            FontSize="25"
+                            FontSize="25" IsVisible="False"
                             Clicked="BtnTimon_Clicked"
                             BackgroundColor="#E53935"
                             HorizontalOptions="Center" 
                             VerticalOptions="Center"/>
 
-                </StackLayout>
+            </StackLayout>
             <!--</ScrollView>-->
         </StackLayout>
         <Button x:Name="btn_Parceria" FontSize="15"
                 Text="MEU ESTABELECIMENTO NO APP?"
                 TextColor="White" BorderRadius="10"                 
                 WidthRequest="300" HeightRequest="40"                
-                Margin="5,220,5,0" BackgroundColor="#E53935"                
+                Margin="5,100,5,0" BackgroundColor="#E53935"                
                 Clicked="Btn_Parceria_Clicked"                
                 HorizontalOptions="Center" 
                 VerticalOptions="End"/>
     </StackLayout>
-
 </ContentPage>

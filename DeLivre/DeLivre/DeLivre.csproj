@@ -27,9 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\Alertas\Localizacao.xaml.cs">
-      <DependentUpon>Localizacao.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\Detalhe\Frios.xaml.cs">
       <DependentUpon>Frios.xaml</DependentUpon>
     </Compile>
@@ -64,9 +61,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Info.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\MenuCardapio.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Pedido.xaml">

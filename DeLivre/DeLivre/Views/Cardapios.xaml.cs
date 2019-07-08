@@ -139,40 +139,7 @@ namespace DeLivre.Views
         }
 
         private async void OnCarrinho_Clicked(object sender, EventArgs e)
-        {
-            //InicioExpediente = new TimeSpan(8, 00, 0);
-            //FinalExpediente = new TimeSpan(21, 00, 0);
-
-            //DateTime HoraAtual = DateTime.Now;
-             
-            //string variavelHora = "23:50";
-
-            //if (Convert.ToDateTime(string.Format("{0:HH:mm}", HoraAtual)) > Convert.ToDateTime(variavelHora))
-            //{
-            //    //"hora atual é maior que a hora da variavel";  
-            //    await DisplayAlert("Antes", "hora atual é maior que a hora da variavel! ", "OK");
-
-            //}
-            //else
-            //{
-            //    //"hora atual é menor que a hora da variavel"; 
-            //    await DisplayAlert("Antes", "hora atual é menor que a hora da variavel! ", "OK");
-            //}
-
-            //TimeSpan HoraEntrada = DateTime.Now.TimeOfDay;
-
-            //if (InicioExpediente.CompareTo(HoraEntrada) == -1)
-            //{
-            //    //CompensarTempo = HoraEntrada.Subtract(InicioExpediente);                                      
-            //    await DisplayAlert("Antes","Fechado! " + HoraEntrada, "OK");
-            //}
-
-            //if (FinalExpediente.CompareTo(HoraEntrada) == +1)
-            //{
-            //    //CompensarTempo = HoraEntrada.Subtract(InicioExpediente);                                         
-            //    await DisplayAlert("Depois", "Fechado!", "OK");
-            //}
-
+        {        
             if (MeuEstabelecimento.Horario_Funcionamento != "Fechado")
             {
                 if (App.Meus_Pedidos.Count > 0)

@@ -158,12 +158,12 @@
             <!--Enviar pedido e Salvar-->
             <Button x:Name="SalvareEnviar" Text="Enviar Pedido!" 
                     Clicked="SalvareEnviar_Clicked" TextColor="White"                   
-                    BackgroundColor="#E53935" BorderRadius="5"
+                    BackgroundColor="#E53935" BorderRadius="10"
                     Margin="5,5,5,5"  />
 
        
         </StackLayout>
-        </ScrollView>
+     </ScrollView>  
     </ContentPage>
        
 </TabbedPage>

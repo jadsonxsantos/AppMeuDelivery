@@ -9,33 +9,17 @@ namespace DeLivre
         // Request do JSON        
         public MainPage()
         {
-            InitializeComponent();         
-            Check_Update();
-        }       
-
-        private async void Check_Update()
-        {
-            var current = $"{VersionTracking.CurrentBuild} ({VersionTracking.CurrentVersion})";
-            var Previus = $"{VersionTracking.PreviousBuild} ({VersionTracking.PreviousVersion})";
-
-            if (VersionTracking.IsFirstLaunchForCurrentBuild)
-            {
-                //Avisa o usuario que existe uma versão nova e pergunta se ele quer baixar
-                var update = await DisplayAlert("Nova versão disponível", "Existe uma nova versão do App Meu Delivery, deseja atualizar?", "Sim", "Não");
-
-                if (update)
-                {                  
-                    await Launcher.OpenAsync("https://play.google.com/store/apps/details?id=com.lurasoft.AppMeuDelivery");
-                }
-            }
-        }
+            InitializeComponent();                  
+        }             
 
         private void BtnPinhao_Clicked(object sender, EventArgs e)
         {           
             string Local = "Pinhão";
             Application.Current.Properties["_Cidade"] = Local;
             Application.Current.Properties["_OcultarLocal"] = true;
-            App.Current.MainPage = new NavigationPage(new Views.Estabelecimentos(Local));        
+            string UrlServidor = "https://meudelivery-47bcc.firebaseio.com/" + ".json";
+            Application.Current.Properties["UrlServer"] = UrlServidor;
+            App.Current.MainPage = new NavigationPage(new Views.Estabelecimentos(Local, UrlServidor));        
         }
 
         private async void Btn_Parceria_Clicked(object sender, EventArgs e)
@@ -51,7 +35,9 @@ namespace DeLivre
             string Local = "Aracaju";
             Application.Current.Properties["_Cidade"] = Local;
             Application.Current.Properties["_OcultarLocal"] = true;
-            App.Current.MainPage = new NavigationPage(new Views.Estabelecimentos(Local));
+            string UrlServidor = "https://teste-213d3.firebaseio.com/" + ".json";
+            Application.Current.Properties["UrlServer"] = UrlServidor;
+            App.Current.MainPage = new NavigationPage(new Views.Estabelecimentos(Local, UrlServidor));
         }
 
         private void BtnTimon_Clicked(object sender, EventArgs e)
@@ -59,7 +45,14 @@ namespace DeLivre
             string Local = "Timon";
             Application.Current.Properties["_Cidade"] = Local;
             Application.Current.Properties["_OcultarLocal"] = true;
-            App.Current.MainPage = new NavigationPage(new Views.Estabelecimentos(Local));
+            string UrlServidor = "https://amd-timon.firebaseio.com/" + ".json";
+            Application.Current.Properties["UrlServer"] = UrlServidor;
+            App.Current.MainPage = new NavigationPage(new Views.Estabelecimentos(Local, UrlServidor));
         }
+
+        //private async void Btn_instagram_Clicked(object sender, EventArgs e)
+        //{           
+        //  await  Launcher.OpenAsync("https://www.instagram.com/appmeudelivery/");
+        //}
     }
 }

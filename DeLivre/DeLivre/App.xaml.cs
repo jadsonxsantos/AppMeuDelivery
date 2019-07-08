@@ -14,7 +14,7 @@ namespace DeLivre
     public partial class App : Application
     {
        public static ObservableCollection<Cardapio> Meus_Pedidos = new ObservableCollection<Cardapio>();     
-        string Nome, Cidade;
+        string MyServer, Cidade;
         public App()
         {
             InitializeComponent();
@@ -33,7 +33,13 @@ namespace DeLivre
                 {
                    Cidade = Application.Current.Properties["_Cidade"] as string;                   
                 }
-                MainPage = new Estabelecimentos(Cidade);
+
+                if (Application.Current.Properties.ContainsKey("UrlServer"))
+                {
+                    MyServer = Application.Current.Properties["UrlServer"] as string;
+                }
+                App.Current.MainPage = new NavigationPage(new Views.Estabelecimentos(Cidade, MyServer));
+                //MainPage = new Estabelecimentos(Cidade, MyServer);
             }
             else
             {
@@ -44,6 +50,7 @@ namespace DeLivre
         protected override void OnStart()
         {
             OneSignal.Current.RegisterForPushNotifications();
+            LoadPage();
         }
 
         protected override void OnSleep()
