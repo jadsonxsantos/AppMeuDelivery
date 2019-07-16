@@ -7,19 +7,24 @@
              x:Class="DeLivre.Views.Detalhe.Frios">
 
     <pages:PopupPage.Animation>
-        <animations:ScaleAnimation
-              PositionIn="Bottom"
-              PositionOut="Center"
-              ScaleIn="1"
-              ScaleOut="0.7"
-              DurationIn="500"
-              EasingIn="SpringIn"/>
+        <animations:MoveAnimation
+            PositionIn="Bottom"
+            PositionOut="Bottom"
+            DurationIn="400"
+            DurationOut="300"
+            HasBackgroundAnimation="True"/>
     </pages:PopupPage.Animation>
 
-    <StackLayout WidthRequest="320" HeightRequest="450" BackgroundColor="White" Padding="5,5" IsClippedToBounds="True" HorizontalOptions="Center" VerticalOptions="Center">
-        <Label Text="Detalhe do Pedido!" FontSize="20" HorizontalTextAlignment="Center" TextColor="{StaticResource asphaltPrimary}"></Label>
-        <BoxView Margin="3" HeightRequest="1" WidthRequest="50" Color="#EF5350" />
-          
+    <StackLayout WidthRequest="360" HeightRequest="400" BackgroundColor="Transparent" Padding="5,5" IsClippedToBounds="True" HorizontalOptions="Center" VerticalOptions="Center">
+        <Frame x:Name="PopUpDialogLayout" Padding="5"
+                HorizontalOptions="Center" VerticalOptions="CenterAndExpand"                                              
+                HasShadow="true" WidthRequest="350"                
+                Margin="16" CornerRadius="5" OutlineColor="#EF5350">
+            <StackLayout>
+                <Label Text="Detalhe do Pedido!" FontSize="20" HorizontalTextAlignment="Center" TextColor="{StaticResource asphaltPrimary}"></Label>
+
+                <BoxView Margin="3" HeightRequest="1" WidthRequest="50" Color="#EF5350" />
+
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,5">
                     <Label x:Name="Qt_Pedido" 
                            Text="{Binding Value, Mode=TwoWay, StringFormat=' {0}'}"                                                     
@@ -44,85 +49,85 @@
                        TextColor="{StaticResource asphaltPrimary}"/>
 
                 <BoxView Margin="3" HeightRequest="1" WidthRequest="50" Color="#EF5350" />
-        <ScrollView>
-            <StackLayout>
-                <Label x:Name="lbl_tipotamanho" FontSize="15" FontAttributes="Bold" 
+                <ScrollView>
+                    <StackLayout>
+                        <Label x:Name="lbl_tipotamanho" FontSize="15" FontAttributes="Bold" 
                            HorizontalTextAlignment="Center" Text="Escolha o Tipo:"                   
                            TextColor="{StaticResource asphaltPrimary}"/>
 
-                <StackLayout x:Name="StackRadio" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="50,0" Spacing="13">
-                        <input:RadioButtonGroupView x:Name="RadioBtn">
-                               <input:RadioButton x:Name="Tipo_P" TextFontSize="12" IsChecked="True" />
-                               <input:RadioButton x:Name="Tipo_B" TextFontSize="12" />
-                               <input:RadioButton x:Name="Tipo_M" TextFontSize="12"  />
-                               <input:RadioButton x:Name="Tipo_G" TextFontSize="12" />
-                        </input:RadioButtonGroupView>
-                    </StackLayout>
-                    
-                    <Label x:Name="lbl_Tamaho" FontSize="15" FontAttributes="Bold" 
+                        <StackLayout x:Name="StackRadio" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="50,0" Spacing="13">
+                            <input:RadioButtonGroupView x:Name="RadioBtn">
+                                <input:RadioButton x:Name="Tipo_P" TextFontSize="12" Color="#EF5350" CircleColor="#EF5350" IsChecked="True" />
+                                <input:RadioButton x:Name="Tipo_B" TextFontSize="12" Color="#EF5350" CircleColor="#EF5350" />
+                                <input:RadioButton x:Name="Tipo_M" TextFontSize="12" Color="#EF5350" CircleColor="#EF5350"  />
+                                <input:RadioButton x:Name="Tipo_G" TextFontSize="12" Color="#EF5350" CircleColor="#EF5350" />
+                            </input:RadioButtonGroupView>
+                        </StackLayout>
+
+                        <Label x:Name="lbl_Tamaho" FontSize="15" FontAttributes="Bold" 
                            HorizontalTextAlignment="Center" Text="Sabores:"                   
                            TextColor="{StaticResource asphaltPrimary}"/>
 
-                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                    <StackLayout Spacing="2" Orientation="Vertical" Margin="5,0,5,0">
-                            <input:CheckBox x:Name="Adicional_00" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
-                            <input:CheckBox x:Name="Adicional_02" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
-                            <input:CheckBox x:Name="Adicional_04" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
-                            <input:CheckBox x:Name="Adicional_06" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
-                            <input:CheckBox x:Name="Adicional_08" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
-                            <input:CheckBox x:Name="Adicional_10" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
-                            <input:CheckBox x:Name="Adicional_12" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
-                            <input:CheckBox x:Name="Adicional_14" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
-                            <input:CheckBox x:Name="Adicional_16" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
-                            <input:CheckBox x:Name="Adicional_18" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
-                            <input:CheckBox x:Name="Adicional_20" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
-                            <input:CheckBox x:Name="Adicional_22" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
-                            <input:CheckBox x:Name="Adicional_24" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                            <StackLayout Spacing="2" Orientation="Vertical" Margin="5,0,5,0">
+                                <input:CheckBox x:Name="Adicional_00" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_02" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_04" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_06" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_08" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_10" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_12" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_14" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_16" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_18" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_20" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_22" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_24" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                            </StackLayout>
+
+                            <StackLayout Spacing="2" Orientation="Vertical" Margin="5,0,5,0">
+                                <input:CheckBox x:Name="Adicional_01" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_03" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_05" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_07" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_09" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_11" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_13" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_15" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_17" TextFontSize="11" HorizontalOptions="StartAndExpand"  Type="Material" />
+                                <input:CheckBox x:Name="Adicional_19" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_21" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_23" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                            </StackLayout>
                         </StackLayout>
 
-                    <StackLayout Spacing="2" Orientation="Vertical" Margin="5,0,5,0">
-                            <input:CheckBox x:Name="Adicional_01" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
-                            <input:CheckBox x:Name="Adicional_03" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
-                            <input:CheckBox x:Name="Adicional_05" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
-                            <input:CheckBox x:Name="Adicional_07" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
-                            <input:CheckBox x:Name="Adicional_09" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
-                            <input:CheckBox x:Name="Adicional_11" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
-                            <input:CheckBox x:Name="Adicional_13" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
-                            <input:CheckBox x:Name="Adicional_15" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
-                            <input:CheckBox x:Name="Adicional_17" TextFontSize="11" HorizontalOptions="StartAndExpand"  Type="Material" />
-                            <input:CheckBox x:Name="Adicional_19" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
-                            <input:CheckBox x:Name="Adicional_21" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
-                            <input:CheckBox x:Name="Adicional_23" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
-                        </StackLayout>
-                    </StackLayout>
-            
-
-                <StackLayout Orientation="Vertical">
-                    <Label Text="Quantidade:" FontAttributes="Bold"
+                        <StackLayout Orientation="Vertical">
+                            <Label Text="Quantidade:" FontAttributes="Bold"
                            FontSize="15" Margin="0,15"      
                            HorizontalTextAlignment="Center"
                            TextColor="{StaticResource asphaltPrimary}" />
 
-                    <Stepper x:Name="stepper" Minimum="1" Maximum="25" 
+                            <Stepper x:Name="stepper" Minimum="1" Maximum="25" 
                              HeightRequest="40" WidthRequest="10" BackgroundColor="#EF5350" 
                              Value="{Binding Quantidade}" Visual="Material"
                              ValueChanged="Stepper_ValueChanged"
                              Increment="1" Margin="20,0,20,0" />
 
-                    <Label x:Name="lbl_InfoComplementar" FontSize="15" Margin="0,5,0,0" FontAttributes="Bold" 
+                            <Label x:Name="lbl_InfoComplementar" FontSize="15" Margin="0,5,0,0" FontAttributes="Bold" 
                            HorizontalTextAlignment="Center" Text="Observação:"                   
                            TextColor="{StaticResource asphaltPrimary}"/>
 
-                    <Entry x:Name="Lbl_Troca" Placeholder="Ex.: Sabor da calda, outros adicionais etc" 
+                            <Entry x:Name="Lbl_Troca" Placeholder="Ex.: Sabor da calda, outros adicionais etc" 
                            Margin="0,5" HeightRequest="60" WidthRequest="200"
                            HorizontalTextAlignment="Center" FontSize="13" />
 
-                </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+                <Button x:Name="btn_selecionar" Margin="0,20" Text="Adicionar ao Pedido!" 
+                    BackgroundColor="#EF5350" Visual="Material" TextColor="White" 
+                    Clicked="Btn_selecionar_Clicked" />
             </StackLayout>
-         </ScrollView>
-        <Button x:Name="btn_selecionar" Margin="0,20" Text="Adicionar ao Pedido!" 
-                BackgroundColor="#EF5350" Visual="Material" TextColor="White" 
-                Clicked="Btn_selecionar_Clicked" />
+        </Frame>
     </StackLayout>
-
 </pages:PopupPage>

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace DeLivre.Models
@@ -28,6 +30,6 @@ namespace DeLivre.Models
         public List<RedesSociais> Redes_Sociais { get; set; }
         public List<Adicional> Adicionais { get; set; }
         public List<SaboresPicole> Sabores_Picole { get; set; }
-        public List<SaboresSorvete> Sabores_Sorvete { get; set; }
+        public List<SaboresSorvete> Sabores_Sorvete { get; set; }      
     }
 }

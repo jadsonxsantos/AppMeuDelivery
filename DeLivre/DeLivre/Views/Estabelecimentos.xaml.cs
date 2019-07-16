@@ -1,13 +1,16 @@
 ﻿using DeLivre.Models;
 using Firebase.Database;
+using Firebase.Database.Query;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -80,26 +83,84 @@ namespace DeLivre.Views
                         // Adiciona os dados em uma Lista!
                         Estabelecimento_ = new ObservableCollection<Estabelecimento>(ItensJson);
 
-                        //DateTime aDate = DateTime.Now;
-                        //DateTime dateValue;
+                        DateTime aDate = DateTime.Now;
+                        DateTime dateValue;
 
-                        //dateValue = DateTime.Parse(aDate.ToString("MM/dd/yyyy"), CultureInfo.InvariantCulture);
-                        //string dia = dateValue.ToString("dddd", new CultureInfo("pt-BR"));
+                        dateValue = DateTime.Parse(aDate.ToString("MM/dd/yyyy"), CultureInfo.InvariantCulture);
+                        string dia = dateValue.ToString("dddd", new CultureInfo("pt-BR"));
 
-                        //if (dia == "terça-feira")
-                        //{
-                        //    foreach (var item in ItensJson)
-                        //    {
+                        if (dia == "segunda-feira")
+                        {
+                            foreach (var item in ItensJson)
+                            {
+                                foreach (var itm in item.Horarios_Funcionamento)
+                                {
+                                    item.Horario_Funcionamento = itm.Segunda_Feira.ToString();
+                                }
+                            }
+                        }
+                        else if (dia == "terça-feira")
+                        {
+                            foreach (var item in ItensJson)
+                            {
+                                foreach (var itm in item.Horarios_Funcionamento)
+                                {
+                                    item.Horario_Funcionamento = itm.Terca_Feira.ToString();
+                                }
+                            }
+                        }
+                        else if (dia == "quarta-feira")
+                        {
+                            foreach (var item in ItensJson)
+                            {
+                                foreach (var itm in item.Horarios_Funcionamento)
+                                {
+                                    item.Horario_Funcionamento = itm.Quarta_Feira.ToString();
+                                }
+                            }
+                        }
+                        else if (dia == "quinta-feira")
+                        {
+                            foreach (var item in ItensJson)
+                            {
+                                foreach (var itm in item.Horarios_Funcionamento)
+                                {
+                                    item.Horario_Funcionamento = itm.Quinta_Feira.ToString();
+                                }
+                            }
+                        }
+                        else if (dia == "sexta-feira")
+                        {
+                            foreach (var item in ItensJson)
+                            {
+                                foreach (var itm in item.Horarios_Funcionamento)
+                                {
+                                    item.Horario_Funcionamento = itm.Sexta_Feira.ToString();
+                                }
+                            }
+                        }
+                        else if (dia == "sabado")
+                        {
+                            foreach (var item in ItensJson)
+                            {
+                                foreach (var itm in item.Horarios_Funcionamento)
+                                {
+                                    item.Horario_Funcionamento = itm.Sabado.ToString();
+                                }
+                            }
+                        }
+                        else if (dia == "domingo")
+                        {
+                            foreach (var item in ItensJson)
+                            {
+                                foreach (var itm in item.Horarios_Funcionamento)
+                                {
+                                    item.Horario_Funcionamento = itm.Domingo.ToString();
+                                }
+                            }
+                        }
 
-                        //        string segunda = item.Horarios_Funcionamento.Select(h => h.Segunda_Feira).ToString();
-                        //        string NomeEstab = Estabelecimento_.Select(x => x.Nome).ToString();
-                        //        string horario = Estabelecimento_.Select(X => X.Horario_Funcionamento).ToString();
-                        //        string codigo = Estabelecimento_.Select(X => X.Id).ToString();
-                        //        await Att_Horario(codigo, NomeEstab, horario, segunda);
-                        //    }
-                        //}
-
-                        //Atribui os dados para a ListaView 
+                        //Atribui os dados para a ListView 
                         ListaEstabelecimento.ItemsSource = Estabelecimento_.Where(x => x.Ativo == true);
                         //Verificação da lista
                         int i = Estabelecimento_.Count;
@@ -165,10 +226,10 @@ namespace DeLivre.Views
             {
                 lbl_Local.Text = " ";
             }
-
+            //Get nos estabelecimento de acordo com a cidade!
             if (Cidade == "Pinhão")
             {
-                CarregarEstabelecimentos("https://meudelivery-47bcc.firebaseio.com/" + ".json");              
+                CarregarEstabelecimentos("https://amd-pinhao.firebaseio.com/" + ".json");              
             }   
             else if (Cidade == "Aracaju")
             {
@@ -195,17 +256,7 @@ namespace DeLivre.Views
                     await Launcher.OpenAsync("https://play.google.com/store/apps/details?id=com.lurasoft.AppMeuDelivery");
                 }
             }
-        }
-
-        //public async Task Att_Horario(string codigo, string estabelecimento, string horario, string horarioatt)
-        //{                    
-        //    await firebase
-        //          .Child(codigo).Child(estabelecimento).Child(horario)
-        //          .PostAsync(new DeLivre.Models.Estabelecimento()
-        //          {
-        //              Horario_Funcionamento =  horarioatt                    
-        //          });
-        //}
+        }      
 
         private async void NavegarToCardapio(string Nome_estabelecimento, string ApiUrl)
         {          

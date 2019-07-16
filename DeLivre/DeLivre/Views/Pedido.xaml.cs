@@ -16,15 +16,13 @@ namespace DeLivre.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Pedido : TabbedPage
     {       
-        ObservableCollection<Cardapio> MeusPedido;
-        ObservableCollection<Models.Pedido> pedido;
+        ObservableCollection<Cardapio> MeusPedido;          
         double Valor_Pedido, Valor_Total, Valor_Adicionais, ValorJurosCartao = 0;
         string Valor_Frete, Number_Whatsapp, Nome_Estabelecimento, Pedido_Minimo, TrocaInfo, Valor_Troco, Tipo_Pagamento, Juros_Cartao, ValorEntrega;
         string BreakLine, Endereco, ClienteDados, infoDados, Saudacao;      
-        bool AceitaCartao, OcultarAviso = true;
-        static int count;
+        bool AceitaCartao, OcultarAviso = true;     
 
-        FirebaseClient firebase = new FirebaseClient("https://deliverypedido-d2451.firebaseio.com/");
+        FirebaseClient firebase = new FirebaseClient("https://amd-pedidos.firebaseio.com/");
 
         public Pedido(ObservableCollection<Cardapio> pedido)
         {
@@ -246,7 +244,7 @@ namespace DeLivre.Views
 
         #endregion
 
-        private async void EnviarPedido(int codigoPedido)
+        private async void EnviarPedido()
         {
             SalvareEnviar.Text = "Aguarde! Enviando pedido...";
             // Apresentações iniciais!
@@ -272,20 +270,20 @@ namespace DeLivre.Views
                     newTrocaInfo = "_Info.: " + item.TrocaInfo + "_" + BreakLine;
                 else
                     newTrocaInfo = "";
-                // Itens Adicionais dos Pedidos!
+                // pegando os Adicionais dos Pedidos!
                 if (item.Adicionais_itens != null)
                     newItemAdicional = "_" + item.TitleAdcorSab + " : " + item.Adicionais_itens.TrimEnd() + "_" + BreakLine;
                 else
                     newItemAdicional = "";
-
+                // Passando todo o pedido para uma variavel
                 MeuPedido += BreakLine + item.Quantidade + "x " + item.Tipo + " " + item.Nome + " "
                          + " - *Valor R$ " + item.ValorTotal + "*." + BreakLine + newTrocaInfo + newItemAdicional;
             }
                      
             string today = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
             try
-            {               
-                await AddPedido(codigoPedido, ClienteDados, today, lbl_Valor_Total.Text);                             
+            {                
+               await AddPedido(ClienteDados, today, lbl_Valor_Total.Text);                                                       
             }
             catch
             {
@@ -305,7 +303,7 @@ namespace DeLivre.Views
             }                      
         }
 
-        public async Task AddPedido(int id, string nome, string datapedido, string valorPedido )
+        public async Task AddPedido(string nome, string datapedido, string valorPedido)
         {
            
             string Dia = DateTime.Now.ToString("dd-MM-yyyy");
@@ -314,15 +312,14 @@ namespace DeLivre.Views
             await firebase
                   .Child(EntCidade.Text).Child(Nome_Estabelecimento).Child(Dia)
                   .PostAsync(new DeLivre.Models.Pedido()
-                  {
-                      Id = id,
+                  {                      
                       Nome = nome,
-                      DataPedido = datapedido,                     
+                      DataPedido = datapedido,                        
                       ValorPedido = valorPedido
                   });
         }      
 
-        private void VerificareEnviar(int idpedido)
+        private void VerificareEnviar()
         {
             if (!String.IsNullOrEmpty(EntNome.Text) && (!String.IsNullOrEmpty(EntEndereco.Text)) && 
                 (!String.IsNullOrEmpty(EntNumero.Text)) && (!String.IsNullOrEmpty(EntBairro.Text))&& 
@@ -336,7 +333,7 @@ namespace DeLivre.Views
                     {
                         if (valorTroco >= valorTotal)
                         {
-                            EnviarPedido(idpedido);                         
+                            EnviarPedido();                         
                         }
                         else
                         {
@@ -345,13 +342,13 @@ namespace DeLivre.Views
                     }
                     else
                     {                       
-                        EnviarPedido(idpedido);
+                        EnviarPedido();
                     }
                    
                 }
                 if(Tipo_Cartao.IsChecked == true)
                 {                    
-                    EnviarPedido(idpedido);
+                    EnviarPedido();
                 }                        
             }
             else
@@ -395,11 +392,10 @@ namespace DeLivre.Views
         }
              
         private void SalvareEnviar_Clicked(object sender, EventArgs e)
-        {          
-            int CodigoPedido = count++;
+        {                     
             SalvarDados();
             CheckMetodoPagamento();           
-            VerificareEnviar(CodigoPedido);                  
+            VerificareEnviar();                  
         }
 
         protected override void OnAppearing()

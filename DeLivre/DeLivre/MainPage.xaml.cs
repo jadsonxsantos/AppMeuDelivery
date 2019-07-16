@@ -17,7 +17,7 @@ namespace DeLivre
             string Local = "Pinhão";
             Application.Current.Properties["_Cidade"] = Local;
             Application.Current.Properties["_OcultarLocal"] = true;
-            string UrlServidor = "https://meudelivery-47bcc.firebaseio.com/" + ".json";
+            string UrlServidor = "https://amd-pinhao.firebaseio.com/" + ".json";
             Application.Current.Properties["UrlServer"] = UrlServidor;
             App.Current.MainPage = new NavigationPage(new Views.Estabelecimentos(Local, UrlServidor));        
         }

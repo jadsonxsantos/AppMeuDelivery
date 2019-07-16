@@ -32,7 +32,7 @@
                    TextColor="{StaticResource asphaltPrimary}"
                    Margin="0,35,0,0"
                    FontSize="13"/>
-            
+
             <Label x:Name="lbl_Mudar"
                    Grid.Row="0"       
                    Grid.Column="0" Text="(Mudar)"
@@ -45,17 +45,7 @@
                 </Label.GestureRecognizers>
             </Label>
         </Grid>
-            <StackLayout Orientation="Vertical">
-            <!--<Label x:Name="lbl_Local" FontAttributes="Bold" FontSize="14" HorizontalTextAlignment="Center" TextColor="Black" Text="Local"/>
-           
-            <controls:CircleImage Source="logotipo_color.png" WidthRequest="200" HeightRequest="70" 
-                                  HorizontalOptions="CenterAndExpand" BorderThickness="1" 
-                                  BorderColor="White" Margin="0,5,0,5" Aspect="AspectFit"/>-->
-        </StackLayout>
-       
-
-        <!--<BoxView Margin="3"  HeightRequest="1" WidthRequest="10" Color="Black" />-->
-
+        
         <StackLayout BackgroundColor="White" Margin="0,-5">
             <ActivityIndicator 
                 IsRunning="true" x:Name="activity_indicator"

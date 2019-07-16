@@ -6,19 +6,23 @@
              x:Class="DeLivre.Views.Detalhe.Detalhes">
 
     <pages:PopupPage.Animation>
-        <animations:ScaleAnimation
-              PositionIn="Bottom"
-              PositionOut="Center"
-              ScaleIn="1"
-              ScaleOut="0.7"
-              DurationIn="500"
-              EasingIn="SpringIn"/>
+        <animations:MoveAnimation
+            PositionIn="Bottom"
+            PositionOut="Bottom"
+            DurationIn="400"
+            DurationOut="300"
+            HasBackgroundAnimation="True"/>
     </pages:PopupPage.Animation>
 
-    <StackLayout WidthRequest="300" HeightRequest="400" BackgroundColor="White" Padding="5,5" HorizontalOptions="Center" VerticalOptions="Center">
-
-        <Label Text="Detalhe do Pedido!" FontSize="20" HorizontalTextAlignment="Center" TextColor="{StaticResource asphaltPrimary}"></Label>
-        <BoxView Margin="3" HeightRequest="1" WidthRequest="50" Color="#EF5350" />
+    <StackLayout WidthRequest="360" HeightRequest="400" BackgroundColor="Transparent" Padding="5,5" HorizontalOptions="Center" VerticalOptions="Center">
+        <Frame x:Name="PopUpDialogLayout" Padding="5"
+                HorizontalOptions="Center" VerticalOptions="CenterAndExpand"                                              
+                HasShadow="true" CornerRadius="5"              
+                Margin="16"  OutlineColor="#EF5350">
+            <StackLayout>
+                <Label Text="Detalhe do Pedido!" FontSize="20" HorizontalTextAlignment="Center" TextColor="{StaticResource asphaltPrimary}"></Label>
+                  
+                <BoxView Margin="3" HeightRequest="1" WidthRequest="50" Color="#EF5350" />
        
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                     
@@ -76,9 +80,11 @@
                 </StackLayout>
             </StackLayout>
         </ScrollView>
-        <Button x:Name="btn_selecionar" Margin="0,0,0,5" Text="Adicionar ao Pedido!" 
-                BackgroundColor="#EF5350" Visual="Material" TextColor="White" 
-                Clicked="Btn_selecionar_Clicked" />
+                <Button x:Name="btn_selecionar" Margin="0,0,0,5" Text="Adicionar ao Pedido!" 
+                        BackgroundColor="#EF5350" Visual="Material" TextColor="White" 
+                        Clicked="Btn_selecionar_Clicked" />
+            </StackLayout>
+        </Frame>
     </StackLayout>
-    
+
 </pages:PopupPage>

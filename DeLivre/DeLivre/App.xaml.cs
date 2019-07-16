@@ -1,7 +1,5 @@
 ﻿using Com.OneSignal;
 using DeLivre.Models;
-using DeLivre.Views;
-using DLToolkit.Forms.Controls;
 using System;
 using System.Collections.ObjectModel;
 using Xamarin.Essentials;

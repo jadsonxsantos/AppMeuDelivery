@@ -67,12 +67,6 @@
     <PackageReference Include="Com.OneSignal">
       <Version>3.0.1</Version>
     </PackageReference>
-    <PackageReference Include="DLToolkit.Forms.Controls.FlowListView">
-      <Version>2.0.9</Version>
-    </PackageReference>
-    <PackageReference Include="ExpandableView">
-      <Version>1.0.5</Version>
-    </PackageReference>
     <PackageReference Include="FirebaseDatabase.net">
       <Version>4.0.0</Version>
     </PackageReference>
@@ -117,7 +111,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\AndroidCheckboxRenderer.cs" />
     <Compile Include="Components\MessageAndroid.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />

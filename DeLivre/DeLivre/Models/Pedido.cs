@@ -10,9 +10,7 @@ namespace DeLivre.Models
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Estabelecimento { get; set; }
-        public string DataPedido { get; set; }
-        public string Tipo { get; set; }
-        public string ValorPedido { get; set; }
-        public double ValorTotal { get; set; }
+        public string DataPedido { get; set; }       
+        public string ValorPedido { get; set; }       
     }
 }
