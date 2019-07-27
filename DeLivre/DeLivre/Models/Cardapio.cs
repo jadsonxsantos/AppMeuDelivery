@@ -28,6 +28,8 @@ namespace DeLivre.Models
         public string Valor_G_Title { get; set; }
         public string Valor_B { get; set; }
         public string Valor_B_Title { get; set; }
+        public string Valor_F { get; set; }
+        public string Valor_F_Title { get; set; }
         public string TrocaInfo { get; set; }
         public string Troco { get; set; }
         public string Valor_RB { get; set; }

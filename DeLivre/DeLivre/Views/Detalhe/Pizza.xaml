@@ -17,74 +17,74 @@
 
     <StackLayout WidthRequest="360" HeightRequest="400" BackgroundColor="Transparent" Padding="5,5" IsClippedToBounds="True" HorizontalOptions="Center" VerticalOptions="Center">
         <Frame x:Name="PopUpDialogLayout" Padding="5"
-                HorizontalOptions="Center" VerticalOptions="CenterAndExpand"                                              
-                HasShadow="true" WidthRequest="350"                
-                Margin="16" CornerRadius="5" OutlineColor="#EF5350">
+               HorizontalOptions="Center" VerticalOptions="CenterAndExpand"                                              
+               HasShadow="true" WidthRequest="350"                
+               Margin="16" CornerRadius="5" OutlineColor="#EF5350">
             <StackLayout>
                 <Label Text="Detalhe do Pedido!" FontSize="20" HorizontalTextAlignment="Center" TextColor="{StaticResource asphaltPrimary}"></Label>
                 <BoxView Margin="3" HeightRequest="1" WidthRequest="50" Color="#EF5350" />
-
                 <ScrollView>
                     <StackLayout HeightRequest="400">
                         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,5">
                             <Label x:Name="Qt_Pedido" 
-                           Text="{Binding Value, Mode=TwoWay, StringFormat=' {0}'}"                                                     
-                           FontSize="13"
-                           FontAttributes="Bold"
-                           BindingContext="{x:Reference stepper}"
-                           HorizontalTextAlignment="Center"
-                           TextColor="{StaticResource asphaltPrimary}" />
+                                   Text="{Binding Value, Mode=TwoWay, StringFormat=' {0}'}"                                                     
+                                   FontSize="13"
+                                   FontAttributes="Bold"
+                                   BindingContext="{x:Reference stepper}"
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="{StaticResource asphaltPrimary}" />
 
                             <Label x:Name="lbl_Tipo_lanche" FontSize="13" 
-                           FontAttributes="Bold" HorizontalTextAlignment="Center" 
-                           TextColor="{StaticResource asphaltPrimary}"/>
+                                   FontAttributes="Bold" HorizontalTextAlignment="Center" 
+                                   TextColor="{StaticResource asphaltPrimary}"/>
 
                             <Label x:Name="lbl_Nome_lanche" FontSize="13" 
-                           HorizontalTextAlignment="Center" LineBreakMode="TailTruncation"
-                           TextColor="{StaticResource asphaltPrimary}"/>
+                                   HorizontalTextAlignment="Center" LineBreakMode="TailTruncation"
+                                   TextColor="{StaticResource asphaltPrimary}"/>
 
                         </StackLayout>
 
                         <Label x:Name="lbl_Descricao" FontSize="15" Margin="0,-5"
-                       HorizontalTextAlignment="Center"                    
-                       TextColor="{StaticResource asphaltPrimary}"/>
+                               HorizontalTextAlignment="Center"                    
+                               TextColor="{StaticResource asphaltPrimary}"/>
 
                         <BoxView Margin="3" HeightRequest="1" WidthRequest="50" Color="#EF5350" />
 
-                        <StackLayout Orientation="Vertical" HorizontalOptions="Center" Margin="0,5">
+                        <StackLayout Orientation="Vertical" HorizontalOptions="Center" Margin="0,5,0,5">
                             <Label x:Name="lbl_Tamaho" FontSize="15" FontAttributes="Bold" 
-                           HorizontalTextAlignment="Center" Text="Escolha o Tamanho:"                   
-                           TextColor="{StaticResource asphaltPrimary}"/>
+                                   HorizontalTextAlignment="Center" Text="Escolha o Tamanho:"                   
+                                   TextColor="{StaticResource asphaltPrimary}"/>
 
-                            <StackLayout x:Name="StackRadio" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="50,0" Spacing="13">
+                            <StackLayout x:Name="StackRadio" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="50,0" Spacing="20">
                                 <input:RadioButtonGroupView x:Name="RadioBtn">
-                                    <input:RadioButton x:Name="Tipo_P" TextFontSize="12" Color="#EF5350" CircleColor="#EF5350" IsChecked="True" />
-                                    <input:RadioButton x:Name="Tipo_I" TextFontSize="12" Color="#EF5350" CircleColor="#EF5350" />
-                                    <input:RadioButton x:Name="Tipo_M" TextFontSize="12" Color="#EF5350" CircleColor="#EF5350"  />
-                                    <input:RadioButton x:Name="Tipo_G" TextFontSize="12" Color="#EF5350" CircleColor="#EF5350" />
+                                    <input:RadioButton x:Name="Tipo_P" TextFontSize="13" Color="#EF5350" CircleColor="#EF5350" IsChecked="True" />
+                                    <input:RadioButton x:Name="Tipo_I" TextFontSize="13" Color="#EF5350" CircleColor="#EF5350" />
+                                    <input:RadioButton x:Name="Tipo_M" TextFontSize="13" Color="#EF5350" CircleColor="#EF5350"  />
+                                    <input:RadioButton x:Name="Tipo_G" TextFontSize="13" Color="#EF5350" CircleColor="#EF5350" />
+                                    <input:RadioButton x:Name="Tipo_F" TextFontSize="13" Color="#EF5350" CircleColor="#EF5350" />
                                 </input:RadioButtonGroupView>
                             </StackLayout>
                         </StackLayout>
 
-                        <StackLayout Orientation="Vertical" Margin="0,-20" WidthRequest="20">
+                        <StackLayout Orientation="Vertical" Margin="0,-15" WidthRequest="20">
                             <Label Text="Quantidade:" FontAttributes="Bold"
-                           FontSize="15" Margin="0,15"      
-                           HorizontalTextAlignment="Center"
-                           TextColor="{StaticResource asphaltPrimary}" />
+                                   FontSize="15" Margin="0,15"      
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="{StaticResource asphaltPrimary}" />
 
                             <Stepper x:Name="stepper" Minimum="1" Maximum="25" 
-                             HeightRequest="40" WidthRequest="10" BackgroundColor="#EF5350" 
-                             Value="{Binding Quantidade}" Visual="Material"
-                             ValueChanged="Stepper_ValueChanged"
-                             Increment="1" Margin="20,0,20,0" />
+                                     HeightRequest="40" WidthRequest="10" BackgroundColor="#EF5350" 
+                                     Value="{Binding Quantidade}" Visual="Material"
+                                     ValueChanged="Stepper_ValueChanged"
+                                     Increment="1" Margin="20,0,20,0" />
 
                             <Label x:Name="lbl_InfoComplementar" FontSize="15" Margin="0,5,0,0" FontAttributes="Bold" 
-                           HorizontalTextAlignment="Center" Text="Observação:"                   
-                           TextColor="{StaticResource asphaltPrimary}"/>
+                                   HorizontalTextAlignment="Center" Text="Observação:"                   
+                                   TextColor="{StaticResource asphaltPrimary}"/>
 
                             <Entry x:Name="Lbl_Troca" Placeholder="Ex.: Tirar a cebola, metade calabresa etc" 
-                           Margin="0,5" HeightRequest="60" WidthRequest="200"
-                           HorizontalTextAlignment="Center" FontSize="13" />
+                                   Margin="0,5" HeightRequest="60" WidthRequest="200"
+                                   HorizontalTextAlignment="Center" FontSize="13" />
 
                         </StackLayout>
                     </StackLayout>

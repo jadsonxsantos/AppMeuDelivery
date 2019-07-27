@@ -17,14 +17,12 @@
 
     <StackLayout WidthRequest="360" HeightRequest="450" BackgroundColor="Transparent" Padding="5,5" IsClippedToBounds="True" HorizontalOptions="Center" VerticalOptions="Center">
         <Frame x:Name="PopUpDialogLayout"
-            HorizontalOptions="Center" 
-            VerticalOptions="CenterAndExpand" 
-            OutlineColor="#EF5350"
-            CornerRadius="5"
-            HasShadow="true"
-            WidthRequest="350"
-            Margin="16"
-            Padding="5">
+                HorizontalOptions="Center" 
+                VerticalOptions="CenterAndExpand" 
+                OutlineColor="#EF5350" Padding="5"
+                CornerRadius="5" Margin="16"
+                HasShadow="true" WidthRequest="350">
+                                             
             <StackLayout>
 
                 <Label Text="Detalhe do Pedido!" FontSize="20" HorizontalTextAlignment="Center" TextColor="{StaticResource asphaltPrimary}"></Label>

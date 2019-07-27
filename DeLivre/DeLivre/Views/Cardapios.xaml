@@ -1,12 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:expandable="clr-namespace:Expandable;assembly=ExpandableView"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"           
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
-             x:Class="DeLivre.Views.Cardapios" 
+             x:Class="DeLivre.Views.Cardapios"             
              BackgroundColor="#EF5350">
-    
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="OnInformacoes" Order="Primary" Icon="ic_Info" Clicked="OnInformacoes_Clicked" Text="Carrinho" Priority="0" />
         <ToolbarItem Name="OnCarrinho" Order="Primary" Icon="ic_Carrinho" Clicked="OnCarrinho_Clicked" Text="Carrinho" Priority="1" />
@@ -24,6 +23,7 @@
             <Label Text="{Binding Nome}" FontSize="16" TextColor="White" VerticalTextAlignment="Center"/>
         </StackLayout>
     </NavigationPage.TitleView>
+
     <StackLayout Padding="5,5,5,0" BackgroundColor="White" Orientation="Vertical">
 
         <!--<SearchBar x:Name="CardapioPesquisa" Placeholder="Pesquise por um lanche!" HeightRequest="40" BackgroundColor="White" TextChanged="CardapioPesquisa_TextChanged" />-->
@@ -34,12 +34,11 @@
                         Placeholder="Pesquise por um tipo"/>
 
         <ListView x:Name="ListaCardapio"                   
-                  BackgroundColor="White" HasUnevenRows="true"                    
-                  SeparatorColor="{StaticResource grayPrimary}"
-                  VerticalOptions="FillAndExpand"                                                                     
+                  BackgroundColor="White"            
+                  SeparatorColor="{StaticResource grayPrimary}" HasUnevenRows="True"
+                  VerticalOptions="FillAndExpand"                 
                   ItemSelected="ListaCardapio_ItemSelected"
-                  ItemsSource="{Binding Cardapios}"
-                  CachingStrategy="RecycleElement">
+                  ItemsSource="{Binding Cardapios}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -86,6 +85,4 @@
             </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
-</ContentPage>
-
-
+</ContentPage>      

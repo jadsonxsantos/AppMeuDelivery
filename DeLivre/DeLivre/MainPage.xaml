@@ -34,21 +34,34 @@
                             BackgroundColor="#E53935"
                             HorizontalOptions="Center" 
                             VerticalOptions="Center">
-                    <!--<VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal">
-                                    <VisualState.Setters>
-                                        <Setter Property="Scale" Value="1"/>
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="Pressed">
-                                    <VisualState.Setters>
-                                        <Setter Property="Scale" Value="0.8"/>
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>-->
                 </Button>
+
+                <Button x:Name="btnItabaiana"
+                            Text="ITABAIANA/SE" FontAttributes="Bold"
+                            TextColor="White"
+                            BorderRadius="18" 
+                            WidthRequest="230"
+                            HeightRequest="50"
+                            Margin="5,0,5,0" 
+                            FontSize="25" IsVisible="True"
+                            Clicked="BtnItabaiana_Clicked"
+                            BackgroundColor="#E53935"
+                            HorizontalOptions="Center" 
+                            VerticalOptions="Center"/>
+
+                <Button x:Name="btnEstancia"
+                            Text="ESTÂNCIA/SE" FontAttributes="Bold"
+                            TextColor="White"
+                            BorderRadius="18" 
+                            WidthRequest="230"
+                            HeightRequest="50"
+                            Margin="5,0,5,0" 
+                            FontSize="25" IsVisible="false"
+                            Clicked="BtnEstancia_Clicked"
+                            BackgroundColor="#E53935"
+                            HorizontalOptions="Center" 
+                            VerticalOptions="Center"/>
+                
                 <Button x:Name="btnAracaju"
                             Text="ARACAJU/SE" FontAttributes="Bold"
                             TextColor="White"
@@ -61,6 +74,7 @@
                             BackgroundColor="#E53935"
                             HorizontalOptions="Center" 
                             VerticalOptions="Center"/>
+                
 
                 <Button x:Name="btnTimon"
                             Text="TIMON/MA" FontAttributes="Bold"

@@ -1,4 +1,5 @@
-﻿using DeLivre.Models;
+﻿using DeLivre.Components;
+using DeLivre.Models;
 using Firebase.Database;
 using Firebase.Database.Query;
 using Newtonsoft.Json;
@@ -83,83 +84,90 @@ namespace DeLivre.Views
                         // Adiciona os dados em uma Lista!
                         Estabelecimento_ = new ObservableCollection<Estabelecimento>(ItensJson);
 
-                        DateTime aDate = DateTime.Now;
-                        DateTime dateValue;
+                        try
+                        {
+                            DateTime aDate = DateTime.Now;
+                            DateTime dateValue;
 
-                        dateValue = DateTime.Parse(aDate.ToString("MM/dd/yyyy"), CultureInfo.InvariantCulture);
-                        string dia = dateValue.ToString("dddd", new CultureInfo("pt-BR"));
+                            dateValue = DateTime.Parse(aDate.ToString("MM/dd/yyyy"), CultureInfo.InvariantCulture);
+                            string dia = dateValue.ToString("dddd", new CultureInfo("pt-BR"));
 
-                        if (dia == "segunda-feira")
-                        {
-                            foreach (var item in ItensJson)
+                            if (dia == "segunda-feira")
                             {
-                                foreach (var itm in item.Horarios_Funcionamento)
+                                foreach (var item in ItensJson)
                                 {
-                                    item.Horario_Funcionamento = itm.Segunda_Feira.ToString();
+                                    foreach (var itm in item.Horarios_Funcionamento)
+                                    {
+                                        item.Horario_Funcionamento = itm.Segunda_Feira.ToString();
+                                    }
+                                }
+                            }
+                            else if (dia == "terça-feira")
+                            {
+                                foreach (var item in ItensJson)
+                                {
+                                    foreach (var itm in item.Horarios_Funcionamento)
+                                    {
+                                        item.Horario_Funcionamento = itm.Terca_Feira.ToString();
+                                    }
+                                }
+                            }
+                            else if (dia == "quarta-feira")
+                            {
+                                foreach (var item in ItensJson)
+                                {
+                                    foreach (var itm in item.Horarios_Funcionamento)
+                                    {
+                                        item.Horario_Funcionamento = itm.Quarta_Feira.ToString();
+                                    }
+                                }
+                            }
+                            else if (dia == "quinta-feira")
+                            {
+                                foreach (var item in ItensJson)
+                                {
+                                    foreach (var itm in item.Horarios_Funcionamento)
+                                    {
+                                        item.Horario_Funcionamento = itm.Quinta_Feira.ToString();
+                                    }
+                                }
+                            }
+                            else if (dia == "sexta-feira")
+                            {
+                                foreach (var item in ItensJson)
+                                {
+                                    foreach (var itm in item.Horarios_Funcionamento)
+                                    {
+                                        item.Horario_Funcionamento = itm.Sexta_Feira.ToString();
+                                    }
+                                }
+                            }
+                            else if (dia == "sábado")
+                            {
+                                foreach (var item in ItensJson)
+                                {
+                                    foreach (var itm in item.Horarios_Funcionamento)
+                                    {
+                                        item.Horario_Funcionamento = itm.Sabado.ToString();
+                                    }
+                                }
+                            }
+                            else if (dia == "domingo")
+                            {
+                                foreach (var item in ItensJson)
+                                {
+                                    foreach (var itm in item.Horarios_Funcionamento)
+                                    {
+                                        item.Horario_Funcionamento = itm.Domingo.ToString();
+                                    }
                                 }
                             }
                         }
-                        else if (dia == "terça-feira")
+                        catch (Exception)
                         {
-                            foreach (var item in ItensJson)
-                            {
-                                foreach (var itm in item.Horarios_Funcionamento)
-                                {
-                                    item.Horario_Funcionamento = itm.Terca_Feira.ToString();
-                                }
-                            }
+                            DependencyService.Get<IMessage>().LongAlert("...");
                         }
-                        else if (dia == "quarta-feira")
-                        {
-                            foreach (var item in ItensJson)
-                            {
-                                foreach (var itm in item.Horarios_Funcionamento)
-                                {
-                                    item.Horario_Funcionamento = itm.Quarta_Feira.ToString();
-                                }
-                            }
-                        }
-                        else if (dia == "quinta-feira")
-                        {
-                            foreach (var item in ItensJson)
-                            {
-                                foreach (var itm in item.Horarios_Funcionamento)
-                                {
-                                    item.Horario_Funcionamento = itm.Quinta_Feira.ToString();
-                                }
-                            }
-                        }
-                        else if (dia == "sexta-feira")
-                        {
-                            foreach (var item in ItensJson)
-                            {
-                                foreach (var itm in item.Horarios_Funcionamento)
-                                {
-                                    item.Horario_Funcionamento = itm.Sexta_Feira.ToString();
-                                }
-                            }
-                        }
-                        else if (dia == "sabado")
-                        {
-                            foreach (var item in ItensJson)
-                            {
-                                foreach (var itm in item.Horarios_Funcionamento)
-                                {
-                                    item.Horario_Funcionamento = itm.Sabado.ToString();
-                                }
-                            }
-                        }
-                        else if (dia == "domingo")
-                        {
-                            foreach (var item in ItensJson)
-                            {
-                                foreach (var itm in item.Horarios_Funcionamento)
-                                {
-                                    item.Horario_Funcionamento = itm.Domingo.ToString();
-                                }
-                            }
-                        }
-
+                       
                         //Atribui os dados para a ListView 
                         ListaEstabelecimento.ItemsSource = Estabelecimento_.Where(x => x.Ativo == true);
                         //Verificação da lista
@@ -230,7 +238,15 @@ namespace DeLivre.Views
             if (Cidade == "Pinhão")
             {
                 CarregarEstabelecimentos("https://amd-pinhao.firebaseio.com/" + ".json");              
-            }   
+            }
+            else if (Cidade == "Itabaiana")
+            {
+                CarregarEstabelecimentos("https://amd-itabaiana.firebaseio.com/" + ".json");
+            }
+            else if (Cidade == "Estância")
+            {
+                CarregarEstabelecimentos("https://amd-estancia.firebaseio.com/" + ".json");
+            }
             else if (Cidade == "Aracaju")
             {
                 CarregarEstabelecimentos("https://teste-213d3.firebaseio.com/" + ".json");               
@@ -264,10 +280,7 @@ namespace DeLivre.Views
             {             
                 //Visibilidade do indicador
                 activity_indicator.IsRunning = true;
-                //Pegando os dados JSON da Servidor
-                //var content = await _client.GetStringAsync(ApiUrl);
-                //ObservableCollection<Estabelecimento> _Estabelecimentos = JsonConvert.DeserializeObject<ObservableCollection<Estabelecimento>>(ItensJson);
-                // Selecionar o objeto no Json.
+                //Pegando os dados JSON da Servidor        
                 // Adiciona os dados em uma Lista!
                 Estabelecimento_ = new ObservableCollection<Estabelecimento>(ItensJson);
                 Estabelecimento _Estabelecimento = Estabelecimento_.FirstOrDefault(cf => cf.Nome.Equals(Nome_estabelecimento));

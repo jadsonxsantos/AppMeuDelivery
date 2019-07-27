@@ -79,8 +79,12 @@ namespace DeLivre.Views
 
             try
             {
-                //Pegando o Valor do Frete e atribuindo ao label                
-                if (Valor_Frete == "0,00")
+                //Pegando o Valor do Frete e atribuindo ao label 
+                if (Valor_Frete.Contains("-"))
+                {
+                    ValorEntrega = "Taxa de entrega: A combinar!";
+                }
+                else if (Valor_Frete == "0,00")
                 {
                     ValorEntrega = "Taxa de entrega: Grátis";
                 }
@@ -108,7 +112,16 @@ namespace DeLivre.Views
                 {
                     lbl_Valor_Adicionais.IsVisible = false;
                 }
-                Valor_Total = ValorPedido_ + Convert.ToDouble(ValorFrete) + Valor_Adicionais + ValorJurosCartao;
+                // Verificando se o frete é a combinar ou se é valor fixo
+                if (ValorFrete.Contains("-") || ValorFrete.Contains("0,00"))
+                {
+                    Valor_Total = ValorPedido_ + Valor_Adicionais + ValorJurosCartao;
+                }
+                else
+                {
+                    Valor_Total = ValorPedido_ + Convert.ToDouble(ValorFrete) + Valor_Adicionais + ValorJurosCartao;
+                }
+                
                 //Valor_Total = Convert.ToDouble(Valor_Total.ToString());
                 lbl_Valor_Total.Text = String.Format("{0:C2}", Valor_Total);
             }
@@ -135,26 +148,7 @@ namespace DeLivre.Views
             {
                 return;
             }
-
-            //ListaCardapio.BeginRefresh();
-            //ListaCardapio.EndRefresh();
-        }
-
-        //private async void DeleteAllPedido_Clicked(object sender, EventArgs e)
-        //{
-        //    var Delete = await DisplayAlert("Tem Certeza?", "Quer deletar todos os pedidos?", "Sim", "Cancelar");
-        //    if (Delete == true) // Sim
-        //    {
-        //        App.Meus_Pedidos.Clear();
-        //        ListaCardapio.BeginRefresh();
-        //        ListaCardapio.EndRefresh();
-        //        DependencyService.Get<IMessage>().LongAlert("Todos os Itens foram Deletados");
-        //    }
-        //    else // Cancelar
-        //    {
-        //        return; 
-        //    }           
-        //}
+        }      
 
         #region ConfirmarIdentidade
         private void VerificarIdentidade()
@@ -252,7 +246,7 @@ namespace DeLivre.Views
             Endereco = EntEndereco.Text + ", %20" + "Nº: " + EntNumero.Text + " - " + EntBairro.Text + " - %20" + EntCidade.Text + " - " + EntReferencia.Text + ".";
             ClienteDados = Application.Current.Properties["_Nome"] as string + " " + Application.Current.Properties["_Sobrenome"] as string;
             infoDados = "*MEUS DADOS:* " + BreakLine + ClienteDados + BreakLine + "*LOCAL DA ENTREGA:* " + BreakLine + Endereco;
-            Saudacao = "Olá, " + Nome_Estabelecimento + "!%20 ";
+            Saudacao = "Olá, *" + Nome_Estabelecimento + "!*%20 ";
             // informações Referente a Troco
             if (!String.IsNullOrEmpty(Ent_Troco.Text))
                 Valor_Troco = String.Format(CultureInfo.GetCultureInfo("pt-BR"), "*Troco para:* R$ {0:C}", Ent_Troco.Text);
@@ -279,11 +273,15 @@ namespace DeLivre.Views
                 MeuPedido += BreakLine + item.Quantidade + "x " + item.Tipo + " " + item.Nome + " "
                          + " - *Valor R$ " + item.ValorTotal + "*." + BreakLine + newTrocaInfo + newItemAdicional;
             }
+            if(Valor_Frete.Contains("-"))
+            {
+                Valor_Frete = "A combinar.";
+            }
                      
             string today = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
             try
             {                
-               await AddPedido(ClienteDados, today, lbl_Valor_Total.Text);                                                       
+               await AddPedido(ClienteDados, today, lbl_Valor_Total.Text);               
             }
             catch
             {
@@ -294,8 +292,8 @@ namespace DeLivre.Views
                 // Passando todo o pedido para a API do Whatsapp
                 Device.OpenUri(new Uri("https://wa.me/" + Number_Whatsapp + "?text="
                        + Saudacao + "%20" + BreakLine + infoDados + BreakLine
-                       + MeuPedido + BreakLine +
-                       "*VALOR FRETE:* " + Valor_Frete + BreakLine
+                       + MeuPedido + BreakLine
+                       + "*VALOR FRETE:* " + Valor_Frete + BreakLine
                        + "*PAGAMENTO:* " + Tipo_Pagamento + BreakLine
                        + "*VALOR TOTAL:* " + lbl_Valor_Total.Text + BreakLine +
                          BreakLine +

@@ -64,7 +64,16 @@ namespace DeLivre.Views.Detalhe
             {
                 Tipo_G.IsVisible = false;
             }
-           
+
+            if (!String.IsNullOrEmpty(MeusPedido.Valor_F))
+            {
+                Tipo_F.Text = String.Format(MeusPedido.Valor_F_Title + " - R$ {0:C}", MeusPedido.Valor_F);
+            }
+            else
+            {
+                Tipo_F.IsVisible = false;
+            }
+
             Application.Current.Properties["_TrocaInfo"] = Lbl_Troca.Text;
         }
 
@@ -113,6 +122,11 @@ namespace DeLivre.Views.Detalhe
                 {
                     MeusPedido.Valor_RB = MeusPedido.Valor_G;
                     Tamanho = MeusPedido.Valor_G_Title;
+                }
+                if (Tipo_F.IsChecked == true)
+                {
+                    MeusPedido.Valor_RB = MeusPedido.Valor_F;
+                    Tamanho = MeusPedido.Valor_F_Title;
                 }
 
                 double valorunit = 0.00;

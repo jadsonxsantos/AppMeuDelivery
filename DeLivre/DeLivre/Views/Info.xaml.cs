@@ -1,6 +1,7 @@
 ﻿using DeLivre.Models;
 using Rg.Plugins.Popup.Pages;
 using System;
+using System.Globalization;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,6 +18,45 @@ namespace DeLivre.Views
             MeuEstabelecimento = new Estabelecimento();
             MeuEstabelecimento = MeusEstabelecimentos;
             DadosEstabelecimentos();
+            DestacarDia();
+        }
+
+        private void DestacarDia()
+        {
+            DateTime aDate = DateTime.Now;
+            DateTime dateValue;
+
+            dateValue = DateTime.Parse(aDate.ToString("MM/dd/yyyy"), CultureInfo.InvariantCulture);
+            string dia = dateValue.ToString("dddd", new CultureInfo("pt-BR"));
+
+            if (dia == "segunda-feira")
+            {
+                lbl_Segunda.FontAttributes = FontAttributes.Bold;
+            }
+            else if (dia == "terça-feira")
+            {
+                lbl_Terca.FontAttributes = FontAttributes.Bold;
+            }
+            else if (dia == "quarta-feira")
+            {
+                lbl_Quarta.FontAttributes = FontAttributes.Bold;
+            }
+            else if (dia == "quinta-feira")
+            {
+                lbl_Quinta.FontAttributes = FontAttributes.Bold;
+            }
+            else if (dia == "sexta-feira")
+            {
+                lbl_Sexta.FontAttributes = FontAttributes.Bold;
+            }
+            else if (dia == "sábado")
+            {
+                lbl_Sabado.FontAttributes = FontAttributes.Bold;
+            }
+            else if (dia == "domingo")
+            {
+                lbl_Domingo.FontAttributes = FontAttributes.Bold;
+            }
         }
 
         private void DadosEstabelecimentos()

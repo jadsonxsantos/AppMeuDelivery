@@ -23,16 +23,18 @@ namespace DeLivre.Views
             InitializeComponent();
             MeuEstabelecimento = new Estabelecimento();
             MeuEstabelecimento = MeusEstabelecimentos;
-            MeuCardapio = new List<Cardapio>();
+            //MeuCardapio = new List<Cardapio>();
             MeuCardapio = MeusEstabelecimentos.Cardapios;
             BindingContext = MeuEstabelecimento;            
-            TipoDrop.ItemsSource = MeuCardapio.Select(x => x.Tipo).Distinct().ToList();               
-            ListaCardapio.ItemsSource = MeuCardapio;            
+            TipoDrop.ItemsSource = MeuCardapio.Select(x => x.Tipo).Distinct().ToList();                                      
             DadosEstabelecimentos();
         }
 
         private void  DadosEstabelecimentos()
-        {                                  
+        {
+            ListaCardapio.BeginRefresh();
+            ListaCardapio.ItemsSource = MeuCardapio;
+            ListaCardapio.EndRefresh();
             //Armaenando o valor do Frete!    
             string ValorFrete = MeuEstabelecimento.Frete;
             Application.Current.Properties["_Frete"] = ValorFrete;
@@ -63,7 +65,7 @@ namespace DeLivre.Views
 
                     if (item != null)
                     {
-                        if (item.Tipo == "Pizza" || item.Tipo == "Pizza Doce" || item.Tipo == "Lazanha" || item.Tipo == "Porções")
+                        if (item.Tipo.Contains("Pizza") || item.Tipo == "Pizza Doce" || item.Tipo == "Lazanha" || item.Tipo == "Porções")
                         {
                             var page = new Detalhe.Pizza(item);
                             await PopupNavigation.Instance.PushAsync(page);
@@ -173,6 +175,22 @@ namespace DeLivre.Views
                 ListaCardapio.ItemsSource = MeuEstabelecimento.Cardapios.Where(x => x.Tipo.ToLower().Contains(TipoDrop.Text.ToLower()));
 
             ListaCardapio.EndRefresh();
+        }
+
+        private async void ListaCardapio_Refreshing(object sender, EventArgs e)
+        {
+            try
+            {
+                DadosEstabelecimentos();
+            }
+            catch
+            {
+                await DisplayAlert("Verifique sua conexão", "Por favor verifique sua conexão e tente novamente mais tarde", "OK");
+            }
+            finally
+            {
+                ListaCardapio.EndRefresh();
+            }
         }
     }
 }
