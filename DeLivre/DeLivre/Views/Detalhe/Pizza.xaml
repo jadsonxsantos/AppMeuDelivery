@@ -66,6 +66,24 @@
                             </StackLayout>
                         </StackLayout>
 
+                        <!--<StackLayout Orientation="Vertical" Margin="0,-15" WidthRequest="20">
+                            <Label Text="Meio sabor" FontAttributes="Bold"
+                                   FontSize="15" Margin="0,15"      
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="{StaticResource asphaltPrimary}" />
+
+                            <StackLayout x:Name="StackRadio" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="50,0" Spacing="20">
+                                <input:RadioButtonGroupView x:Name="RadioBtn">
+                                    <input:RadioButton x:Name="Sabor_1" TextFontSize="13" Color="#EF5350" CircleColor="#EF5350" IsChecked="True" />
+                                    <input:RadioButton x:Name="Sabor_2" TextFontSize="13" Color="#EF5350" CircleColor="#EF5350" />
+                                    <input:RadioButton x:Name="Sabor_3" TextFontSize="13" Color="#EF5350" CircleColor="#EF5350"  />
+                                    <input:RadioButton x:Name="Sabor_4" TextFontSize="13" Color="#EF5350" CircleColor="#EF5350" />
+                                    <input:RadioButton x:Name="Sabor_5" TextFontSize="13" Color="#EF5350" CircleColor="#EF5350" />
+                                </input:RadioButtonGroupView>
+                            </StackLayout>
+
+                        </StackLayout>-->
+
                         <StackLayout Orientation="Vertical" Margin="0,-15" WidthRequest="20">
                             <Label Text="Quantidade:" FontAttributes="Bold"
                                    FontSize="15" Margin="0,15"      

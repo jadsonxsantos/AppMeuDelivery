@@ -4,12 +4,12 @@ using System.Text;
 
 namespace DeLivre.Models
 {
-   public class Adicional
+   public class Porcao
     {
-        public string Nome { get; set; }       
+        public string Nome { get; set; }
         public string Valor { get; set; }
-       
-        public string Adicional_Info
+
+        public string Porcao_Info
         {
             get
             {

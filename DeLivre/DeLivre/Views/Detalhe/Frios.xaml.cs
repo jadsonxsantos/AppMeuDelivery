@@ -288,7 +288,8 @@ namespace DeLivre.Views.Detalhe
                 if (!String.IsNullOrEmpty(MeuEstabelecimento.Sabores_Picole[24].Nome))
                     Adicional_24.Text = MeuEstabelecimento.Sabores_Picole[24].Nome;
                 else
-                    Adicional_24.IsVisible = false;
+                    Adicional_24.IsVisible = false;                           
+               
             }
         }
         private void Load_Itens()
@@ -488,7 +489,7 @@ namespace DeLivre.Views.Detalhe
                 }
             }
             else if (MeusPedido.Tipo == "Picolé")
-            {
+            {              
                 if (!String.IsNullOrEmpty(MeusPedido.Valor_P))
                 {
                     Tipo_P.Text = String.Format(MeusPedido.Valor_P_Title + " - R$ {0:C}", MeusPedido.Valor_P);
@@ -679,11 +680,12 @@ namespace DeLivre.Views.Detalhe
                 {
                     Adc_Item_24 = Adicional_24.Text + ", ";
                 }
+                                 
 
                 string MeusAdicionais = Adc_Item_00 + Adc_Item_01 + Adc_Item_02 + Adc_Item_03 + Adc_Item_04 + Adc_Item_05 +
-                         Adc_Item_06 + Adc_Item_07 + Adc_Item_08 + Adc_Item_09 + Adc_Item_10 + Adc_Item_11 + Adc_Item_12 +
-                         Adc_Item_13 + Adc_Item_14 + Adc_Item_15 + Adc_Item_16 + Adc_Item_17 + Adc_Item_18 + Adc_Item_19 +
-                         Adc_Item_20 + Adc_Item_21 + Adc_Item_22 + Adc_Item_23 + Adc_Item_24 + Adc_Item_25;
+                        Adc_Item_06 + Adc_Item_07 + Adc_Item_08 + Adc_Item_09 + Adc_Item_10 + Adc_Item_11 + Adc_Item_12 +
+                        Adc_Item_13 + Adc_Item_14 + Adc_Item_15 + Adc_Item_16 + Adc_Item_17 + Adc_Item_18 + Adc_Item_19 +
+                        Adc_Item_20 + Adc_Item_21 + Adc_Item_22 + Adc_Item_23 + Adc_Item_24;
 
                 double valorunit = 0.00;
 

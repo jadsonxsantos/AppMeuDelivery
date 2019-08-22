@@ -94,7 +94,7 @@
                                 <input:CheckBox x:Name="Adicional_11" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
                                 <input:CheckBox x:Name="Adicional_13" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
                                 <input:CheckBox x:Name="Adicional_15" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
-                                <input:CheckBox x:Name="Adicional_17" TextFontSize="11" HorizontalOptions="StartAndExpand"  Type="Material" />
+                                <input:CheckBox x:Name="Adicional_17" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
                                 <input:CheckBox x:Name="Adicional_19" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
                                 <input:CheckBox x:Name="Adicional_21" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
                                 <input:CheckBox x:Name="Adicional_23" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />

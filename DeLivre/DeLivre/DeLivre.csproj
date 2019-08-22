@@ -58,7 +58,7 @@
     <EmbeddedResource Update="Views\Detalhe\Detalhes.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Info.xaml">
+    <EmbeddedResource Update="Views\More\Info.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Pedido.xaml">

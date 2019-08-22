@@ -68,11 +68,6 @@ namespace DeLivre
             string UrlServidor = "https://amd-itabaiana.firebaseio.com/" + ".json";
             Application.Current.Properties["UrlServer"] = UrlServidor;
             App.Current.MainPage = new NavigationPage(new Views.Estabelecimentos(Local, UrlServidor));
-        }
-
-        //private async void Btn_instagram_Clicked(object sender, EventArgs e)
-        //{           
-        //  await  Launcher.OpenAsync("https://www.instagram.com/appmeudelivery/");
-        //}
+        }      
     }
 }

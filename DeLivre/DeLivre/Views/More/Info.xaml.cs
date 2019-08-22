@@ -5,7 +5,7 @@ using System.Globalization;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace DeLivre.Views
+namespace DeLivre.Views.More
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Info : PopupPage
@@ -86,7 +86,18 @@ namespace DeLivre.Views
                 lbl_Sexta.Text = "SEXTA: " + item.Sexta_Feira;
                 lbl_Sabado.Text = "SÁBADO: " + item.Sabado;
                 lbl_Domingo.Text = "DOMINGO: " + item.Domingo;
-            }          
+            }
+
+            if (Application.Current.Properties.ContainsKey("_AceitaCartao"))
+            {
+               bool AceitaCartao = Convert.ToBoolean(Application.Current.Properties["_AceitaCartao"]);
+
+                if (AceitaCartao == false)
+                    ExibirCartao.IsVisible = false;
+                else
+                    ExibirCartao.IsVisible = true;
+
+            }
         }
 
         private void Btn_instagram_Clicked(object sender, EventArgs e)

@@ -20,7 +20,8 @@ namespace DeLivre.Views
         double Valor_Pedido, Valor_Total, Valor_Adicionais, ValorJurosCartao = 0;
         string Valor_Frete, Number_Whatsapp, Nome_Estabelecimento, Pedido_Minimo, TrocaInfo, Valor_Troco, Tipo_Pagamento, Juros_Cartao, ValorEntrega;
         string BreakLine, Endereco, ClienteDados, infoDados, Saudacao;      
-        bool AceitaCartao, OcultarAviso = true;     
+        bool AceitaCartao, OcultarAviso = true;
+        string tipoPedido;
 
         FirebaseClient firebase = new FirebaseClient("https://amd-pedidos.firebaseio.com/");
 
@@ -82,7 +83,7 @@ namespace DeLivre.Views
                 //Pegando o Valor do Frete e atribuindo ao label 
                 if (Valor_Frete.Contains("-"))
                 {
-                    ValorEntrega = "Taxa de entrega: A combinar!";
+                    ValorEntrega = "Taxa de entrega: A combinar!";                   
                 }
                 else if (Valor_Frete == "0,00")
                 {
@@ -92,7 +93,7 @@ namespace DeLivre.Views
                 {
                     ValorEntrega = String.Format("Taxa de entrega: R$ {0:C} ", Valor_Frete);
                 }
-                 
+           
                 lbl_Entrega.Text = ValorEntrega;
                 //Calculando o Valor de cada Pedido!
                 Valor_Pedido = MeusPedido.Select(x => Convert.ToDouble(x.ValorTotal)).Sum();
@@ -115,19 +116,22 @@ namespace DeLivre.Views
                 // Verificando se o frete é a combinar ou se é valor fixo
                 if (ValorFrete.Contains("-") || ValorFrete.Contains("0,00"))
                 {
-                    Valor_Total = ValorPedido_ + Valor_Adicionais + ValorJurosCartao;
+                    Valor_Total = ValorPedido_ + Valor_Adicionais + ValorJurosCartao;                   
                 }
                 else
                 {
                     Valor_Total = ValorPedido_ + Convert.ToDouble(ValorFrete) + Valor_Adicionais + ValorJurosCartao;
                 }
-                
-                //Valor_Total = Convert.ToDouble(Valor_Total.ToString());
+
+                if(ValorFrete.Contains("-"))
+                   Valor_Frete = "A combinar.";
+
+                Valor_Total = Convert.ToDouble(Valor_Total.ToString());
                 lbl_Valor_Total.Text = String.Format("{0:C2}", Valor_Total);
             }
             catch
             {
-                DependencyService.Get<IMessage>().LongAlert("Tente novamente");
+                DependencyService.Get<IMessage>().LongAlert("...");
             }        
         }
        
@@ -254,38 +258,40 @@ namespace DeLivre.Views
                 Valor_Troco = " ";
 
             string MeuPedido = BreakLine + "*MEU PEDIDO:* " + BreakLine;
-
+           
             string newTrocaInfo = "";
             string newItemAdicional = "";
             foreach (Cardapio item in ListaCardapio.ItemsSource)
             {
                 // Informações Complementares, Troca de algum item, ou remoção de items
-                if (item.TrocaInfo != null)
+                if (!String.IsNullOrEmpty(item.TrocaInfo))
                     newTrocaInfo = "_Info.: " + item.TrocaInfo + "_" + BreakLine;
                 else
                     newTrocaInfo = "";
-                // pegando os Adicionais dos Pedidos!
-                if (item.Adicionais_itens != null)
+               
+                // Pegando os Adicionais dos Pedidos!
+                if (!String.IsNullOrEmpty(item.Adicionais_itens))
                     newItemAdicional = "_" + item.TitleAdcorSab + " : " + item.Adicionais_itens.TrimEnd() + "_" + BreakLine;
                 else
                     newItemAdicional = "";
+
+                tipoPedido = item.Tipo;
                 // Passando todo o pedido para uma variavel
                 MeuPedido += BreakLine + item.Quantidade + "x " + item.Tipo + " " + item.Nome + " "
                          + " - *Valor R$ " + item.ValorTotal + "*." + BreakLine + newTrocaInfo + newItemAdicional;
             }
-            if(Valor_Frete.Contains("-"))
-            {
-                Valor_Frete = "A combinar.";
-            }
-                     
-            string today = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
+            System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo("pt-BR");
+
+
+            string today = DateTime.Now.ToString("HH:mm");
+           
             try
             {                
                await AddPedido(ClienteDados, today, lbl_Valor_Total.Text);               
             }
             catch
             {
-                DependencyService.Get<IMessage>().ShortAlert("Verifique sua internet...");
+                DependencyService.Get<IMessage>().ShortAlert("Processando pedido...");
             }
             finally
             {
@@ -299,22 +305,24 @@ namespace DeLivre.Views
                          BreakLine +
                          Valor_Troco));
             }                      
-        }
+        }       
 
         public async Task AddPedido(string nome, string datapedido, string valorPedido)
-        {
-           
+        {           
             string Dia = DateTime.Now.ToString("dd-MM-yyyy");
-            //double ValorTotalPedido = pedido.Select(x => x.ValorPedido).Sum();
+            string Ano = DateTime.Now.Year.ToString();
+            int Mes = DateTime.Now.Month;
+            string mesNome = DateTimeFormatInfo.CurrentInfo.GetMonthName(Mes).ToLower();
+            mesNome = char.ToUpper(mesNome[0]) + mesNome.Substring(1);
 
             await firebase
-                  .Child(EntCidade.Text).Child(Nome_Estabelecimento).Child(Dia)
+                  .Child(EntCidade.Text).Child(Nome_Estabelecimento).Child(Ano).Child(mesNome).Child(Dia)
                   .PostAsync(new DeLivre.Models.Pedido()
                   {                      
-                      Nome = nome,
-                      DataPedido = datapedido,                        
+                      Nome = nome,                      
+                      HoraPedido = datapedido,                   
                       ValorPedido = valorPedido
-                  });
+                  });       
         }      
 
         private void VerificareEnviar()
@@ -361,10 +369,10 @@ namespace DeLivre.Views
                 if (Tipo_Dinheiro.IsChecked == true)
                 {
                     Tipo_Pagamento = "Dinheiro";
+                    Load_Valores();
                 }
                 if (Tipo_Cartao.IsChecked == true)
-                {
-
+                {                  
                     Ent_Troco.Text = null;
                     if (Juros_Cartao != "")
                     {

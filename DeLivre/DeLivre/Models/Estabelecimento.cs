@@ -29,6 +29,7 @@ namespace DeLivre.Models
         public List<Horario_Funcionamento> Horarios_Funcionamento { get; set; }
         public List<RedesSociais> Redes_Sociais { get; set; }
         public List<Adicional> Adicionais { get; set; }
+        public List<Porcao> Porcoes { get; set; }
         public List<SaboresPicole> Sabores_Picole { get; set; }
         public List<SaboresSorvete> Sabores_Sorvete { get; set; }      
     }

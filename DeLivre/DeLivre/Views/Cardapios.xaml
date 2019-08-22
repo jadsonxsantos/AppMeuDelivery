@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"           
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"      
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              x:Class="DeLivre.Views.Cardapios"             
              BackgroundColor="#EF5350">
@@ -21,21 +22,32 @@
                                   WidthRequest="45" HeightRequest="45" 
                                   Aspect="AspectFit"/>
             <Label Text="{Binding Nome}" FontSize="16" TextColor="White" VerticalTextAlignment="Center"/>
+
         </StackLayout>
+
     </NavigationPage.TitleView>
 
-    <StackLayout Padding="5,5,5,0" BackgroundColor="White" Orientation="Vertical">
+    <StackLayout Padding="0,5,0,0" BackgroundColor="White" Orientation="Vertical">
 
         <!--<SearchBar x:Name="CardapioPesquisa" Placeholder="Pesquise por um lanche!" HeightRequest="40" BackgroundColor="White" TextChanged="CardapioPesquisa_TextChanged" />-->
-
-        <input:Dropdown x:Name="TipoDrop"
-                        BorderColor="#EF5350" Color="#EF5350"                                                                                                                                                                                            
+        <StackLayout Orientation="Horizontal" Padding="5" MinimumWidthRequest="450" Margin="-14,-5,-14,0" HorizontalOptions="CenterAndExpand" BackgroundColor="#EF5350">
+            <Image WidthRequest="25" HeightRequest="25" Source="ic_Tempo"/>
+            <Label Text="{Binding Entrega_}" HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro" />
+            <Image WidthRequest="25" HeightRequest="25" Source="ic_Entrega"/>
+            <Label Text="{Binding Frete, StringFormat='R$ {0:C}'}" HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro"/>
+            <Image WidthRequest="25" HeightRequest="25" Source="ic_Funcionamento"/>
+            <Label Text="{Binding Horario_Funcionamento, Mode=TwoWay}" HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro"/>
+            <Image WidthRequest="25" HeightRequest="25" Source="ic_PedidoMinimo"/>
+            <Label Text="{Binding Pedido_Minimo, StringFormat='R$ {0:C}'}" HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro"/>
+        </StackLayout>
+        <input:Dropdown x:Name="TipoDrop" CornerRadius="15"
+                        BorderColor="#EF5350" Color="#EF5350"                                                                                                                                                                                          
                         SelectedItemChanged="TipoDrop_SelectedItemChanged"
                         Placeholder="Pesquise por um tipo"/>
-
-        <ListView x:Name="ListaCardapio"                   
-                  BackgroundColor="White"            
-                  SeparatorColor="{StaticResource grayPrimary}" HasUnevenRows="True"
+      
+        <ListView x:Name="ListaCardapio" Margin="5,0,5,0"                  
+                  BackgroundColor="White" HasUnevenRows="True"          
+                  SeparatorColor="{StaticResource grayPrimary}" 
                   VerticalOptions="FillAndExpand"                 
                   ItemSelected="ListaCardapio_ItemSelected"
                   ItemsSource="{Binding Cardapios}">

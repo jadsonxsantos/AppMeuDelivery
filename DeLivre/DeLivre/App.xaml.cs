@@ -16,7 +16,7 @@ namespace DeLivre
         public App()
         {
             InitializeComponent();
-            VersionTracking.Track();
+            VersionTracking.Track();          
             LoadPage();
             //MainPage = new Estabelecimentos(ocultar);           
             OneSignal.Current.StartInit("aed63aa3-9fbf-4f23-a9b2-26ee4666d096").EndInit();

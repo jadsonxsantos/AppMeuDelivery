@@ -2,6 +2,7 @@
 using DeLivre.Views.Detalhe;
 using Rg.Plugins.Popup.Services;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -14,27 +15,32 @@ namespace DeLivre.Views
 	public partial class Cardapios : ContentPage
     {
         ObservableCollection<Cardapio> ListaPedido = new ObservableCollection<Cardapio>();
+        List<Cardapio> ListaPi = new List<Cardapio>();
         Estabelecimento MeuEstabelecimento;
         List<Cardapio> MeuCardapio;
 
         public Cardapios(Estabelecimento MeusEstabelecimentos)
         {
             NavigationPage.SetHasBackButton(this, false);
-            InitializeComponent();
-            MeuEstabelecimento = new Estabelecimento();
-            MeuEstabelecimento = MeusEstabelecimentos;
-            //MeuCardapio = new List<Cardapio>();
+            InitializeComponent();  
+            MeuEstabelecimento = MeusEstabelecimentos;             
             MeuCardapio = MeusEstabelecimentos.Cardapios;
             BindingContext = MeuEstabelecimento;            
-            TipoDrop.ItemsSource = MeuCardapio.Select(x => x.Tipo).Distinct().ToList();                                      
-            DadosEstabelecimentos();
+            TipoDrop.ItemsSource = MeuCardapio.Select(x => x.Tipo).Distinct().ToList();
+            var ListaPis = MeuCardapio.Select(x => x.Nome).ToList();
+            InfoEstabelecimento();
+            CarregarCardapio();
+            
         }
-
-        private void  DadosEstabelecimentos()
+        private void CarregarCardapio()
         {
             ListaCardapio.BeginRefresh();
             ListaCardapio.ItemsSource = MeuCardapio;
             ListaCardapio.EndRefresh();
+        }
+
+        private void InfoEstabelecimento()
+        {           
             //Armaenando o valor do Frete!    
             string ValorFrete = MeuEstabelecimento.Frete;
             Application.Current.Properties["_Frete"] = ValorFrete;
@@ -79,7 +85,7 @@ namespace DeLivre.Views
                             }
                             else
                             {
-                                if (item.Tipo == "Sorvete" || item.Tipo == "Picolé")
+                                if (item.Tipo == "Sorvete" || item.Tipo == "Picolé" || item.Tipo == "Paletas")
                                 {
                                     var page = new Detalhe.Frios(item, MeuEstabelecimento);
                                     await PopupNavigation.Instance.PushAsync(page);
@@ -100,7 +106,7 @@ namespace DeLivre.Views
                                         }
                                         else
                                         {
-                                            var page = new Detalhes(item);
+                                            var page = new Detalhes(item, MeuEstabelecimento);
                                             await PopupNavigation.Instance.PushAsync(page);
                                         }                                       
                                     }
@@ -137,7 +143,7 @@ namespace DeLivre.Views
 
         private async void OnInformacoes_Clicked(object sender, EventArgs e)
         {
-            await PopupNavigation.Instance.PushAsync(new Info(MeuEstabelecimento));       
+            await PopupNavigation.Instance.PushAsync(new Views.More.Info(MeuEstabelecimento));                  
         }
 
         private async void OnCarrinho_Clicked(object sender, EventArgs e)
@@ -162,26 +168,23 @@ namespace DeLivre.Views
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            await PopupNavigation.Instance.PushAsync(new Info(MeuEstabelecimento));
+            await Navigation.PushAsync(new Views.More.Info(MeuEstabelecimento));           
         }
 
         private void TipoDrop_SelectedItemChanged(object sender, Plugin.InputKit.Shared.Utils.SelectedItemChangedArgs e)
         {
-            ListaCardapio.BeginRefresh();
-
-            if(TipoDrop.Text == "Todos")
-                ListaCardapio.ItemsSource = MeuEstabelecimento.Cardapios.OrderBy(x => x.Valor);
-            else
-                ListaCardapio.ItemsSource = MeuEstabelecimento.Cardapios.Where(x => x.Tipo.ToLower().Contains(TipoDrop.Text.ToLower()));
-
+            //ListaCardapio.ScrollTo(((IList)ListaCardapio.ItemsSource)[0], ScrollToPosition.Start, false);
+            ListaCardapio.BeginRefresh();       
+            ListaCardapio.ItemsSource = MeuEstabelecimento.Cardapios.Where(x => x.Tipo.ToLower().Contains(TipoDrop.Text.ToLower()));                      
             ListaCardapio.EndRefresh();
+            //ListaCardapio.ScrollTo(((IList)ListaCardapio.ItemsSource)[0], ScrollToPosition.Start, false);
         }
 
         private async void ListaCardapio_Refreshing(object sender, EventArgs e)
         {
             try
             {
-                DadosEstabelecimentos();
+                CarregarCardapio();
             }
             catch
             {

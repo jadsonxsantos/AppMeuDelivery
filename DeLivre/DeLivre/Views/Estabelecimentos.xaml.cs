@@ -1,7 +1,5 @@
 ﻿using DeLivre.Components;
 using DeLivre.Models;
-using Firebase.Database;
-using Firebase.Database.Query;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
 using System;
@@ -11,7 +9,6 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -29,7 +26,7 @@ namespace DeLivre.Views
         bool OcultarLocal;
         string MeuLocal;
         string Cidade;
-        FirebaseClient firebase = new FirebaseClient("https://meudelivery-47bcc.firebaseio.com/");
+    
         public Estabelecimentos(string cidade, string urlservidor)
         {
             NavigationPage.SetHasNavigationBar(this, false);
@@ -181,7 +178,7 @@ namespace DeLivre.Views
                     }
                     else
                     {
-                        await DisplayAlert("Manutenção", "Olá, Estamos fazendo manutenção em nossos servidores, aguarde e tente mais tarde.", "OK");
+                        await DisplayAlert("Manutenção", "Se o problema persistir, atualize o aplicativo na Play Store!", "OK");
                     }
                 }
                 catch (Exception)
@@ -259,19 +256,19 @@ namespace DeLivre.Views
 
         private async void Check_Update()
         {
-            var current = $"{VersionTracking.CurrentBuild} ({VersionTracking.CurrentVersion})";
-            var Previus = $"{VersionTracking.PreviousBuild} ({VersionTracking.PreviousVersion})";
+            //var current = $"{VersionTracking.CurrentBuild} ({VersionTracking.CurrentVersion})";
+            //var Previus = $"{VersionTracking.PreviousBuild} ({VersionTracking.PreviousVersion})";
 
-            if (VersionTracking.IsFirstLaunchForCurrentBuild)
-            {
-                //Avisa o usuario que existe uma versão nova e pergunta se ele quer baixar
-                var update = await DisplayAlert("Nova versão disponível", "Existe uma nova versão do App Meu Delivery, deseja atualizar?", "Sim", "Não");
+            //if (VersionTracking.IsFirstLaunchForCurrentVersion)
+            //{
+            //    //Avisa o usuario que existe uma versão nova e pergunta se ele quer baixar
+            //    var update = await DisplayAlert("Nova versão disponível", "Existe uma nova versão do App Meu Delivery, deseja atualizar?", "Sim", "Não");
 
-                if (update)
-                {
-                    await Launcher.OpenAsync("https://play.google.com/store/apps/details?id=com.lurasoft.AppMeuDelivery");
-                }
-            }
+            //    if (update)
+            //    {
+            //        await Launcher.OpenAsync("https://play.google.com/store/apps/details?id=com.lurasoft.AppMeuDelivery");
+            //    }
+            //}
         }      
 
         private async void NavegarToCardapio(string Nome_estabelecimento, string ApiUrl)
@@ -314,8 +311,7 @@ namespace DeLivre.Views
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
-           
+            base.OnAppearing();           
         }
 
         private async void ListaEstabelecimento_Refreshing(object sender, EventArgs e)

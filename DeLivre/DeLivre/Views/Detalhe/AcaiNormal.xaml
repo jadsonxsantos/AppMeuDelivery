@@ -67,11 +67,12 @@
                                 <input:RadioButton x:Name="Tipo_G" TextFontSize="12" Color="#EF5350" CircleColor="#EF5350" />
                             </input:RadioButtonGroupView>
                         </StackLayout>
-                        <Label x:Name="lbl_Adicionais" FontSize="15" FontAttributes="Bold" 
-                       HorizontalTextAlignment="Center" Text="Adicionais:"                   
-                       TextColor="{StaticResource asphaltPrimary}"/>
+                        
+                        <Label x:Name="lbl_Adicionais" Text="Adicionais:" FontSize="15"  
+                               HorizontalTextAlignment="Center" FontAttributes="Bold"                   
+                               TextColor="{StaticResource asphaltPrimary}"/>
 
-                        <StackLayout Orientation="Horizontal">
+                        <StackLayout x:Name="Stack_Adicionais" Orientation="Horizontal">
                             <StackLayout Spacing="2" Orientation="Vertical" Margin="5,0,5,0">
                                 <input:CheckBox x:Name="Adicional_00" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
                                 <input:CheckBox x:Name="Adicional_02" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
@@ -86,6 +87,13 @@
                                 <input:CheckBox x:Name="Adicional_20" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
                                 <input:CheckBox x:Name="Adicional_22" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
                                 <input:CheckBox x:Name="Adicional_24" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_26" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_28" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_30" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_32" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_34" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_36" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_38" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
                             </StackLayout>
 
                             <StackLayout Spacing="2" Orientation="Vertical" Margin="5,0,5,0">
@@ -101,21 +109,28 @@
                                 <input:CheckBox x:Name="Adicional_19" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
                                 <input:CheckBox x:Name="Adicional_21" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
                                 <input:CheckBox x:Name="Adicional_23" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
-
+                                <input:CheckBox x:Name="Adicional_25" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_27" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_29" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_31" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_33" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_35" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_37" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Adicional_39" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
                             </StackLayout>
                         </StackLayout>
 
                         <StackLayout Orientation="Vertical">
                             <Label Text="Quantidade:" FontAttributes="Bold"
-                           FontSize="15" Margin="0,15"      
-                           HorizontalTextAlignment="Center"
-                           TextColor="{StaticResource asphaltPrimary}" />
+                                   FontSize="15" Margin="0,15"      
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="{StaticResource asphaltPrimary}" />
 
                             <Stepper x:Name="stepper" Minimum="1" Maximum="25" 
-                             HeightRequest="40" WidthRequest="10" BackgroundColor="#EF5350" 
-                             Value="{Binding Quantidade}" Visual="Material"
-                             ValueChanged="Stepper_ValueChanged"
-                             Increment="1" Margin="20,0,20,0" />
+                                     HeightRequest="40" WidthRequest="10" BackgroundColor="#EF5350" 
+                                     Value="{Binding Quantidade}" Visual="Material"
+                                     ValueChanged="Stepper_ValueChanged"
+                                     Increment="1" Margin="20,0,20,0" />
 
                             <Label x:Name="lbl_InfoComplementar" FontSize="15" Margin="0,5,0,0" FontAttributes="Bold" 
                            HorizontalTextAlignment="Center" Text="Observação:"                              

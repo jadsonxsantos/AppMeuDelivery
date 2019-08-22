@@ -29,50 +29,30 @@ namespace DeLivre.Views.Detalhe
             lbl_Nome_lanche.Text = MeusPedido.Nome;
             lbl_Descricao.Text = "(" + MeusPedido.Descricao + ")";
 
-            if(!String.IsNullOrEmpty(MeusPedido.Valor_P))
-            {
-                Tipo_P.Text = String.Format(MeusPedido.Valor_P_Title + " - R$ {0:C}", MeusPedido.Valor_P);             
-            }
-            else
-            {
-                Tipo_P.IsVisible = false;
-            }
+            if(!String.IsNullOrEmpty(MeusPedido.Valor_P))            
+                Tipo_P.Text = String.Format(MeusPedido.Valor_P_Title + " - R$ {0:C}", MeusPedido.Valor_P);                         
+            else            
+                Tipo_P.IsVisible = false;            
 
-            if (!String.IsNullOrEmpty(MeusPedido.Valor_B))
-            {
-                Tipo_I.Text = String.Format(MeusPedido.Valor_B_Title + " - R$ {0:C}", MeusPedido.Valor_B);               
-            }
-            else
-            {
-                Tipo_I.IsVisible = false;
-            }
+            if (!String.IsNullOrEmpty(MeusPedido.Valor_B))           
+                Tipo_I.Text = String.Format(MeusPedido.Valor_B_Title + " - R$ {0:C}", MeusPedido.Valor_B);                           
+            else            
+                Tipo_I.IsVisible = false;            
 
-            if (!String.IsNullOrEmpty(MeusPedido.Valor_M))
-            {
-                Tipo_M.Text = String.Format(MeusPedido.Valor_M_Title + " - R$ {0:C}", MeusPedido.Valor_M);              
-            }
-            else
-            {
-                Tipo_M.IsVisible = false;
-            }
+            if (!String.IsNullOrEmpty(MeusPedido.Valor_M))            
+                Tipo_M.Text = String.Format(MeusPedido.Valor_M_Title + " - R$ {0:C}", MeusPedido.Valor_M);                          
+            else            
+                Tipo_M.IsVisible = false;            
 
-            if (!String.IsNullOrEmpty(MeusPedido.Valor_G))
-            {
-                Tipo_G.Text = String.Format(MeusPedido.Valor_G_Title + " - R$ {0:C}", MeusPedido.Valor_G);               
-            }
-            else
-            {
-                Tipo_G.IsVisible = false;
-            }
+            if (!String.IsNullOrEmpty(MeusPedido.Valor_G))            
+                Tipo_G.Text = String.Format(MeusPedido.Valor_G_Title + " - R$ {0:C}", MeusPedido.Valor_G);                           
+            else            
+                Tipo_G.IsVisible = false;            
 
-            if (!String.IsNullOrEmpty(MeusPedido.Valor_F))
-            {
-                Tipo_F.Text = String.Format(MeusPedido.Valor_F_Title + " - R$ {0:C}", MeusPedido.Valor_F);
-            }
-            else
-            {
-                Tipo_F.IsVisible = false;
-            }
+            if (!String.IsNullOrEmpty(MeusPedido.Valor_F))            
+                Tipo_F.Text = String.Format(MeusPedido.Valor_F_Title + " - R$ {0:C}", MeusPedido.Valor_F);            
+            else            
+                Tipo_F.IsVisible = false;            
 
             Application.Current.Properties["_TrocaInfo"] = Lbl_Troca.Text;
         }
