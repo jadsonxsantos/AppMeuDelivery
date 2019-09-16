@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"              
              xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
              xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
              x:Class="DeLivre.Views.Detalhe.Detalhes">
 
@@ -113,7 +114,7 @@
         </ScrollView>
                 <Button x:Name="btn_selecionar" Margin="0,0,0,5" Text="Adicionar ao Pedido!" 
                         BackgroundColor="#EF5350" Visual="Material" TextColor="White" 
-                        Clicked="Btn_selecionar_Clicked" />
+                        Clicked="Btn_selecionar_Clicked"/>
             </StackLayout>
         </Frame>
     </StackLayout>

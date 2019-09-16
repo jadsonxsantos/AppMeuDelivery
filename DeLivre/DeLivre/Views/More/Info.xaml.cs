@@ -61,8 +61,8 @@ namespace DeLivre.Views.More
 
         private void DadosEstabelecimentos()
         {
-            Title = MeuEstabelecimento.Nome;
-            ImagemEstab.Source = MeuEstabelecimento.Logo;
+            lbl_Nome.Text = MeuEstabelecimento.Nome;
+            //ImagemEstab.Source = MeuEstabelecimento.Logo;
             lbl_Horario_Funcionamento.Text = String.Format("R$ {0:C}", MeuEstabelecimento.Pedido_Minimo);
             lbl_Local.Text = MeuEstabelecimento.Local;
             lbl_Frete.Text = String.Format("R$ {0:C}", MeuEstabelecimento.Frete);

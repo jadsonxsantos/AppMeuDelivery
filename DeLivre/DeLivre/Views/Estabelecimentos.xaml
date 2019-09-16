@@ -87,8 +87,7 @@
                 </StackLayout>
             </ScrollView>-->
 
-            <ListView x:Name="ListaEstabelecimento"
-                      CachingStrategy="RecycleElement"
+            <ListView x:Name="ListaEstabelecimento"       
                       BackgroundColor="White" HasUnevenRows="true"                    
                       VerticalOptions="FillAndExpand"                  
                       SeparatorColor="Black" Refreshing="ListaEstabelecimento_Refreshing"
@@ -101,7 +100,7 @@
                                 <BoxView Margin="3" HeightRequest="1" WidthRequest="1.5" Color="#EF5350" />
 
                                 <controls:CircleImage Source="{Binding Logo}" BorderColor="#EF5350" 
-                                                      BorderThickness="2" Margin="-7,0,0,0" 
+                                                      BorderThickness="2" Margin="-7,-20,0,0" 
                                                       WidthRequest="60" HeightRequest="60" 
                                                       Aspect="AspectFit"/>
 
@@ -147,13 +146,13 @@
                                         <StackLayout Grid.Row="2" Orientation="Horizontal">
                                         </StackLayout>
                                     </Grid>
-                                    <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="5" Margin="-7,-5,0,0" HorizontalOptions="FillAndExpand" BackgroundColor="#EF5350">
+                                    <StackLayout Orientation="Horizontal" HeightRequest="23" Grid.Row="1" Padding="8" Margin="-7,-5,0,0" HorizontalOptions="FillAndExpand" BackgroundColor="#EF5350">
                                         <Image WidthRequest="25" HeightRequest="25" Source="ic_Tempo"  />
-                                        <Label Text="{Binding Entrega_}" HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro" />
+                                        <Label Text="{Binding Entrega_}" HorizontalTextAlignment="Start" Margin="-7,0,7,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro" />
                                         <Image WidthRequest="25" HeightRequest="25" Source="ic_Entrega" />
-                                        <Label Text="{Binding Frete, StringFormat='R$ {0:C}'}" HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro"/>
+                                        <Label Text="{Binding Frete, StringFormat='R$ {0:C}'}" HorizontalTextAlignment="Start" Margin="-7,0,7,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro"/>
                                         <Image WidthRequest="25" HeightRequest="25" Source="ic_Funcionamento" />
-                                        <Label Text="{Binding Horario_Funcionamento, Mode=TwoWay}" HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro"/>
+                                        <Label Text="{Binding Horario_Funcionamento, Mode=TwoWay}" HorizontalTextAlignment="Start" Margin="-7,0,7,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro"/>
                                     </StackLayout>
                                 </Grid>
                             </StackLayout>

@@ -2,9 +2,10 @@
 using DeLivre.Views.Detalhe;
 using Rg.Plugins.Popup.Services;
 using System;
-using System.Collections;
+using Xamarin.Essentials;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,7 +13,7 @@ using Xamarin.Forms.Xaml;
 namespace DeLivre.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class Cardapios : ContentPage
+	public partial class Cardapios : TabbedPage
     {
         ObservableCollection<Cardapio> ListaPedido = new ObservableCollection<Cardapio>();
         List<Cardapio> ListaPi = new List<Cardapio>();
@@ -26,12 +27,12 @@ namespace DeLivre.Views
             MeuEstabelecimento = MeusEstabelecimentos;             
             MeuCardapio = MeusEstabelecimentos.Cardapios;
             BindingContext = MeuEstabelecimento;            
-            TipoDrop.ItemsSource = MeuCardapio.Select(x => x.Tipo).Distinct().ToList();
-            var ListaPis = MeuCardapio.Select(x => x.Nome).ToList();
+            TipoDrop.ItemsSource = MeuCardapio.Select(x => x.Tipo).Distinct().ToList();                  
             InfoEstabelecimento();
             CarregarCardapio();
-            
+            DestacarDia();           
         }
+
         private void CarregarCardapio()
         {
             ListaCardapio.BeginRefresh();
@@ -54,8 +55,82 @@ namespace DeLivre.Views
             Application.Current.Properties["_JurosCartao"] = MeuEstabelecimento.Juros_Cartao;
             //Valor do Pedido Minimo 
             Application.Current.Properties["_PedidoMinimo"] = MeuEstabelecimento.Pedido_Minimo;
+
+            foreach (var item in MeuEstabelecimento.Horarios_Funcionamento)
+            {
+                lbl_Segunda.Text = "SEGUNDA-FEIRA: " + item.Segunda_Feira;
+                lbl_Terca.Text = "TERÇA-FEIRA: " + item.Terca_Feira;
+                lbl_Quarta.Text = "QUARTA-FEIRA: " + item.Quarta_Feira;
+                lbl_Quinta.Text = "QUINTA-FEIRA: " + item.Quinta_Feira;
+                lbl_Sexta.Text = "SEXTA-FEIRA: " + item.Sexta_Feira;
+                lbl_Sabado.Text = "SÁBADO: " + item.Sabado;
+                lbl_Domingo.Text = "DOMINGO: " + item.Domingo;
+            }
+
+            if (Application.Current.Properties.ContainsKey("_AceitaCartao"))
+            {
+                bool AceitaCartao = Convert.ToBoolean(Application.Current.Properties["_AceitaCartao"]);
+
+                if (AceitaCartao == false)
+                    ExibirCartao.IsVisible = false;
+                else
+                    ExibirCartao.IsVisible = true;
+            }
         }
-        
+
+        private void DestacarDia()
+        {
+            DateTime aDate = DateTime.Now;
+            DateTime dateValue;
+
+            dateValue = DateTime.Parse(aDate.ToString("MM/dd/yyyy"), CultureInfo.InvariantCulture);
+            string dia = dateValue.ToString("dddd", new CultureInfo("pt-BR"));
+
+            if (dia == "segunda-feira")
+            {
+                lbl_Segunda.FontAttributes = FontAttributes.Bold;
+                lbl_Segunda.TextColor = Color.FromHex("#EF5350");
+            }
+            else if (dia == "terça-feira")
+            {
+                lbl_Terca.FontAttributes = FontAttributes.Bold;
+                lbl_Terca.TextColor = Color.FromHex("#EF5350");
+            }
+            else if (dia == "quarta-feira")
+            {
+                lbl_Quarta.FontAttributes = FontAttributes.Bold;
+                lbl_Quarta.TextColor = Color.FromHex("#EF5350");
+            }
+            else if (dia == "quinta-feira")
+            {
+                lbl_Quinta.FontAttributes = FontAttributes.Bold;
+                lbl_Quinta.TextColor = Color.FromHex("#EF5350");
+            }
+            else if (dia == "sexta-feira")
+            {
+                lbl_Sexta.FontAttributes = FontAttributes.Bold;
+                lbl_Sexta.TextColor = Color.FromHex("#EF5350");
+            }
+            else if (dia == "sábado")
+            {
+                lbl_Sabado.FontAttributes = FontAttributes.Bold;
+                lbl_Sabado.TextColor = Color.FromHex("#EF5350");
+            }
+            else if (dia == "domingo")
+            {
+                lbl_Domingo.FontAttributes = FontAttributes.Bold;
+                lbl_Domingo.TextColor = Color.FromHex("#EF5350");
+            }
+        }
+
+        private void Btn_instagram_Clicked(object sender, EventArgs e)
+        {    
+            foreach (var item in MeuEstabelecimento.Redes_Sociais)
+            {
+                Device.OpenUri(new Uri(item.Instagram));
+            }
+        }
+
         private async void ListaCardapio_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             #region DisabledSelectionHighlighting
@@ -140,12 +215,7 @@ namespace DeLivre.Views
             App.Meus_Pedidos.Clear();
             return base.OnBackButtonPressed();           
         }
-
-        private async void OnInformacoes_Clicked(object sender, EventArgs e)
-        {
-            await PopupNavigation.Instance.PushAsync(new Views.More.Info(MeuEstabelecimento));                  
-        }
-
+      
         private async void OnCarrinho_Clicked(object sender, EventArgs e)
         {        
             if (MeuEstabelecimento.Horario_Funcionamento != "Fechado")
@@ -164,12 +234,7 @@ namespace DeLivre.Views
             {
                 await DisplayAlert("Estamos Fechado!", "Verifique nossos horários de funcionamento e tente mais tarde!", "OK");
             }                         
-        }
-
-        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new Views.More.Info(MeuEstabelecimento));           
-        }
+        }       
 
         private void TipoDrop_SelectedItemChanged(object sender, Plugin.InputKit.Shared.Utils.SelectedItemChangedArgs e)
         {
@@ -194,6 +259,19 @@ namespace DeLivre.Views
             {
                 ListaCardapio.EndRefresh();
             }
+        }
+
+      
+        private async void Compartilhar_Tapped(object sender, EventArgs e)
+        {
+            await Share.RequestAsync(new ShareTextRequest
+            { 
+                Text = @"Olha o que encontrei no AppMeuDelivery: *" + MeuEstabelecimento.Nome +
+@"* Quer agilizar sua entrega?
+
+https://play.google.com/store/apps/details?id=com.lurasoft.AppMeuDelivery",
+                Title = MeuEstabelecimento.Nome
+            });
         }
     }
 }

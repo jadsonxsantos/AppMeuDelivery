@@ -1,54 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"           
-             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
-             xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"      
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"          
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"   
+             xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"  
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"                      
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
-             x:Class="DeLivre.Views.Cardapios"             
+             x:Class="DeLivre.Views.Cardapios" 
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             android:TabbedPage.ToolbarPlacement="Bottom"
+             BarBackgroundColor="#EF5350"
+             BarTextColor="White"
+             android:TabbedPage.BarItemColor="White"
+             android:TabbedPage.BarSelectedItemColor="White"
              BackgroundColor="#EF5350">
-
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Name="OnInformacoes" Order="Primary" Icon="ic_Info" Clicked="OnInformacoes_Clicked" Text="Carrinho" Priority="0" />
+    <TabbedPage.ToolbarItems>
+        <!--<ToolbarItem Name="OnInformacoes" Order="Primary" Icon="ic_Info" Clicked="OnInformacoes_Clicked" Text="Carrinho" Priority="0" />-->
         <ToolbarItem Name="OnCarrinho" Order="Primary" Icon="ic_Carrinho" Clicked="OnCarrinho_Clicked" Text="Carrinho" Priority="1" />
-    </ContentPage.ToolbarItems>
+    </TabbedPage.ToolbarItems>
     <NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal">
-            <StackLayout.GestureRecognizers>
-                <TapGestureRecognizer
-                    Tapped="TapGestureRecognizer_Tapped"/>
-            </StackLayout.GestureRecognizers>
             <controls:CircleImage Source="{Binding Logo}" BorderColor="White" 
                                   BorderThickness="2" Margin="5,0,10,0" 
                                   WidthRequest="45" HeightRequest="45" 
                                   Aspect="AspectFit"/>
             <Label Text="{Binding Nome}" FontSize="16" TextColor="White" VerticalTextAlignment="Center"/>
-
         </StackLayout>
-
     </NavigationPage.TitleView>
 
-    <StackLayout Padding="0,5,0,0" BackgroundColor="White" Orientation="Vertical">
-
+    <!--CARDÁPIO -->
+    <ContentPage x:Name="ctp_Cardapio" IconImageSource="ic_Menu" Title="CARDÁPIO">
+        <StackLayout Padding="0,5,0,0" BackgroundColor="White" Orientation="Vertical">
+                          
         <!--<SearchBar x:Name="CardapioPesquisa" Placeholder="Pesquise por um lanche!" HeightRequest="40" BackgroundColor="White" TextChanged="CardapioPesquisa_TextChanged" />-->
-        <StackLayout Orientation="Horizontal" Padding="5" MinimumWidthRequest="450" Margin="-14,-5,-14,0" HorizontalOptions="CenterAndExpand" BackgroundColor="#EF5350">
-            <Image WidthRequest="25" HeightRequest="25" Source="ic_Tempo"/>
-            <Label Text="{Binding Entrega_}" HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro" />
-            <Image WidthRequest="25" HeightRequest="25" Source="ic_Entrega"/>
-            <Label Text="{Binding Frete, StringFormat='R$ {0:C}'}" HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro"/>
-            <Image WidthRequest="25" HeightRequest="25" Source="ic_Funcionamento"/>
-            <Label Text="{Binding Horario_Funcionamento, Mode=TwoWay}" HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro"/>
-            <Image WidthRequest="25" HeightRequest="25" Source="ic_PedidoMinimo"/>
-            <Label Text="{Binding Pedido_Minimo, StringFormat='R$ {0:C}'}" HorizontalTextAlignment="Start" Margin="-5,0,6,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro"/>
-        </StackLayout>
+       
         <input:Dropdown x:Name="TipoDrop" CornerRadius="15"
-                        BorderColor="#EF5350" Color="#EF5350"                                                                                                                                                                                          
+                        BorderColor="#EF5350" Color="#EF5350" Margin="7,0,7,0"                                                                                                                                                                                         
                         SelectedItemChanged="TipoDrop_SelectedItemChanged"
                         Placeholder="Pesquise por um tipo"/>
-      
-        <ListView x:Name="ListaCardapio" Margin="5,0,5,0"                  
+
+            <ListView x:Name="ListaCardapio" Margin="5,0,5,0"                 
                   BackgroundColor="White" HasUnevenRows="True"          
                   SeparatorColor="{StaticResource grayPrimary}" 
-                  VerticalOptions="FillAndExpand"                 
+                  VerticalOptions="FillAndExpand"
                   ItemSelected="ListaCardapio_ItemSelected"
                   ItemsSource="{Binding Cardapios}">
             <ListView.ItemTemplate>
@@ -97,4 +89,146 @@
             </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
-</ContentPage>      
+    </ContentPage>
+    <!--INFORMAÇÕES -->
+    <ContentPage x:Name="ctp_info" BackgroundColor="White" IconImageSource="ic_Info" Title="INFORMAÇÕES">
+        <StackLayout Padding="0,0,0,0" BackgroundColor="White" Orientation="Vertical">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" WidthRequest="510" HeightRequest="35" BackgroundColor="#EF5350">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Image WidthRequest="25" HeightRequest="25" Source="ic_Tempo"/>
+                    <Label Text="{Binding Entrega_}" HorizontalTextAlignment="Start" Margin="-7,0,7,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro" />
+                    <Image WidthRequest="25" HeightRequest="25" Source="ic_Entrega"/>
+                    <Label Text="{Binding Frete, StringFormat='R$ {0:C}'}" HorizontalTextAlignment="Start" Margin="-7,0,7,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro"/>
+                    <Image WidthRequest="25" HeightRequest="25" Source="ic_Funcionamento"/>
+                    <Label Text="{Binding Horario_Funcionamento, Mode=TwoWay}" HorizontalTextAlignment="Start" Margin="-7,0,7,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro"/>
+                    <Image WidthRequest="25" HeightRequest="25" Source="ic_PedidoMinimo"/>
+                    <Label Text="{Binding Pedido_Minimo, StringFormat='R$ {0:C}'}" HorizontalTextAlignment="Start" Margin="-7,0,7,0" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" FontSize="Micro"/>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+
+                <pv:PancakeView x:Name="e" IsVisible="False"
+                                        BackgroundColor="#EF5350"                                   
+                                        HorizontalOptions="FillAndExpand"
+                                        HeightRequest="25" WidthRequest="55"
+                                        CornerRadius="20" Padding="5,0">
+
+                    <Label Text="MAPA"
+                                   TextColor="#ffffff" Margin="0,5"
+                                   FontAttributes="Bold"
+                                   FontSize="10"
+                                   HorizontalOptions="Center">
+
+                    </Label>
+                </pv:PancakeView>
+
+                <pv:PancakeView x:Name="Exibtao"
+                                        BackgroundColor="#EF5350"                                   
+                                        HorizontalOptions="CenterAndExpand"
+                                        HeightRequest="25" WidthRequest="95"
+                                        CornerRadius="20" Padding="0,0">
+
+                    <Label Text="COMPARTILHAR"
+                                   TextColor="#ffffff"
+                                   FontAttributes="Bold"
+                                   FontSize="10" Margin="0,5"
+                                   HorizontalOptions="Center" >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="compartilhar" Tapped="Compartilhar_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </pv:PancakeView>
+
+            </StackLayout>
+            
+            <ScrollView BackgroundColor="White" Margin="-5,-5,-5,-5">
+                <StackLayout>
+                    <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand" Margin="0,5,0,0">
+                        <Label Text="HORÁRIOS DE FUNCIONAMENTO" FontAttributes="Bold" 
+                               TextColor="{StaticResource asphaltPrimary}" Margin="0,0,0,5" 
+                               HorizontalTextAlignment="Center" FontSize="16"/>
+
+                        <Label x:Name="lbl_Segunda"                                        
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="{StaticResource asphaltPrimary}"                           
+                                   FontSize="10"  />
+                            <Label x:Name="lbl_Terca"                                        
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="{StaticResource asphaltPrimary}"                           
+                                   FontSize="10"/>
+                            <Label x:Name="lbl_Quarta"                                       
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="{StaticResource asphaltPrimary}"                           
+                                   FontSize="10"/>
+                            <Label x:Name="lbl_Quinta"               
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="{StaticResource asphaltPrimary}"                           
+                                   FontSize="10"/>
+                            <Label x:Name="lbl_Sexta"                                       
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="{StaticResource asphaltPrimary}"                           
+                                   FontSize="10"/>
+                            <Label x:Name="lbl_Sabado"                                        
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="{StaticResource asphaltPrimary}"                           
+                                   FontSize="10"/>
+                            <Label x:Name="lbl_Domingo"                                       
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="{StaticResource asphaltPrimary}"                           
+                                   FontSize="10"/>
+                        </StackLayout>
+
+                    <Label Text="FORMAS DE PAGAMENTO" FontAttributes="Bold" 
+                           TextColor="{StaticResource asphaltPrimary}" Margin="0,5,0,5"               
+                           HorizontalTextAlignment="Center" FontSize="16"/>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+
+                        <pv:PancakeView x:Name="FundoOpenOrClose"
+                                        BackgroundColor="#EF5350"                                   
+                                        HorizontalOptions="CenterAndExpand"
+                                        HeightRequest="25" WidthRequest="55"
+                                        CornerRadius="20" Padding="20,0">
+
+                            <Label Text="DINHEIRO"
+                                   TextColor="#ffffff"
+                                   FontAttributes="Bold"
+                                   FontSize="10" Margin="0,5"
+                                   HorizontalOptions="Center" />
+                        </pv:PancakeView>
+
+                        <pv:PancakeView x:Name="ExibirCartao"
+                                        BackgroundColor="#EF5350"                                   
+                                        HorizontalOptions="FillAndExpand"
+                                        HeightRequest="25" WidthRequest="50"
+                                        CornerRadius="20" Padding="20,0">
+
+                            <Label Text="CARTÃO"
+                                   TextColor="#ffffff"
+                                   FontAttributes="Bold"
+                                   FontSize="10" Margin="0,5"
+                                   HorizontalOptions="Center" />
+                        </pv:PancakeView>
+                          
+                        </StackLayout>
+
+                    <Label Text="REDES SOCIAIS" FontAttributes="Bold" 
+                           TextColor="{StaticResource asphaltPrimary}" Margin="0,5,0,5"               
+                           HorizontalTextAlignment="Center" FontSize="16"/>
+
+                    <Button x:Name="btn_instagram" FontSize="12"
+                            Text="SIGA-NOS NO INSTAGRAM"
+                            TextColor="White"
+                            BorderRadius="10" 
+                            WidthRequest="300"
+                            HeightRequest="40"                         
+                            Clicked="Btn_instagram_Clicked"
+                            BackgroundColor="#E53935"
+                            HorizontalOptions="Center" 
+                            VerticalOptions="Center"/>
+                    </StackLayout>
+                </ScrollView>
+        </StackLayout>
+    </ContentPage>
+</TabbedPage>      

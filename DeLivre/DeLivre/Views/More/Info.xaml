@@ -2,7 +2,8 @@
 <pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
-                xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"                                      
+                xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"  
+                xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"      
                 xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
                 x:Class="DeLivre.Views.More.Info">
 
@@ -16,57 +17,68 @@
               EasingIn="SpringIn"/>
     </pages:PopupPage.Animation>
 
-    <StackLayout WidthRequest="300" HeightRequest="400" BackgroundColor="White" Padding="5" IsClippedToBounds="True" HorizontalOptions="Center" VerticalOptions="Center">
-        <ScrollView>
+    <StackLayout WidthRequest="300" HeightRequest="400" BackgroundColor="Transparent" Padding="5" IsClippedToBounds="True" HorizontalOptions="Center" VerticalOptions="Center">
+        <Frame x:Name="PopUpDialogLayout"
+                HorizontalOptions="Center" 
+                VerticalOptions="CenterAndExpand" 
+                OutlineColor="#EF5350" Padding="5"
+                CornerRadius="5" Margin="16"
+                HasShadow="true">
+            <ScrollView>
             <StackLayout>
                 <StackLayout x:Name="Stack" HorizontalOptions="Center" VerticalOptions="Center">
-                    <Grid>
+                        <Label x:Name="lbl_Nome"                                     
+                               Grid.Column="0"
+                               Margin="0,10"
+                               HorizontalTextAlignment="Center"
+                               TextColor="{StaticResource asphaltPrimary}"                              
+                               FontSize="12" FontAttributes="Bold"/>
+                        <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="60"/>
                         </Grid.ColumnDefinitions>
-                        <controls:CircleImage x:Name="ImagemEstab" 
+                        <!--<controls:CircleImage x:Name="ImagemEstab" 
                                               Grid.Column="1" 
                                               BorderColor="#EF5350" 
                                               BorderThickness="2" 
-                                              Margin="0,-70,0,0" 
-                                              WidthRequest="350" 
-                                              HeightRequest="350"                                                 
-                                              Aspect="AspectFit"/>
+                                              Margin="0,-140,0,0" 
+                                              WidthRequest="450" 
+                                              HeightRequest="450"                                                 
+                                              Aspect="AspectFit"/>-->
 
                         <Label x:Name="lbl_To"                                     
                                Grid.Column="0"
                                Text="TEMPO" Margin="0, 10"
-                               HorizontalTextAlignment="Center"
+                               HorizontalTextAlignment="Start"
                                TextColor="{StaticResource asphaltPrimary}"                              
                                FontSize="12" FontAttributes="Bold"/>
 
                         <Label x:Name="lbl_Tempo"                              
                                Grid.Column="0"
-                               HorizontalTextAlignment="Center"
+                               HorizontalTextAlignment="Start"
                                TextColor="{StaticResource asphaltPrimary}"
-                               Margin="0,30,0,0"
+                               Margin="0,28,0,0"
                                FontSize="13"/>
 
                         <Label x:Name="lbl_TitleFrete"                                              
                                Grid.Column="0"
                                Text="FRETE" Margin="0,47"
-                               HorizontalTextAlignment="Center"
+                               HorizontalTextAlignment="Start"
                                TextColor="{StaticResource asphaltPrimary}"                              
                                FontSize="12" FontAttributes="Bold"/>
 
                         <Label x:Name="lbl_Frete"                                            
                                Grid.Column="0"
-                               HorizontalTextAlignment="Center"
+                               HorizontalTextAlignment="Start"
                                TextColor="{StaticResource asphaltPrimary}"
-                               Margin="0,60,0,0"
+                               Margin="0,58,0,0"
                                FontSize="13" />
 
                         <Label x:Name="lbl_pedidominimo"                                              
                                Grid.Column="2" Margin="0,10"
                                Text="PEDIDO MINIMO" 
-                               HorizontalTextAlignment="Center"
+                               HorizontalTextAlignment="Start"
                                TextColor="{StaticResource asphaltPrimary}"                              
                                FontSize="12" FontAttributes="Bold"/>
 
@@ -74,7 +86,7 @@
                                TextColor="{StaticResource asphaltPrimary}"
                                Grid.Column="2" 
                                HorizontalTextAlignment="Center"
-                               Margin="0,30,0,0"
+                               Margin="0,15,0,0"
                                FontSize="13"/>
 
                         <Label Text="LOCAL"                                        
@@ -85,24 +97,24 @@
 
                         <Label x:Name="lbl_Local"                                              
                                Grid.Column="2"
-                               Margin="0,60,0,0"
+                               Margin="0,20,0,0"
                                HorizontalTextAlignment="Center"
                                TextColor="{StaticResource asphaltPrimary}"                              
                                FontSize="13"/>
                     </Grid>
                 </StackLayout>
-                <Label x:Name="lbl_Endereco" Margin="0,-80"                                     
+                <Label x:Name="lbl_Endereco" Margin="0,0"                                     
                        HorizontalTextAlignment="Center"
                        TextColor="{StaticResource asphaltPrimary}"                         
                        FontAttributes="Italic"
                        FontSize="13" />
 
-                <Label x:Name="lbl_Descricao" Margin="0,80"                                       
+                <Label x:Name="lbl_Descricao" Margin="0,10"                                       
                        HorizontalTextAlignment="Center"
                        TextColor="{StaticResource asphaltPrimary}"                           
                        FontSize="13" />
 
-                <StackLayout Orientation="Vertical" VerticalOptions="Center" Margin="0,-65,0,0">
+                <StackLayout Orientation="Vertical" VerticalOptions="Center" Margin="0,15,0,0">
                     <Label Text="HORÁRIOS DE FUNCIONAMENTO" FontAttributes="Bold" 
                            TextColor="{StaticResource asphaltPrimary}" Margin="0,0,0,5" 
                            HorizontalTextAlignment="Center" FontSize="14"/>
@@ -142,20 +154,45 @@
                        HorizontalTextAlignment="Center" FontSize="14"/>
                 
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <ContentView x:Name="FundoOpenOrClose"                                                     
+
+                    <pv:PancakeView x:Name="FundoOpenOrClose"
+                                    BackgroundColor="#EF5350"                                   
+                                    HorizontalOptions="FillAndExpand"
+                                    HeightRequest="25" WidthRequest="100"
+                                    CornerRadius="20" Padding="20,0">                             
+                                   
+                        <Label Text="DINHEIRO"
+                               TextColor="#ffffff"
+                               FontAttributes="Bold"
+                               FontSize="10"
+                               VerticalOptions="Center" />
+                    </pv:PancakeView>
+                    
+                    <!--<ContentView x:Name="FundoOpenOrClose"                                                     
                                  BackgroundColor="#EF5350"                                
                                  HeightRequest="25"
                                  WidthRequest="100">
 
                         <Label x:Name="OpenOrClose"                                                  
-                           Text="DINHEIRO"
+                           Text=""
                            FontAttributes="Bold"
                            FontSize="10"
                            VerticalOptions="Center"
                            HorizontalOptions="Center"/>
-                    </ContentView>
-                    
-                    <ContentView x:Name="ExibirCartao"                               
+                    </ContentView>-->
+                    <pv:PancakeView x:Name="ExibirCartao"
+                                    BackgroundColor="#EF5350"                                   
+                                    HorizontalOptions="FillAndExpand"
+                                    HeightRequest="25" WidthRequest="100"
+                                    CornerRadius="20" Padding="20,0">
+
+                        <Label Text="CARTÃO"
+                               TextColor="#ffffff"
+                               FontAttributes="Bold"
+                               FontSize="10"
+                               VerticalOptions="Center" />
+                    </pv:PancakeView>
+                    <!--<ContentView x:Name="ExibirCartao"                               
                                  BackgroundColor="#EF5350"                             
                                  HeightRequest="20"
                                  WidthRequest="100">
@@ -167,7 +204,7 @@
                                HorizontalOptions="Center"/>
 
 
-                    </ContentView>
+                    </ContentView>-->
                 </StackLayout>
                 
                 <Label Text="REDES SOCIAIS" FontAttributes="Bold" 
@@ -186,5 +223,6 @@
                             VerticalOptions="Center"/>
             </StackLayout>
         </ScrollView>
+        </Frame>
     </StackLayout>
 </pages:PopupPage>
