@@ -1,10 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
              xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
-             x:Class="DeLivre.Views.Detalhe.AcaiNormal">
+             x:Class="DeLivre.Views.Detalhe.Detalhe">
 
     <pages:PopupPage.Animation>
         <animations:MoveAnimation
@@ -15,63 +15,63 @@
             HasBackgroundAnimation="True"/>
     </pages:PopupPage.Animation>
 
-    <StackLayout WidthRequest="360" HeightRequest="450" BackgroundColor="Transparent" Padding="5,5" IsClippedToBounds="True" HorizontalOptions="Center" VerticalOptions="Center">
-        <Frame x:Name="PopUpDialogLayout"
-                HorizontalOptions="Center" 
-                VerticalOptions="CenterAndExpand" 
-                OutlineColor="#EF5350" Padding="5"
-                CornerRadius="5" Margin="16"
-                HasShadow="true" WidthRequest="350">
-                                             
+    <StackLayout WidthRequest="400" HeightRequest="460" BackgroundColor="Transparent" Padding="5,5" IsClippedToBounds="True" HorizontalOptions="Center" VerticalOptions="Center">
+
+        <Frame x:Name="PopUpDialogLayout" Padding="5"
+                HorizontalOptions="Center" VerticalOptions="CenterAndExpand"                                              
+                HasShadow="true" WidthRequest="400"                
+                Margin="16" CornerRadius="7" OutlineColor="#EF5350">
             <StackLayout>
-
-                <Label Text="Detalhe do Pedido!" FontSize="20" HorizontalTextAlignment="Center" TextColor="{StaticResource asphaltPrimary}"></Label>
+                <!--CABEÇALHO-->
+                <Label Text="Detalhe do Pedido" FontSize="20" HorizontalTextAlignment="Center" TextColor="{StaticResource asphaltPrimary}"></Label>
+                <!--LINHAS-->
                 <BoxView Margin="3" HeightRequest="1" WidthRequest="50" Color="#EF5350" />
-
+                <!--EXIBIR A QUANTIDADE DO PEDIDO E O NOME-->
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,5">
+                    <!--QUANTIDADE-->
                     <Label x:Name="Qt_Pedido" 
                            Text="{Binding Value, Mode=TwoWay, StringFormat=' {0}'}"                                                     
                            FontSize="13"
                            FontAttributes="Bold"
                            BindingContext="{x:Reference stepper}"
                            HorizontalTextAlignment="Center"
-                           TextColor="{StaticResource asphaltPrimary}" />
-
-                    <Label x:Name="lbl_Tipo_lanche" FontSize="13" 
+                           TextColor="#EF5350" />
+                    <!--TIPO DO LANCHE-->
+                    <Label x:Name="lbl_Tipo_lanche" FontSize="13" Margin="-1"
                            FontAttributes="Bold" HorizontalTextAlignment="Center" 
                            TextColor="{StaticResource asphaltPrimary}"/>
-
-                    <Label x:Name="lbl_Nome_lanche" FontSize="13" 
+                    <!--NOME DO LANCHE-->
+                    <Label x:Name="lbl_Nome_lanche" FontSize="13" FontAttributes="Bold"
                            HorizontalTextAlignment="Center" LineBreakMode="TailTruncation"
-                           TextColor="{StaticResource asphaltPrimary}"/>
-
+                           TextColor="#EF5350"/>
                 </StackLayout>
-
+                <!--DESCRIÇÃO DOS INGREDIENTES-->
                 <Label x:Name="lbl_Descricao" FontSize="15" Margin="0,-5"
-                       HorizontalTextAlignment="Center"                    
+                       HorizontalTextAlignment="Center" FontAttributes="Italic"                    
                        TextColor="{StaticResource asphaltPrimary}"/>
 
                 <BoxView Margin="3" HeightRequest="1" WidthRequest="50" Color="#EF5350" />
                 <ScrollView>
                     <StackLayout>
-
-                        <Label x:Name="lbl_Tam" FontSize="15" FontAttributes="Bold" 
-                           HorizontalTextAlignment="Center" Text="Escolha o Tamanho:"                   
+                        <!--ESCOLHER O TIPO DO LANCHE-->
+                        <Label x:Name="lbl_tipotamanho" FontSize="15" FontAttributes="Bold" 
+                           HorizontalTextAlignment="Center" Text="Escolha o Tipo:"                   
                            TextColor="{StaticResource asphaltPrimary}"/>
-
+                        <!--OPÇÕES DE TIPO-->
                         <StackLayout x:Name="StackRadio" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="50,0" Spacing="13">
                             <input:RadioButtonGroupView x:Name="RadioBtn">
                                 <input:RadioButton x:Name="Tipo_P" TextFontSize="12" Color="#EF5350" CircleColor="#EF5350" IsChecked="True" />
-                                <input:RadioButton x:Name="Tipo_I" TextFontSize="12" Color="#EF5350" CircleColor="#EF5350" />
+                                <input:RadioButton x:Name="Tipo_B" TextFontSize="12" Color="#EF5350" CircleColor="#EF5350" />
                                 <input:RadioButton x:Name="Tipo_M" TextFontSize="12" Color="#EF5350" CircleColor="#EF5350"  />
                                 <input:RadioButton x:Name="Tipo_G" TextFontSize="12" Color="#EF5350" CircleColor="#EF5350" />
+                                <input:RadioButton x:Name="Tipo_GG" TextFontSize="12" Color="#EF5350" CircleColor="#EF5350" />
                             </input:RadioButtonGroupView>
                         </StackLayout>
-                        
+                        <!--CABEÇALHO ADICIONAIS-->
                         <Label x:Name="lbl_Adicionais" Text="Adicionais:" FontSize="15"  
                                HorizontalTextAlignment="Center" FontAttributes="Bold"                   
                                TextColor="{StaticResource asphaltPrimary}"/>
-
+                        <!--ITENS DOS ADICIONAIS-->
                         <StackLayout x:Name="Stack_Adicionais" Orientation="Horizontal">
                             <StackLayout Spacing="2" Orientation="Vertical" Margin="5,0,5,0">
                                 <input:CheckBox x:Name="Adicional_00" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
@@ -120,36 +120,71 @@
                             </StackLayout>
                         </StackLayout>
 
+                        <!--<Label x:Name="lbl_Sabor" FontSize="15" FontAttributes="Bold" 
+                               HorizontalTextAlignment="Center" Text="Sabores:"                   
+                               TextColor="{StaticResource asphaltPrimary}"/>
+
+                        <StackLayout x:Name="Stack_Sabor" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                            <StackLayout Spacing="2" Orientation="Vertical" Margin="5,0,5,0">
+                                <input:CheckBox x:Name="Sabor_00" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Sabor_02" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Sabor_04" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Sabor_06" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Sabor_08" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Sabor_10" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Sabor_12" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Sabor_14" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Sabor_16" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Sabor_18" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Sabor_20" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Sabor_22" TextFontSize="11" Margin="0,0,5,0" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Sabor_24" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                            </StackLayout>
+
+                            <StackLayout Spacing="2" Orientation="Vertical" Margin="5,0,5,0">
+                                <input:CheckBox x:Name="Sabor_01" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Sabor_03" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Sabor_05" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Sabor_07" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Sabor_09" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Sabor_11" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Sabor_13" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Sabor_15" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Sabor_17" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Sabor_19" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Sabor_21" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                                <input:CheckBox x:Name="Sabor_23" TextFontSize="11" HorizontalOptions="StartAndExpand" Type="Material" />
+                            </StackLayout>
+                        </StackLayout>-->
+                        <!--CABEÇALHO QUANTIDADE-->
                         <StackLayout Orientation="Vertical">
                             <Label Text="Quantidade:" FontAttributes="Bold"
-                                   FontSize="15" Margin="0,15"      
-                                   HorizontalTextAlignment="Center"
-                                   TextColor="{StaticResource asphaltPrimary}" />
-
+                           FontSize="15" Margin="0,15"      
+                           HorizontalTextAlignment="Center"
+                           TextColor="{StaticResource asphaltPrimary}" />
+                            <!--STEPPER QUANTIDADE-->
                             <Stepper x:Name="stepper" Minimum="1" Maximum="25" 
-                                     HeightRequest="40" WidthRequest="10" BackgroundColor="#EF5350" 
-                                     Value="{Binding Quantidade}" Visual="Material"
-                                     ValueChanged="Stepper_ValueChanged"
-                                     Increment="1" Margin="20,0,20,0" />
-
+                             HeightRequest="40" WidthRequest="10" BackgroundColor="#EF5350" 
+                             Value="{Binding Quantidade}" Visual="Material"
+                             ValueChanged="Stepper_ValueChanged"
+                             Increment="1" Margin="20,0,20,0" />
+                            <!--CABEÇALHO OBSERVAÇÕES-->
                             <Label x:Name="lbl_InfoComplementar" FontSize="15" Margin="0,5,0,0" FontAttributes="Bold" 
-                           HorizontalTextAlignment="Center" Text="Observação:"                              
+                           HorizontalTextAlignment="Center" Text="Observação:"                   
                            TextColor="{StaticResource asphaltPrimary}"/>
-
-                            <Entry x:Name="Lbl_Troca" Placeholder="Ex.: Tirar a granola, sabor da calda etc" 
-                           Margin="0,10" HeightRequest="60"
-                           HorizontalTextAlignment="Center" FontSize="13"
-                           WidthRequest="200"/>
+                            <!--OBSERVAÇÃO-->
+                            <Entry x:Name="Lbl_Troca" Placeholder="Ex.: Sabor da calda, outros adicionais etc" 
+                           Margin="0,5" HeightRequest="60" WidthRequest="200"
+                           HorizontalTextAlignment="Center" FontSize="13" />
 
                         </StackLayout>
                     </StackLayout>
                 </ScrollView>
-                <Button x:Name="btn_selecionar" Margin="0,5,0,5" Text="Adicionar ao Pedido!" 
-                        BackgroundColor="#EF5350" Visual="Material" TextColor="White" 
-                        Clicked="Btn_selecionar_Clicked"/>
-
+                <!--BOTÃO ADICIONAR PEDIDO AO CARRINHO-->
+                <Button x:Name="btn_selecionar" Margin="0,20" Text="Adicionar ao Pedido!" 
+                    BackgroundColor="#EF5350" Visual="Material" TextColor="White" 
+                    Clicked="Btn_selecionar_Clicked" />
             </StackLayout>
         </Frame>
     </StackLayout>
-
 </pages:PopupPage>

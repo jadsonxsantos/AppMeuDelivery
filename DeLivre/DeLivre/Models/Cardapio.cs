@@ -26,6 +26,8 @@ namespace DeLivre.Models
         public string Valor_M_Title { get; set; }
         public string Valor_G { get; set; }
         public string Valor_G_Title { get; set; }
+        public string Valor_GG { get; set; }
+        public string Valor_GG_Title { get; set; }
         public string Valor_B { get; set; }
         public string Valor_B_Title { get; set; }
         public string Valor_F { get; set; }

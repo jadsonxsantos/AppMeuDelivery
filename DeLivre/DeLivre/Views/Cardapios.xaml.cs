@@ -146,47 +146,15 @@ namespace DeLivre.Views
 
                     if (item != null)
                     {
-                        if (item.Tipo.Contains("Pizza") || item.Tipo == "Pizza Doce" || item.Tipo == "Lazanha" || item.Tipo == "Porções")
+                        if (item.Tipo == "Sorvete" || item.Tipo == "Picolé" || item.Tipo == "Paletas")
                         {
-                            var page = new Detalhe.Pizza(item);
+                            var page = new Detalhe.Frios(item, MeuEstabelecimento);
                             await PopupNavigation.Instance.PushAsync(page);
                         }
                         else
                         {
-                            if (item.Tipo == "Refrigerante" || item.Tipo == "Suco")
-                            {
-                                var page = new Detalhe.Refrigerante(item);
-                                await PopupNavigation.Instance.PushAsync(page);
-                            }
-                            else
-                            {
-                                if (item.Tipo == "Sorvete" || item.Tipo == "Picolé" || item.Tipo == "Paletas")
-                                {
-                                    var page = new Detalhe.Frios(item, MeuEstabelecimento);
-                                    await PopupNavigation.Instance.PushAsync(page);
-                                }
-                                else
-                                {
-                                    if (item.Tipo == "Açaí" || item.Tipo == "Açaí Copo" || item.Tipo == "Barca")
-                                    {
-                                        var page = new Detalhe.AcaiNormal(item, MeuEstabelecimento);
-                                        await PopupNavigation.Instance.PushAsync(page);
-                                    }
-                                    else
-                                    {
-                                        if (item.Tipo == "Doces")
-                                        {
-                                            var pageDoces = new Detalhe.Doces(item);
-                                            await PopupNavigation.Instance.PushAsync(pageDoces);
-                                        }
-                                        else
-                                        {
-                                            var page = new Detalhes(item, MeuEstabelecimento);
-                                            await PopupNavigation.Instance.PushAsync(page);
-                                        }                                       
-                                    }
-                                }
-                            }
+                            var page = new Detalhe.Detalhe(item, MeuEstabelecimento);
+                            await PopupNavigation.Instance.PushAsync(page);
                         }
                     }
                 }
@@ -260,15 +228,14 @@ namespace DeLivre.Views
                 ListaCardapio.EndRefresh();
             }
         }
-
       
         private async void Compartilhar_Tapped(object sender, EventArgs e)
         {
             await Share.RequestAsync(new ShareTextRequest
             { 
                 Text = @"Olha o que encontrei no AppMeuDelivery: *" + MeuEstabelecimento.Nome +
-@"* Quer agilizar sua entrega?
-
+@"* 
+Quer agilizar sua entrega? baixe nosso app!
 https://play.google.com/store/apps/details?id=com.lurasoft.AppMeuDelivery",
                 Title = MeuEstabelecimento.Nome
             });

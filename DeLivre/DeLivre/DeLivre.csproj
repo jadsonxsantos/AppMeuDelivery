@@ -28,17 +28,8 @@
     <Compile Update="Views\Detalhe\Frios.xaml.cs">
       <DependentUpon>Frios.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Detalhe\Doces.xaml.cs">
-      <DependentUpon>Doces.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\Detalhe\Aviso.xaml.cs">
       <DependentUpon>Aviso.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Detalhe\Refrigerante.xaml.cs">
-      <DependentUpon>Refrigerante.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Detalhe\Pizza.xaml.cs">
-      <DependentUpon>Pizza.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Pedido.xaml.cs">
       <DependentUpon>Pedido.xaml</DependentUpon>
@@ -52,10 +43,7 @@
     <EmbeddedResource Update="View1.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Detalhe\AcaiNormal.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Detalhe\Detalhes.xaml">
+    <EmbeddedResource Update="Views\Detalhe\Detalhe.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\More\Info.xaml">

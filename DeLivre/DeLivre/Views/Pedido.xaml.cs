@@ -21,7 +21,7 @@ namespace DeLivre.Views
         string Valor_Frete, Number_Whatsapp, Nome_Estabelecimento, Pedido_Minimo, TrocaInfo, Valor_Troco, Tipo_Pagamento, Juros_Cartao, ValorEntrega;
         string BreakLine, Endereco, ClienteDados, infoDados, Saudacao;      
         bool AceitaCartao, OcultarAviso = true;
-        string tipoPedido;
+        string tipoPedido, NomePedidoFb;
 
         FirebaseClient firebase = new FirebaseClient("https://amd-pedidos.firebaseio.com/");
 
@@ -279,15 +279,15 @@ namespace DeLivre.Views
                 // Passando todo o pedido para uma variavel
                 MeuPedido += BreakLine + item.Quantidade + "x " + item.Tipo + " " + item.Nome + " "
                          + " - *Valor R$ " + item.ValorTotal + "*." + BreakLine + newTrocaInfo + newItemAdicional;
+                NomePedidoFb = item.Tipo + " - " + item.Nome;
             }
             System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo("pt-BR");
-
 
             string today = DateTime.Now.ToString("HH:mm");
            
             try
             {                
-               await AddPedido(ClienteDados, today, lbl_Valor_Total.Text);               
+               await AddPedido(ClienteDados, today, NomePedidoFb, lbl_Valor_Total.Text);               
             }
             catch
             {
@@ -307,7 +307,7 @@ namespace DeLivre.Views
             }                      
         }       
 
-        public async Task AddPedido(string nome, string datapedido, string valorPedido)
+        public async Task AddPedido(string nome, string datapedido, string pedido, string valorPedido)
         {           
             string Dia = DateTime.Now.ToString("dd-MM-yyyy");
             string Ano = DateTime.Now.Year.ToString();
@@ -320,7 +320,8 @@ namespace DeLivre.Views
                   .PostAsync(new DeLivre.Models.Pedido()
                   {                      
                       Nome = nome,                      
-                      HoraPedido = datapedido,                   
+                      HoraPedido = datapedido,  
+                      NomePedido = pedido,
                       ValorPedido = valorPedido
                   });       
         }      
