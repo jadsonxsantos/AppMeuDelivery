@@ -15,11 +15,11 @@
             HasBackgroundAnimation="True"/>
     </pages:PopupPage.Animation>
 
-    <StackLayout WidthRequest="360" HeightRequest="400" BackgroundColor="Transparent" Padding="5,5" IsClippedToBounds="True" HorizontalOptions="Center" VerticalOptions="Center">
+    <StackLayout WidthRequest="400" HeightRequest="460" BackgroundColor="Transparent" Padding="5,5" IsClippedToBounds="True" HorizontalOptions="Center" VerticalOptions="Center">
         <Frame x:Name="PopUpDialogLayout" Padding="5"
                 HorizontalOptions="Center" VerticalOptions="CenterAndExpand"                                              
-                HasShadow="true" WidthRequest="350"                
-                Margin="16" CornerRadius="5" OutlineColor="#EF5350">
+                HasShadow="true" WidthRequest="400"                
+                Margin="16" CornerRadius="7" OutlineColor="#EF5350">
             <StackLayout>
                 <Label Text="Detalhe do Pedido!" FontSize="20" HorizontalTextAlignment="Center" TextColor="{StaticResource asphaltPrimary}"></Label>
 
